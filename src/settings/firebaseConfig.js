@@ -1,17 +1,17 @@
 export const config = {
 
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 
-    authDomain: "product-a87b2.firebaseapp.com",
+  authDomain: "rain-d3dcb.firebaseapp.com",
 
-    databaseURL: "https://product-d7b56.firebaseio.com",
+  projectId: "rain-d3dcb",
 
-    projectId: "product-d7b56",
+  storageBucket: "rain-d3dcb.appspot.com",
 
-    storageBucket: "product-a87b2.appspot.com",
+  messagingSenderId: "867738579370",
 
-    messagingSenderId: "576564577770",
+  appId: "1:867738579370:web:70fe44ede33065c91fbbd3",
+  
+  measurementId: "G-9XBWYV42LV"
 
-    appId: "1:909356527204:web:ad50fa688d058260a73971"
-
-  };
+};
