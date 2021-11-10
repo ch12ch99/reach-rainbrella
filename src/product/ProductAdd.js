@@ -7,16 +7,19 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc,deleteDoc } from "firebase/firestore"; 
 import { addDoc } from '@firebase/firestore';
 import { collection } from '@firebase/firestore';
 import { getFirestore } from "firebase/firestore";
 import { onSnapshot} from "firebase/firestore";
 import { query } from '@firebase/firestore';
- 
+
+
 export default function ProductAdd(props) {
     const db = getFirestore();
-    const add = async function(){
+    
+    
+    const addproduct = async function(){
 
         
         try{
@@ -29,7 +32,7 @@ export default function ProductAdd(props) {
                 docRef.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
                       console.log(doc.id, " => ", doc.data());
-                      temp.push({des:doc.data().des, price:doc.data().price});
+                      temp.push({id:doc.id, des:doc.data().des, price:doc.data().price});
                     });
             }
             catch(e){
@@ -50,6 +53,7 @@ export default function ProductAdd(props) {
         setOpen(false);
     
     };
+    
     return (
         <div>
             <Button variant="outlined" onClick={handleClickOpen}>
@@ -63,7 +67,7 @@ export default function ProductAdd(props) {
                     產品價格:<input type="text" name="price" value={product.price} onChange={handleClick} /><br />
                 </DialogContent>
                 <DialogActions>
-                    <button variant="outlined" onClick={add}>新增</button>
+                    <button variant="outlined" onClick={addproduct}>新增</button>
                     <button variant="outlined" onClick={handleClose}>關閉</button>
                 </DialogActions>
             </Dialog>
