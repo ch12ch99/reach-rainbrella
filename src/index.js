@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 //import './index.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import reportWebVitals from './reportWebVitals';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import ProductList from './product/ProductList';
 import AccountList from './account/AccountList';
 import UmbrellaList from './umbrella/UmbrellaList';
