@@ -1,15 +1,11 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { getFirestore, collection, doc, addDoc, setDoc } from '@firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { Button } from '@mui/material';
 import { TextField } from '@mui/material';
+import { getFirestore, collection, doc, addDoc, setDoc } from '@firebase/firestore';
 
 export default function ProductAddEdit(props) {
     const [product, setProduct] = useState({ des: "", price: 0 })
-    const handleClickDes = function (e) {
-        setProduct({ ...product, [e.target.name]: e.target.value })
-    }
     useEffect(() => setProduct({ ...props.product }), [props.product]);
     const action = !props.product.id ? "新增" : "修改";
     const handleChange = function (e) {
@@ -46,14 +42,8 @@ export default function ProductAddEdit(props) {
             </DialogContent>
             <DialogActions>
                 <Button variant="outlined" color="primary" onClick={update}>{action}</Button>
-                <Button variant="outlined" onClick={props.close}>取消</Button>
+                <Button variant="outlined" color="secondary" onClick={props.close}>取消</Button>
             </DialogActions>
         </Dialog>
-
     );
-
 }
-
-
-
-

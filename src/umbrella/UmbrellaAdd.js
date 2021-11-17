@@ -5,30 +5,30 @@ import { addDoc } from '@firebase/firestore';
 import { collection } from '@firebase/firestore';
 import { getFirestore } from "firebase/firestore";
 
-export default function ProductAdd(props) {
+export default function UmbrellaAdd(props) {
     const db = getFirestore();
-
-    const addproduct = async function(){
+    const addumbrella = async function(){
         try{
-            const docRef = await addDoc(collection(db,"product"),{
-                des:product.des,
-                price:parseInt(product.price)
+            const docRef = await addDoc(collection(db,"Rainbrella"),{
+                umbrella_Status:parseInt(umbrella.umbrella_Status),
+                machine_Id:parseInt(umbrella.machine_Id)
+                //需要在哪個基台但我不會寫
             });
-                console.log(docRef.id);
+                console.log(docRef.umbrella_Id);
                 const temp = [];
                 docRef.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
-                      console.log(doc.id, " => ", doc.data());
-                      temp.push({id:doc.id, des:doc.data().des, price:doc.data().price});
+                      console.log(doc.umbrella_Id, " => ", doc.data());
+                      temp.push({umbrella_Id:doc.umbrella_Id, umbrella_Status:doc.data().umbrella_Status, machine_Id:doc.data().machine_Id});
                     });
             }catch(e) {
                 console.log(e);
             }
     }
 
-    const [product, setProduct] = useState({ des: "", price: 0 })
+    const [umbrella, setUmbrella] = useState({ umbrella_Status:"", machine_Id: 0 })
     const handleClick = function (e) {
-        setProduct({ ...product, [e.target.name]: e.target.value })
+        setUmbrella({ ...umbrella, [e.target.name]: e.target.value })
     }
 
     const [open, setOpen] = useState(false);
@@ -43,14 +43,14 @@ export default function ProductAdd(props) {
         <div>
             <Button variant="outlined" onClick={handleClickOpen}>新增</Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>產品</DialogTitle>
+                <DialogTitle>雨傘</DialogTitle>
                 <DialogContent>
-                    產品描述:<input type="text" name="des" value={product.des} onChange={handleClick} /><br />
+                    狀態:<input type="text" name="umbrella_Status" value={umbrella.umbrella_Status} onChange={handleClick} /><br />
                     <br />
-                    產品價格:<input type="text" name="price" value={product.price} onChange={handleClick} /><br />
+                    基台:<input type="text" name="machine_Id" value={umbrella.machine_Id} onChange={handleClick} /><br />
                 </DialogContent>
                 <DialogActions>
-                    <button variant="outlined" onClick={addproduct}>新增</button>
+                    <button variant="outlined" onClick={addumbrella}>新增</button>
                     <button variant="outlined" onClick={handleClose}>關閉</button>
                 </DialogActions>
             </Dialog>

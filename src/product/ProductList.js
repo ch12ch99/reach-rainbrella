@@ -1,28 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, List, ListItem, ListItemText, IconButton } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+import { Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
-import setDeleted from 'react-dom';
-import AppMenu from '../ui/AppMenu';
 import { initializeApp } from "firebase/app";
-import { config } from '../settings/firebaseConfig';
 import { collection } from '@firebase/firestore';
-import { useEffect } from 'react';
 import { getDocs, doc, deleteDoc, } from '@firebase/firestore';
-import { CircularProgress } from '@mui/material';
-import { getFirestore, } from '@firebase/firestore';
-import { Fab } from '@mui/material';
+import { getFirestore } from '@firebase/firestore';
+import { config } from '../settings/firebaseConfig';
+import AppMenu from '../ui/AppMenu';
 import ProductAddEdit from './ProductAddEdit';
 
 export default function ProductList() {
   const firebaseApp = initializeApp(config);
   const db = getFirestore();
   const [isLoading, setIsLoading] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(false);
- 
 
   useEffect(() => {
     async function readData() {
@@ -35,7 +33,6 @@ export default function ProductList() {
         console.log(doc.data().des);
       });
       setProducts([...temp]);
-      
       setIsLoading(false);
     }
     readData();
@@ -45,11 +42,13 @@ export default function ProductList() {
     setCurrentProduct({ des: "", price: 0 });
     setOpen(true);
   }
+
   const editData = async function (index) {
     console.log(index);
     setCurrentProduct({...products[index]});
     setOpen(true);
   }
+
   const deleteData = async function (id) {
     try {
       setIsLoading(true);
@@ -61,8 +60,8 @@ export default function ProductList() {
     catch (error) {
       console.log(error);
     }
-
   }
+
   const close = async function () {
     setOpen(false);
   }
@@ -104,34 +103,9 @@ export default function ProductList() {
           bottom: (theme) => theme.spacing(2),
           right: (theme) => theme.spacing(8)
         }}>
-        <CreateIcon />
+        <AddIcon />
       </Fab>
       <ProductAddEdit open={open} close={close} product={currentProduct} />
     </Box>
   );
 }
-/*
-<Box sx={{
-  width: '100vw',
-  height: '100vh',
-  backgroundColor: 'background.paper',
-  color: 'black',
-  textAlign: 'left'
-}}>
-  <AppMenu />
-  {!isLoading ?
-    <ProductListComponent />
-    :
-    <CircularProgress />
-  }
-  <Fab color="primary" aria-label="新增" onClick={addData}
-    sx={{
-      position: "fixed",
-      bottom: (theme) => theme.spacing(2),
-      right: (theme) => theme.spacing(8)
-    }}>
-    <AddIcon />
-  </Fab>
-  <ProductAddEdit open={open} close={close} product={currentProduct} />
-</Box>
-*/
