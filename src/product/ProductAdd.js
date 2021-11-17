@@ -7,14 +7,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { addDoc } from '@firebase/firestore';
 import { collection } from '@firebase/firestore';
 import { getFirestore } from "firebase/firestore";
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 
 export default function ProductAdd(props) {
     const db = getFirestore();
+    
+    
     const addproduct = async function(){
+
+        
         try{
             const docRef = await addDoc(collection(db,"product"),{
                 des:product.des,
@@ -27,9 +28,11 @@ export default function ProductAdd(props) {
                       console.log(doc.id, " => ", doc.data());
                       temp.push({id:doc.id, des:doc.data().des, price:doc.data().price});
                     });
-            }catch(e) {
+            }
+            catch(e){
                 console.log(e);
             }
+
     }
     const [product, setProduct] = useState({ des: "", price: 0 })
     const handleClick = function (e) {
@@ -42,7 +45,9 @@ export default function ProductAdd(props) {
     };
     const handleClose = () => {
         setOpen(false);
+    
     };
+    
     return (
         <div>
             <Button variant="outlined" onClick={handleClickOpen}>
@@ -56,10 +61,14 @@ export default function ProductAdd(props) {
                     產品價格:<input type="text" name="price" value={product.price} onChange={handleClick} /><br />
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="outlined" onClick={addproduct}>新增</Button>
-                    <Button variant="outlined" onClick={handleClose}>關閉</Button>
+                    <button variant="outlined" onClick={addproduct}>新增</button>
+                    <button variant="outlined" onClick={handleClose}>關閉</button>
                 </DialogActions>
             </Dialog>
         </div>
+ 
+ 
     );
+ 
 }
+
