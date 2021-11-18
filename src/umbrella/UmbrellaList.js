@@ -3,6 +3,7 @@ import { Fab } from '@mui/material';
 import { CircularProgress } from '@mui/material';
 import { Box, List, ListItem, ListItemText, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { initializeApp } from "firebase/app";
 import { doc, getDocs, deleteDoc } from '@firebase/firestore';
@@ -41,9 +42,9 @@ export default function UmbrellaList() {
         setOpen(true);
     }
 
-    const editData = async function (index) {
-      console.log(index);
-      setCurrentUmbrella({...umbrellas[index]});
+    const editData = async function (orange) {
+      console.log(orange);
+      setCurrentUmbrella({...umbrellas[orange]});
       setOpen(true);
     }
 
@@ -67,11 +68,11 @@ export default function UmbrellaList() {
     const UmbrellaListComponent = function () {
         return (
             <List subheader="Umbrella list" aria-label="umbrella list">
-                {umbrellas.map((umbrella, index) =>
-                  <ListItem divider key={index}>
-                    <ListItemText primary={"狀態:" + umbrella.umbrella_Status}></ListItemText>
-                    <IconButton edge="end" aria-label="edit" onClick={() => editData(index)}>
-                      <DeleteIcon />
+                {umbrellas.map((umbrella, orange) =>
+                  <ListItem divider key={orange}>
+                    <ListItemText primary={"狀態:" + umbrella.umbrella_Status} secondary={"機台:" + umbrella.machine_Id}></ListItemText>
+                    <IconButton edge="end" aria-label="edit" onClick={() => editData(orange)}>
+                      <CreateIcon />
                     </IconButton>
                     <IconButton edge="end" aria-label="delete" onClick={() => deleteData(umbrella.umbrella_Id)}>
                       <DeleteIcon />
