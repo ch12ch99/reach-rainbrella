@@ -15,14 +15,14 @@ export default function UmbrellaAddEdit(props) {
         const db = getFirestore();
         try {
             if (action === "新增") {
-                const docRef = await addDoc(collection(db, "Rainbrella"), {
+                const docRef = await addDoc(collection(db, "umbrella"), {
                     umbrella_Status: umbrella.umbrella_Status,
                     machine_Id: parseInt(umbrella.machine_Id)
                 });
                 console.log(docRef.umbrella_Id);
             }
             else {
-                await setDoc(doc(db, "Rainbrella", umbrella.umbrella_Id), {
+                await setDoc(doc(db, "umbrella", umbrella.umbrella_Id), {
                     umbrella_Status: umbrella.umbrella_Status,
                     machine_Id: parseInt(umbrella.machine_Id)
                 });

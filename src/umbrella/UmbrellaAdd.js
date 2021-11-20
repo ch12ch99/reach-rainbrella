@@ -9,7 +9,7 @@ export default function UmbrellaAdd(props) {
     const db = getFirestore();
     const addumbrella = async function(){
         try{
-            const docRef = await addDoc(collection(db,"Rainbrella"),{
+            const docRef = await addDoc(collection(db,"umbrella"),{
                 umbrella_Status:parseInt(umbrella.umbrella_Status),
                 machine_Id:parseInt(umbrella.machine_Id)
                 //需要在哪個基台但我不會寫
