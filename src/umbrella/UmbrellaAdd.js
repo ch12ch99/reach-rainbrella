@@ -14,12 +14,12 @@ export default function UmbrellaAdd(props) {
                 machine_Id:parseInt(umbrella.machine_Id)
                 //需要在哪個基台但我不會寫
             });
-                console.log(docRef.umbrella_Id);
+                console.log(docRef.id);
                 const temp = [];
                 docRef.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
-                      console.log(doc.umbrella_Id, " => ", doc.data());
-                      temp.push({umbrella_Id:doc.umbrella_Id, umbrella_Status:doc.data().umbrella_Status, machine_Id:doc.data().machine_Id});
+                      console.log(doc.id, " => ", doc.data());
+                      temp.push({id: doc.id, umbrella_Id:doc.umbrella_Id, umbrella_Status:doc.data().umbrella_Status, machine_Id:doc.data().machine_Id});
                     });
             }catch(e) {
                 console.log(e);

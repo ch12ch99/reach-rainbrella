@@ -29,6 +29,7 @@ export default function UmbrellaList() {
           const temp = [];
           querySnapshot.forEach((doc) => {
             temp.push({id: doc.id,umbrella_Id: doc.umbrella_Id, umbrella_Status: doc.data().umbrella_Status, machine_Id: doc.data().machine_Id });
+            //自己設的umbrella_Id與系統給的id不同
             console.log(doc.id);
             console.log(doc.data().umbrella_Status);
           });
@@ -83,23 +84,6 @@ export default function UmbrellaList() {
               </List >
         )
     }
-    // const UmbrellaListComponent = function () {
-    //   return (
-    //     <List subheader="Umbrella list" aria-label="umbrellas list">
-    //       {umbrellas.map((umbrellas, orange) =>
-    //         <ListItem divider key={orange}>
-    //           <ListItemText primary={"狀態:" + umbrellas.umbrella_Status} secondary={"機台:" + umbrellas.machine_Id}></ListItemText>
-    //           <IconButton edge="end" aria-label="edit" onClick={() => editData(index)}>
-    //             <CreateIcon />
-    //           </IconButton>
-    //           <IconButton edge="end" aria-label="delete" onClick={() => deleteData(umbrellas.id)}>
-    //             <DeleteIcon />
-    //           </IconButton>
-    //         </ListItem>)
-    //       }
-    //     </List >
-    //   )
-    // }
     return (
         <Box sx={{
             width: '100vw',

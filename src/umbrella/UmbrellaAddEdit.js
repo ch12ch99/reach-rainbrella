@@ -7,7 +7,7 @@ import { getFirestore, collection, doc, addDoc, setDoc } from '@firebase/firesto
 export default function UmbrellaAddEdit(props) {
     const [umbrella, setUmbrella] = useState({ umbrella_Status:"", machine_Id: 0 })
     useEffect(() => setUmbrella({ ...props.umbrella }), [props.umbrella]);
-    const action = !props.umbrella.umbrella_Id ? "新增" : "修改";
+    const action = !props.umbrella.id ? "新增" : "修改";
     const handleChange = function (e) {
         setUmbrella({ ...umbrella, [e.target.name]: e.target.value })
     }
@@ -19,10 +19,10 @@ export default function UmbrellaAddEdit(props) {
                     umbrella_Status: umbrella.umbrella_Status,
                     machine_Id: parseInt(umbrella.machine_Id)
                 });
-                console.log(docRef.umbrella_Id);
+                console.log(docRef.id);
             }
             else {
-                await setDoc(doc(db, "umbrella", umbrella.umbrella_Id), {
+                await setDoc(doc(db, "umbrella", umbrella.id), {
                     umbrella_Status: umbrella.umbrella_Status,
                     machine_Id: parseInt(umbrella.machine_Id)
                 });
