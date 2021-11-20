@@ -122,7 +122,7 @@ export default function UmbrellaList() {
                 }}>
                 <AddIcon />
               </Fab>
-              <UmbrellaAddEdit open={open} close={close} product={currentUmbrella} />
+              <UmbrellaAddEdit open={open} close={close} umbrellas={currentUmbrella} />
             </Box>
           );
         }
