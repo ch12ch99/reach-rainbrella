@@ -28,8 +28,8 @@ export default function UmbrellaList() {
           const querySnapshot = await getDocs(collection(db, "umbrella")); // db後面是接table name 不是專案名稱
           const temp = [];
           querySnapshot.forEach((doc) => {
-            temp.push({umbrella_Id: doc.umbrella_Id, umbrella_Status: doc.data().umbrella_Status, machine_Id: doc.data().machine_Id });
-            console.log(doc.umbrella_Id);
+            temp.push({id: doc.id,umbrella_Id: doc.umbrella_Id, umbrella_Status: doc.data().umbrella_Status, machine_Id: doc.data().machine_Id });
+            console.log(doc.id);
             console.log(doc.data().umbrella_Status);
           });
           setUmbrellas([...temp]);
@@ -49,10 +49,10 @@ export default function UmbrellaList() {
       setOpen(true);
     }
 
-    const deleteData = async function (umbrella_Id) {
+    const deleteData = async function (id) {
         try {
           setIsLoading(true);
-          await deleteDoc(doc(db, "umbrella", umbrella_Id));
+          await deleteDoc(doc(db, "umbrella", id));
           //console.log("deleted");
           setDeleted(deleted + 1);
           setIsLoading(false);
@@ -75,7 +75,7 @@ export default function UmbrellaList() {
                     <IconButton edge="end" aria-label="edit" onClick={() => editData(orange)}>
                       <CreateIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => deleteData(umbrella.umbrella_Id)}>
+                    <IconButton edge="end" aria-label="delete" onClick={() => deleteData(umbrella.id)}>
                       <DeleteIcon />
                     </IconButton>
                   </ListItem>)
@@ -122,7 +122,7 @@ export default function UmbrellaList() {
                 }}>
                 <AddIcon />
               </Fab>
-              <UmbrellaAddEdit open={open} close={close} umbrellas={currentUmbrella} />
+              <UmbrellaAddEdit open={open} close={close} umbrella={currentUmbrella} />
             </Box>
           );
         }
