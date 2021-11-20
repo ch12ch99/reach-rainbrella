@@ -19,13 +19,13 @@ export default function UmbrellaList() {
     const [open, setOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     // const [umbrellas, setUmbrellas] = useState(false);
-    const [umbrellas, setUmbrellas] = useState([]);
+    const [umbrellas, setUmbrellas] = useState([]); //useState是存firebase的資料 所以要用[]
     const [currentUmbrella, setCurrentUmbrella] = useState(false);
     const [deleted, setDeleted] = useState(false);
     useEffect(() => {
         async function readData() {
           setIsLoading(true);
-          const querySnapshot = await getDocs(collection(db, "umbrella"));
+          const querySnapshot = await getDocs(collection(db, "umbrella")); // db後面是接table name 不是專案名稱
           const temp = [];
           querySnapshot.forEach((doc) => {
             temp.push({umbrella_Id: doc.umbrella_Id, umbrella_Status: doc.data().umbrella_Status, machine_Id: doc.data().machine_Id });
