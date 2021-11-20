@@ -11,23 +11,24 @@ import { getFirestore } from '@firebase/firestore';
 import { collection } from '@firebase/firestore';
 import { config } from '../settings/firebaseConfig';
 import AppMenu from '../ui/AppMenu';
-import UmbrellaAddEdit from './UmbrellaAddEdit';
+// import UmbrellaAddEdit from './UmbrellaAddEdit';
 
 export default function UmbrellaList() {
     const firebaseApp = initializeApp(config);
     const db = getFirestore();
     const [open, setOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [umbrellas, setUmbrellas] = useState(false);
+    // const [umbrellas, setUmbrellas] = useState(false);
+    const [umbrellas, setUmbrellas] = useState([]);
     const [currentUmbrella, setCurrentUmbrella] = useState(false);
     const [deleted, setDeleted] = useState(false);
     useEffect(() => {
         async function readData() {
           setIsLoading(true);
-          const querySnapshot = await getDocs(collection(db, "Rainbrella"));
+          const querySnapshot = await getDocs(collection(db, "umbrella"));
           const temp = [];
           querySnapshot.forEach((doc) => {
-            temp.push({ umbrella_Id: doc.umbrella_Id, umbrella_Status: doc.data().umbrella_Status, machine_Id: doc.data().machine_Id });
+            temp.push({umbrella_Id: doc.umbrella_Id, umbrella_Status: doc.data().umbrella_Status, machine_Id: doc.data().machine_Id });
             console.log(doc.umbrella_Id);
             console.log(doc.data().umbrella_Status);
           });
@@ -65,22 +66,39 @@ export default function UmbrellaList() {
         setOpen(false);
       }
 
+    // const UmbrellaListComponent = function () {
+    //     return (
+    //         <List subheader="Umbrella list" aria-label="umbrella list">
+    //             {umbrellas.map((umbrella, orange) =>
+    //               <ListItem divider key={orange}>
+    //                 <ListItemText primary={"狀態:" + umbrella.umbrella_Status} secondary={"機台:" + umbrella.machine_Id}></ListItemText>
+    //                 <IconButton edge="end" aria-label="edit" onClick={() => editData(orange)}>
+    //                   <CreateIcon />
+    //                 </IconButton>
+    //                 <IconButton edge="end" aria-label="delete" onClick={() => deleteData(umbrella.umbrella_Id)}>
+    //                   <DeleteIcon />
+    //                 </IconButton>
+    //               </ListItem>)
+    //             }
+    //           </List >
+    //     )
+    // }
     const UmbrellaListComponent = function () {
-        return (
-            <List subheader="Umbrella list" aria-label="umbrella list">
-                {umbrellas.map((umbrella, orange) =>
-                  <ListItem divider key={orange}>
-                    <ListItemText primary={"狀態:" + umbrella.umbrella_Status} secondary={"機台:" + umbrella.machine_Id}></ListItemText>
-                    <IconButton edge="end" aria-label="edit" onClick={() => editData(orange)}>
-                      <CreateIcon />
-                    </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => deleteData(umbrella.umbrella_Id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItem>)
-                }
-              </List >
-        )
+      return (
+        <List subheader="Umbrella list" aria-label="umbrellas list">
+          {umbrellas.map((umbrellas, index) =>
+            <ListItem divider key={index}>
+              <ListItemText primary={"狀態:" + umbrellas.umbrella_Status} secondary={"機台:" + umbrellas.machine_Id}></ListItemText>
+              {/* <IconButton edge="end" aria-label="edit" onClick={() => editData(index)}>
+                <CreateIcon />
+              </IconButton>
+              <IconButton edge="end" aria-label="delete" onClick={() => deleteData(umbrellas.id)}>
+                <DeleteIcon />
+              </IconButton> */}
+            </ListItem>)
+          }
+        </List >
+      )
     }
     return (
         <Box sx={{
@@ -104,7 +122,7 @@ export default function UmbrellaList() {
                 }}>
                 <AddIcon />
               </Fab>
-              <UmbrellaAddEdit open={open} close={close} product={currentUmbrella} />
+              {/* <UmbrellaAddEdit open={open} close={close} product={currentUmbrella} /> */}
             </Box>
           );
         }
