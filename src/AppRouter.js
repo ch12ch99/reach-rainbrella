@@ -1,9 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductList from "./product/ProductList";
 import Main from "./ui/Main";
 import { AuthContext, STATUS } from "./account/AuthContext";
-import { Switch } from "@mui/material";
+//import { Switch } from "@mui/material";
 import AccountList from "./account/AccountList";
 import UmbrellaList from "./umbrella/UmbrellaList";
 import MachineList from "./machine/MachineList";
