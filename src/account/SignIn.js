@@ -12,7 +12,7 @@ export default function SignIn() {
     initializeApp(config);
   }
 
-  const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext); //利用useContext取得authContext
 
   const [account, setAccount] = useState({
     email: "",
@@ -53,7 +53,7 @@ export default function SignIn() {
   };
 
   const changeStatus = function () {
-    authContext.setStatus(STATUS.toSignOut);
+    authContext.setStatus(STATUS.toSignUp); //設定
   };
 
   return (

@@ -22,7 +22,7 @@ export default function ProductList() {
   const [deleted, setDeleted] = useState(false);
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(false);
-  const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext);//利用useContext hook取得AuthContext裡的值
   useEffect(() => {
     async function readData() {
       setIsLoading(true);

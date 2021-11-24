@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+//改用Switch，是react的switch喲
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductList from "./product/ProductList";
 import Main from "./ui/Main";
@@ -10,9 +11,9 @@ import MachineList from "./machine/MachineList";
 
 
 export default function AppRouter() {
-    const [status, setStatus] = useState(STATUS.toSignOut);
+    const [status, setStatus] = useState(STATUS.toSignIn);
   return (
-    <AuthContext.Provider value={{ status: STATUS.toSignOut }}>
+    <AuthContext.Provider value={{ status, setStatus}}>
       <Router>
         <Switch>
           <Route exact path="/" component={Main} /> //Route版本5.3.0要使用exact來path 不然他只會到上層
