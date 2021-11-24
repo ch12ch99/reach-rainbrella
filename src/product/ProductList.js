@@ -22,7 +22,7 @@ export default function ProductList() {
   const [deleted, setDeleted] = useState(false);
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(false);
-
+  const authContext = useContext(AuthContext);
   useEffect(() => {
     async function readData() {
       setIsLoading(true);

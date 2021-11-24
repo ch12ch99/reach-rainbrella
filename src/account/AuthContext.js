@@ -9,5 +9,8 @@ export const STATUS = {
 };
 
 export const AuthContext = React.createContext({
-  status: STATUS.toSignIn,
+  status: STATUS.toSignOut,
+  setStatus: (newStatus) => {
+    this.status = newStatus;
+  },
 });

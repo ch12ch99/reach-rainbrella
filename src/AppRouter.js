@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductList from "./product/ProductList";
 import Main from "./ui/Main";
@@ -8,12 +8,14 @@ import AccountList from "./account/AccountList";
 import UmbrellaList from "./umbrella/UmbrellaList";
 import MachineList from "./machine/MachineList";
 
+
 export default function AppRouter() {
+    const [status, setStatus] = useState(STATUS.toSignOut);
   return (
-    <AuthContext.Provider value={{ status: STATUS.toSignIn }}>
+    <AuthContext.Provider value={{ status: STATUS.toSignOut }}>
       <Router>
         <Switch>
-          <Route path="/" component={Main} />
+          <Route exact path="/" component={Main} />
           <Route path="/product" component={ProductList} />
           <Route path="/account" component={AccountList} />
           <Route path="/umbrella" component={UmbrellaList} />
