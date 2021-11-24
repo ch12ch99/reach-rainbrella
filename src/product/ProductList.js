@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Box, List, ListItem, ListItemText, IconButton } from '@mui/material';
 import { CircularProgress } from '@mui/material';
 import { Fab } from '@mui/material';
@@ -12,6 +12,7 @@ import { getFirestore } from '@firebase/firestore';
 import { config } from '../settings/firebaseConfig';
 import AppMenu from '../ui/AppMenu';
 import ProductAddEdit from './ProductAddEdit';
+import {AuthContext, STATUS} from '../account/AuthContext';
 
 export default function ProductList() {
   const firebaseApp = initializeApp(config);
