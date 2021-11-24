@@ -15,7 +15,7 @@ export default function AppRouter() {
     <AuthContext.Provider value={{ status: STATUS.toSignOut }}>
       <Router>
         <Switch>
-          <Route exact path="/" component={Main} />
+          <Route exact path="/" component={Main} /> //Route版本5.3.0要使用exact來path 不然他只會到上層
           <Route path="/product" component={ProductList} />
           <Route path="/account" component={AccountList} />
           <Route path="/umbrella" component={UmbrellaList} />
