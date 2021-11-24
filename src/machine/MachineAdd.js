@@ -19,7 +19,7 @@ export default function MachineAdd(props) {
                 docRef.forEach((doc) => {
                     // doc.data() is never undefined for query doc snapshots
                       console.log(doc.id, " => ", doc.data());
-                      temp.push({id: doc.id, machine_Id:doc.machine_Id, machine_Address:doc.data().machine_Address, machine_Spaces:doc.data().machine_Spaces});
+                      temp.push({id: doc.id, machine_Id:doc.data().machine_Id, machine_Address:doc.data().machine_Address, machine_Spaces:doc.data().machine_Spaces});
                     });
             }catch(e) {
                 console.log(e);

@@ -16,19 +16,19 @@ import MachineAddEdit from './MachineAddEdit';
 export default function MachineList() {
     const firebaseApp = initializeApp(config);
     const db = getFirestore();
-    const [open, setOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    // const [umbrellas, setUmbrellas] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [deleted, setDeleted] = useState(false);
     const [machines, setMachines] = useState([]); //useState是存firebase的資料 所以要用[]
     const [currentMachine, setCurrentMachine] = useState(false);
-    const [deleted, setDeleted] = useState(false);
+
     useEffect(() => {
         async function readData() {
           setIsLoading(true);
           const querySnapshot = await getDocs(collection(db, "machine")); // db後面是接table name 不是專案名稱
           const temp = [];
           querySnapshot.forEach((doc) => {
-            temp.push({id: doc.id,machine_Id: doc.machine_Id, machine_Address: doc.data().machine_Address, machine_Spaces: doc.data().machine_Spaces });
+            temp.push({id: doc.id,machine_Id: doc.data().machine_Id, machine_Address: doc.data().machine_Address, machine_Spaces: doc.data().machine_Spaces });
             //自己設的umbrella_Id與系統給的id不同
             console.log(doc.id);
             console.log(doc.data().machine_Address);
@@ -63,7 +63,6 @@ export default function MachineList() {
           console.log(error);
         }
       }
-
     const close = async function () {
         setOpen(false);
       }
@@ -73,7 +72,7 @@ export default function MachineList() {
             <List subheader="Machine list" aria-label="machine list">
                 {machines.map((machine, duck) =>
                   <ListItem divider key={duck}>
-                    <ListItemText primary={"地址:" + machines.machine_Address} secondary={"空間:" + machines.machine_Spaces}></ListItemText>
+                    <ListItemText primary={"地址:" + machine.machine_Address} secondary={"空間:" + machine.machine_Spaces}></ListItemText>
                     <IconButton edge="end" aria-label="edit" onClick={() => editData(duck)}>
                       <CreateIcon />
                     </IconButton>
