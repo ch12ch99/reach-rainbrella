@@ -28,7 +28,15 @@ export default function AccountList() {
           const querySnapshot = await getDocs(collection(db, "account")); // db後面是接table name 不是專案名稱
           const temp = [];
           querySnapshot.forEach((doc) => {
-            temp.push({id: doc.id,account_Id: doc.account_Id, account_Authority: doc.data().account_Authority, account_Id: doc.data().account_Id });
+            temp.push({id: doc.id,
+                      account_Authority: doc.data().account_Authority,
+                      account_Email: doc.data().account_Email,
+                      account_Id: doc.data().account_Id, 
+                      account_Name: doc.data().account_Name, 
+                      account_Password: doc.data().account_Password, 
+                      account_Phone: doc.data().account_Phone, 
+                      umbrella_Id: doc.data().umbrella_Id
+                      });
             //自己設的_Id與系統給的id不同
             console.log(doc.id);
             console.log(doc.data().account_Authority);
@@ -40,7 +48,7 @@ export default function AccountList() {
     }, [db, open, deleted]);
     
     const addData = async function () {
-        setCurrentAccount({ account_Authority:"", machine_Id: 0 });
+        setCurrentAccount({ account_Authority:"", account_Email:"", account_Id:"", account_Name:"", account_Password:"", account_Phone:"", umbrella_Id:""});
         setOpen(true);
     }
 
@@ -73,8 +81,7 @@ export default function AccountList() {
             <List subheader="Account list" aria-label="account list">
                 {accounts.map((account, red) =>
                   <ListItem divider key={red}>
-                    <ListItemText primary={"帳號名稱:" + account.account_Name} secondary={"E-mail:" + account.machine_Id + <br> + "E-mail:" + account.machine_Id + </br>}></ListItemText>
-
+                    <ListItemText primary={"帳號名稱:" + account.account_Name} secondary={"E-mail:" + account.account_Email +  "Id:" + account.account_Id + "Password:" + account.account_Password + "雨傘編號:" + account.umbrella_Id + "是否為管理者:" + account.account_Authority}></ListItemText>
                     <IconButton edge="end" aria-label="edit" onClick={() => editData(red)}>
                       <CreateIcon />
                     </IconButton>
