@@ -1,49 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import Button from '@mui/material/Button';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
-import { Button } from '@mui/material';
-import { TextField } from '@mui/material';
-import { getFirestore, collection, doc, addDoc, setDoc } from '@firebase/firestore';
+import { addDoc } from '@firebase/firestore';
+import { collection } from '@firebase/firestore';
+import { getFirestore } from "firebase/firestore";
 
-export default function AccountAddEdit(props) {
-    const [account, setAccount] = useState({ account_Status:"", machine_Id: 0 })
-    useEffect(() => setAccount({ ...props.account }), [props.account]);
-    const action = !props.account.id ? "新增" : "修改";
-    const handleChange = function (e) {
-        setAccount({ ...account, [e.target.name]: e.target.value })
-    }
-    const update = async function () {
-        const db = getFirestore();
-        try {
-            if (action === "新增") {
-                const docRef = await addDoc(collection(db, "account"), {
-                    account_Status: account.account_Status,
-                    machine_Id: parseInt(account.machine_Id)
-                });
+export default function AccountAdd(props) {
+    const db = getFirestore();
+    const addaccount = async function(){
+        try{
+            const docRef = await addDoc(collection(db,"account"),{
+                account_Authority:parseInt(account.account_Authority),
+                account_Email:parseInt(account.account_Email),
+                account_Id:parseInt(account.account_Id),
+                account_Name:parseInt(account.account_Name),
+                account_Password:parseInt(account.account_Password),
+                umbrella_Id:parseInt(account.umbrella_Id)
+            });
                 console.log(docRef.id);
+                const temp = [];
+                docRef.forEach((doc) => {
+                    // doc.data() is never undefined for query doc snapshots
+                      console.log(doc.id, " => ", doc.data());
+                      temp.push({id: doc.id,
+                        account_Authority: doc.data().account_Authority,
+                        account_Email: doc.data().account_Email,
+                        account_Id: doc.data().account_Id, 
+                        account_Name: doc.data().account_Name, 
+                        account_Password: doc.data().account_Password, 
+                        account_Phone: doc.data().account_Phone, 
+                        umbrella_Id: doc.data().umbrella_Id
+                        });
+                    });
+            }catch(e) {
+                console.log(e);
             }
-            else {
-                await setDoc(doc(db, "account", account.id), {
-                    account_Status: account.account_Status,
-                    machine_Id: parseInt(account.machine_Id)
-                });
-            }
-        }
-        catch (e) {
-            console.log(e);
-        }
-        props.close();
     }
+
+    const [account, setaccount] = useState({ account_Authority:"", account_Email:"", account_Id:"", account_Name:"", account_Password:"", account_Phone:"", umbrella_Id:""})
+    const handleClick = function (e) {
+        setaccount({ ...account, [e.target.name]: e.target.value })
+    }
+
+    const [open, setOpen] = useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
+    
     return (
-        <Dialog open={props.open}>
-            <DialogTitle>{action}帳戶</DialogTitle>
-            <DialogContent>
-                <TextField label="狀態" name="account_Status" variant="outlined" value={account.account_Status} onChange={handleChange} />
-                <TextField label="基台" type="number" name="machine_Id" variant="outlined" value={account.machine_Id} onChange={handleChange} />
-            </DialogContent>
-            <DialogActions>
-                <Button variant="outlined" color="primary" onClick={update}>{action}</Button>
-                <Button variant="outlined" color="secondary" onClick={props.close}>取消</Button>
-            </DialogActions>
-        </Dialog>
+        <div>
+            <Button variant="outlined" onClick={handleClickOpen}>新增</Button>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>帳戶</DialogTitle>
+                <DialogContent>
+                    帳號名稱:<input type="text" name="account_Name" value={account.account_Name} onChange={handleClick} /><br />
+                    <br />
+                    E-mail:<input type="text" name="account_Email" value={account.account_Email} onChange={handleClick} /><br />
+                    <br />
+                    Id:<input type="text" name="account_Id" value={account.account_Id} onChange={handleClick} /><br />
+                    <br />
+                    Password:<input type="text" name="account_Password" value={account.account_Password} onChange={handleClick} /><br />
+                    <br />
+                    雨傘編號:<input type="text" name="umbrella_Id" value={account.machinumbrella_Ide_Id} onChange={handleClick} /><br />
+                    <br />
+                    是否為管理者:<input type="text" name="account_Authority" value={account.account_Authority} onChange={handleClick} /><br />
+                </DialogContent>
+                <DialogActions>
+                    <button variant="outlined" onClick={addaccount}>新增</button>
+                    <button variant="outlined" onClick={handleClose}>關閉</button>
+                </DialogActions>
+            </Dialog>
+        </div>
     );
 }

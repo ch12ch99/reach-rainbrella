@@ -16,15 +16,23 @@ export default function AccountAddEdit(props) {
         try {
             if (action === "新增") {
                 const docRef = await addDoc(collection(db, "account"), {
-                    account_Status: account.account_Status,
-                    machine_Id: parseInt(account.machine_Id)
+                    account_Authority: account.account_Authority,
+                    account_Name: parseInt(account.account_Name),
+                    account_Email: parseInt(account.account_Email),
+                    account_Id: parseInt(account.account_Id),
+                    account_Password: parseInt(account.account_Password),
+                    umbrella_Id: parseInt(account.umbrella_Id)
                 });
                 console.log(docRef.id);
             }
             else {
                 await setDoc(doc(db, "account", account.id), {
-                    account_Status: account.account_Status,
-                    machine_Id: parseInt(account.machine_Id)
+                    account_Authority: account.account_Authority,
+                    account_Name: parseInt(account.account_Name),
+                    account_Email: parseInt(account.account_Email),
+                    account_Id: parseInt(account.account_Id),
+                    account_Password: parseInt(account.account_Password),
+                    umbrella_Id: parseInt(account.umbrella_Id)
                 });
             }
         }
@@ -35,10 +43,14 @@ export default function AccountAddEdit(props) {
     }
     return (
         <Dialog open={props.open}>
-            <DialogTitle>{action}帳戶</DialogTitle>
+            <DialogTitle>{action}帳戶</DialogTitle> 
             <DialogContent>
-                <TextField label="帳號權限" name="account_Status" variant="outlined" value={account.account_Status} onChange={handleChange} />
-                <TextField label="基台" type="number" name="machine_Id" variant="outlined" value={account.machine_Id} onChange={handleChange} />
+                <TextField label="帳號名稱" name="account_Name" variant="outlined" value={account.account_Name} onChange={handleChange} /><br /><br />
+                <TextField label="E-mail" name="account_Email" variant="outlined" value={account.account_Email} onChange={handleChange} /><br /><br />
+                <TextField label="Id" name="account_Id" variant="outlined" value={account.account_Id} onChange={handleChange} /><br /><br />
+                <TextField label="Password" name="account_Password" variant="outlined" value={account.account_Password} onChange={handleChange} /><br /><br />
+                <TextField label="雨傘編號" name="umbrella_Id" variant="outlined" value={account.umbrella_Id} onChange={handleChange} /><br /><br />
+                <TextField label="是否為管理者" type="boolean" name="account_Authority" variant="outlined" value={account.account_Authority} onChange={handleChange} /><br /><br />
             </DialogContent>
             <DialogActions>
                 <Button variant="outlined" color="primary" onClick={update}>{action}</Button>
