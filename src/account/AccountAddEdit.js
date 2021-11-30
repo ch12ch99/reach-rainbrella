@@ -43,14 +43,15 @@ export default function AccountAddEdit(props) {
     }
     return (
         <Dialog open={props.open}>
-            <DialogTitle>{action}帳戶</DialogTitle> 
+            <DialogTitle>{action}帳戶</DialogTitle>
             <DialogContent>
-                <TextField label="帳號名稱" name="account_Name" variant="outlined" value={account.account_Name} onChange={handleChange} /><br /><br />
-                <TextField label="E-mail" name="account_Email" variant="outlined" value={account.account_Email} onChange={handleChange} /><br /><br />
-                <TextField label="Id" name="account_Id" variant="outlined" value={account.account_Id} onChange={handleChange} /><br /><br />
-                <TextField label="Password" name="account_Password" variant="outlined" value={account.account_Password} onChange={handleChange} /><br /><br />
-                <TextField label="雨傘編號" name="umbrella_Id" variant="outlined" value={account.umbrella_Id} onChange={handleChange} /><br /><br />
-                <TextField label="是否為管理者" type="boolean" name="account_Authority" variant="outlined" value={account.account_Authority} onChange={handleChange} /><br /><br />
+                <hr/>
+                <TextField label="帳號名稱" name="account_Name" variant="outlined" value={account.account_Name} onChange={handleChange} /><hr />
+                <TextField label="E-mail" name="account_Email" variant="outlined" value={account.account_Email} onChange={handleChange} /><hr />
+                <TextField label="Id" name="account_Id" variant="outlined" value={account.account_Id} onChange={handleChange} /><hr />
+                <TextField label="Password" name="account_Password" variant="outlined" value={account.account_Password} onChange={handleChange} /><hr />
+                <TextField label="雨傘編號" name="umbrella_Id" variant="outlined" value={account.umbrella_Id} onChange={handleChange} /><hr />
+                <TextField label="是否為管理者" type="boolean" name="account_Authority" variant="outlined" value={account.account_Authority} onChange={handleChange} /><hr />
             </DialogContent>
             <DialogActions>
                 <Button variant="outlined" color="primary" onClick={update}>{action}</Button>

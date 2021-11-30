@@ -81,7 +81,8 @@ export default function AccountList() {
             <List subheader="Account list" aria-label="account list">
                 {accounts.map((account, red) =>
                   <ListItem divider key={red}>
-                    <ListItemText primary={"帳號名稱:" + account.account_Name} secondary={"E-mail:" + account.account_Email +  "Id:" + account.account_Id + "Password:" + account.account_Password + "雨傘編號:" + account.umbrella_Id + "是否為管理者:" + account.account_Authority}></ListItemText>
+                    <ListItemText primary={"帳號名稱:" + account.account_Name} ></ListItemText>
+                    <ListItemText secondary={"E-mail:" + account.account_Email + "Id:" + account.account_Id + "Password:" + account.account_Password + "雨傘編號:" + account.umbrella_Id + "是否為管理者:" + account.account_Authority}></ListItemText>
                     <IconButton edge="end" aria-label="edit" onClick={() => editData(red)}>
                       <CreateIcon />
                     </IconButton>
