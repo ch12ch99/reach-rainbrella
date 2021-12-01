@@ -1,15 +1,15 @@
 import React from "react";
 
 export const STATUS = {
-  toSignIn: 1,
+  toSignIn: "signIn",
 
-  toSignOut: 2,
+  toSignOut: "signOut",
 
-  toSignUp: 0,
+  toSignUp: "signUp",
 };
 
 export const AuthContext = React.createContext({
-  status: STATUS.toSignOut,
+  status: STATUS.toSignIn,
   setStatus: (newStatus) => {
     this.status = newStatus;
   },

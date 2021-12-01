@@ -8,6 +8,7 @@ import ProductList from "./product/ProductList";
 import AccountList from "./account/AccountList";
 import UmbrellaList from "./umbrella/UmbrellaList";
 import MachineList from "./machine/MachineList";
+import SignOut from "./account/SignOut";
 
 
 export default function AppRouter() {
