@@ -20,7 +20,7 @@ export default function Main() {
         <h1>請先登錄</h1>,
         <SignIn />
       ) : (
-        <SignOut />
+        <SignOut />,<AppMenu />
       )}
     </div>
   );

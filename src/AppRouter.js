@@ -13,7 +13,7 @@ import SignOut from "./account/SignOut";
 
 export default function AppRouter() {
     const authContext = useContext(AuthContext);
-    const [status, setStatus] = useState(STATUS.toSignOut);
+    const [status, setStatus] = useState(STATUS.toSignIn); //我爲了測試註冊所以我預設是Out啊！要登錄請直接改動此！
    
   return (
     <AuthContext.Provider value={{ status, setStatus}}>
