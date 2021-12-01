@@ -10,12 +10,12 @@ export default function AccountAdd(props) {
     const addaccount = async function(){
         try{
             const docRef = await addDoc(collection(db,"account"),{
-                account_Authority:parseInt(account.account_Authority),
-                account_Email:parseInt(account.account_Email),
-                account_Id:parseInt(account.account_Id),
-                account_Name:parseInt(account.account_Name),
-                account_Password:parseInt(account.account_Password),
-                umbrella_Id:parseInt(account.umbrella_Id)
+                account_Authority: Boolean(account.account_Authority),
+                account_Name: account.account_Name,
+                account_Email: account.account_Email,
+                account_Id:account.account_Id,
+                account_Password:account.account_Password,
+                umbrella_Id:account.umbrella_Id
             });
                 console.log(docRef.id);
                 const temp = [];
