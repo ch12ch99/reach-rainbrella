@@ -75,7 +75,16 @@ export default function AccountList() {
         setOpen(false);
       }
 
-
+//      const columns: GridColDef[] = [
+//        { field: "id", headerName: "帳號名稱", width: 100 },
+//        { field: "firstName", headerName: "E-mail", width: 200 },
+//        { field: "lastName", headerName: "Id", width: 200 },
+//        { field: "age", headerName: "Password", width: 90 },
+//        { field: "age", headerName: "雨傘編號", width: 90 },
+//        { field: "age", headerName: "是否為管理者", width: 90 },
+//        { field: "age", headerName: "編輯", width: 90 },
+//        { field: "age", headerName: "刪除", width: 90 }
+//      ];
       const AccountListComponent = function () {
         return (
           
@@ -83,7 +92,11 @@ export default function AccountList() {
                 {accounts.map((account, red) =>
                   <ListItem divider key={red}>
                     <ListItemText primary={"帳號名稱 : " + account.account_Name} ></ListItemText>
-                    <ListItemText secondary={"E-mail : " + account.account_Email + "Id : " + account.account_Id + "Password : " + account.account_Password + "雨傘編號 :" + account.umbrella_Id + "是否為管理者 : " + account.account_Authority}></ListItemText>
+                    <ListItemText secondary={"E-mail : " + account.account_Email}></ListItemText>
+                    <ListItemText secondary={"Id : " + account.account_Id}></ListItemText>
+                    <ListItemText secondary={"Password : " + account.account_Password}></ListItemText>
+                    <ListItemText secondary={"雨傘編號 : " + account.umbrella_Id}></ListItemText>
+                    <ListItemText secondary={"是否為管理者 : " + account.account_Authority}></ListItemText>
                     <IconButton edge="end" aria-label="edit" onClick={() => editData(red)}>
                       <CreateIcon />
                     </IconButton>
