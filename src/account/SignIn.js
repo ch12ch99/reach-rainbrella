@@ -57,6 +57,11 @@ export default function SignIn() {
     console.log(authContext); //看現在到底是什麼狀態
   };
 
+  const superStatus = function () {
+    authContext.setStatus(STATUS.toSignOut); //設定
+    console.log(authContext); //看現在到底是什麼狀態
+  };
+
   return (
     <form>
       <TextField
@@ -90,6 +95,10 @@ export default function SignIn() {
 
       <Button variant="contained" color="secondary" onClick={changeStatus} >
         我要註冊
+      </Button>
+
+      <Button variant="contained" color="secondary" onClick={superStatus} >
+        我是超級按鈕！
       </Button>
     </form>
   );
