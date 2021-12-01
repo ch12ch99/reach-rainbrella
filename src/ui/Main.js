@@ -11,7 +11,7 @@ export default function Main() {
   return (
     <div>
       <AppMenu />
-      {status === "signUp" ? (
+      {status === "SignUp" ? (
         <SignUp setStatus={setStatus} />
       ) : status === "signIn" ? (
         <SignIn setStatus={setStatus} />

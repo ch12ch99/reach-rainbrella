@@ -78,11 +78,12 @@ export default function AccountList() {
 
       const AccountListComponent = function () {
         return (
+          
             <List subheader="Account list" aria-label="account list">
                 {accounts.map((account, red) =>
                   <ListItem divider key={red}>
-                    <ListItemText primary={"帳號名稱:" + account.account_Name} ></ListItemText>
-                    <ListItemText secondary={"E-mail:" + account.account_Email + "Id:" + account.account_Id + "Password:" + account.account_Password + "雨傘編號:" + account.umbrella_Id + "是否為管理者:" + account.account_Authority}></ListItemText>
+                    <ListItemText primary={"帳號名稱  :  " + account.account_Name} ></ListItemText>
+                    <ListItemText secondary={"E-mail: " + account.account_Email + " / ID: " + account.account_Id + " / Password: " + account.account_Password + " / 雨傘編號: " + account.umbrella_Id + " / 是否為管理者:" + account.account_Authority}></ListItemText>
                     <IconButton edge="end" aria-label="edit" onClick={() => editData(red)}>
                       <CreateIcon />
                     </IconButton>
@@ -96,7 +97,8 @@ export default function AccountList() {
     }
     return (
         <Box sx={{
-            width: '100vw',
+          paddingLeft: '3vw',
+          width: '90vw',
             height: '100vh',
             backgroundColor: 'background.paper',
             color: 'black',

@@ -20,10 +20,6 @@ export default function ImageUpload() {
 
   const [loaded, setLoaded] = useState(0); //add 1 when loaded
 
-
-
-  
-
   const handleUpload = async function(e){
 
     console.log(e.target.files[0]);
@@ -36,8 +32,6 @@ export default function ImageUpload() {
 
       const imageRef = ref(storage,e.target.files[0].name);
 
-    
-
       await uploadBytes(imageRef, e.target.files[0]);
 
       console.log('Uploaded a blob or file!');
@@ -47,9 +41,6 @@ export default function ImageUpload() {
       console.log(url);
 
       setLoaded((currentValue)=>currentValue+1);
-
-      
-
     }
 
     catch(error){
@@ -64,11 +55,7 @@ export default function ImageUpload() {
 
     }
 
-
-
   }
-
-
 
   useEffect(()=>{
 
@@ -91,11 +78,7 @@ export default function ImageUpload() {
           setImages((currentImages)=>[...currentImages,{img:url, title:image.name}]);
 
         });  
-
         setMessage("");
-
-      
-
       }
 
       catch(error){
@@ -106,15 +89,11 @@ export default function ImageUpload() {
 
       }
 
-
-
     }
 
     readImage();
 
   },[storage, loaded]);
-
-
 
   return (
 

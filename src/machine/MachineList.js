@@ -86,7 +86,8 @@ export default function MachineList() {
     }
     return (
         <Box sx={{
-            width: '100vw',
+          paddingLeft: '3vw',
+          width: '90vw',
             height: '100vh',
             backgroundColor: 'background.paper',
             color: 'black',
@@ -110,3 +111,4 @@ export default function MachineList() {
             </Box>
           );
         }
+        

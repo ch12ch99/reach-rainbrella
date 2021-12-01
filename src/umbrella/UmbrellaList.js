@@ -69,7 +69,7 @@ export default function UmbrellaList() {
 
     const UmbrellaListComponent = function () {
         return (
-            <List subheader="Umbrella list" aria-label="umbrella list">
+            <List subheader="Umbrella list" aria-label="umbrella list" >
                 {umbrellas.map((umbrella, orange) =>
                   <ListItem divider key={orange}>
                     <ListItemText primary={"狀態:" + umbrella.umbrella_Status} secondary={"機台:" + umbrella.machine_Id}></ListItemText>
@@ -86,7 +86,8 @@ export default function UmbrellaList() {
     }
     return (
         <Box sx={{
-            width: '100vw',
+            paddingLeft: '3vw',
+            width: '90vw',
             height: '100vh',
             backgroundColor: 'background.paper',
             color: 'black',
