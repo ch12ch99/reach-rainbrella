@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Button} from '@mui/material';
 import { getApps, initializeApp } from "firebase/app";
 import { getAuth, signOut } from "firebase/auth";
 import {config} from '../settings/firebaseConfig';
+import {AuthContext, STATUS} from '../account/AuthContext';
 //import { Box } from '@mui/system';
 
 export default function SignOut(props) {
@@ -10,15 +11,17 @@ export default function SignOut(props) {
     initializeApp(config);
   }
   const [message, setMessage] = useState("");
+  const authContext = useContext(AuthContext);
+  const auth = getAuth();
   const handleSubmit = async function(){
     try {
-      const auth = getAuth();
+      
       await signOut(auth);
       setMessage("");
-      props.setStatus("signIn");
+      authContext.setStatus("signIn");
     }
     catch(error){
-      setMessage(""+error);
+      setMessage("in signOut"+error);
     }
   }
   return(

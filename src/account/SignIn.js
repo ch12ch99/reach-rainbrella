@@ -6,14 +6,14 @@ import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
 
 //import { Box } from '@mui/system';
-
+ 
 export default function SignIn() {
+  
   if (getApps().length === 0) {
     initializeApp(config);
   }
-
   const authContext = useContext(AuthContext); //利用useContext取得authContext
-
+  console.log(authContext);
   const [account, setAccount] = useState({
     email: "",
     password: "",
@@ -54,6 +54,7 @@ export default function SignIn() {
 
   const changeStatus = function () {
     authContext.setStatus(STATUS.toSignUp); //設定
+    console.log(authContext); //看現在到底是什麼狀態
   };
 
   return (
@@ -87,7 +88,7 @@ export default function SignIn() {
         登入
       </Button>
 
-      <Button variant="contained" color="secondary" onClick={changeStatus}>
+      <Button variant="contained" color="secondary" onClick={changeStatus} >
         我要註冊
       </Button>
     </form>
