@@ -10,7 +10,7 @@ import { AuthContext, STATUS } from "../account/AuthContext";
 export default function Main() {
   //const [status, setStatus] = useState("signIn"); //設定預設狀態
   const authContext = useContext(AuthContext); // 取得AuthContext裡的值
-  console.log(authContext); //查看預設狀態
+  console.log(authContext.status); //查看預設狀態
 
   return (
     <div>
@@ -20,7 +20,7 @@ export default function Main() {
         <h1>請先登錄</h1>,
         <SignIn />
       ) : (
-        <SignOut />,<AppMenu />
+        <AppMenu />
       )}
     </div>
   );

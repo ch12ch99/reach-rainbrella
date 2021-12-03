@@ -18,7 +18,8 @@ export default function SignOut(props) {
       
       await signOut(auth);
       setMessage("");
-      authContext.setStatus("signIn");
+      authContext.setStatus(STATUS.toSignIn); //設定
+      // authContext.setStatus("signIn");
     }
     catch(error){
       setMessage("in signOut"+error);

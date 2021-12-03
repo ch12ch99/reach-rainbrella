@@ -13,6 +13,7 @@ import { config } from '../settings/firebaseConfig';
 import AppMenu from '../ui/AppMenu';
 import ProductAddEdit from './ProductAddEdit';
 import {AuthContext, STATUS} from '../account/AuthContext';
+import SignIn from '../account/SignIn';
 
 export default function ProductList() {
   const firebaseApp = initializeApp(config);
@@ -23,6 +24,7 @@ export default function ProductList() {
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState(false);
   const authContext = useContext(AuthContext);//利用useContext hook取得AuthContext裡的值
+  console.log(authContext.status);
   useEffect(() => {
     async function readData() {
       setIsLoading(true);
@@ -94,11 +96,16 @@ export default function ProductList() {
       textAlign: 'left'
     }}>
       <AppMenu />
-      {!isLoading ?
+      {authContext.status === "signOut" ? ( //查看預設狀態
         <ProductListComponent />
+      ) : <SignIn />}
+       
+      {/* {!isLoading ?
+        
         :
-        <CircularProgress />
-      }
+        <CircularProgress /> 我不會塞isLoading在context裏面
+      } */}
+
       <Fab color="primary" aria-label="新增" onClick={addData}
         sx={{
           position: "fixed",
