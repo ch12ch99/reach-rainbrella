@@ -1,8 +1,9 @@
 /* 
     這我用來設設計SignIn的from的不要刪掉咯
 */
-.container{
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
- }
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}

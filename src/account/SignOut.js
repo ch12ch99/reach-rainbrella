@@ -5,7 +5,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
 //import { Box } from '@mui/system';
-import { Alert } from "@mui/material";
+
 export default function SignOut(props) {
   if (getApps().length === 0) {
     initializeApp(config);
@@ -19,7 +19,6 @@ export default function SignOut(props) {
       setMessage("");
       authContext.setStatus(STATUS.toSignIn); //設定
       // authContext.setStatus("signIn");
-      
     } catch (error) {
       setMessage("in signOut" + error);
     }
