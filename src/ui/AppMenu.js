@@ -4,7 +4,8 @@ import { AppBar, Button, Toolbar } from '@mui/material';
 import SignOut from '../account/SignOut';
 import SignIn from '../account/SignIn';
 import {AuthContext, STATUS} from '../account/AuthContext';
-
+import Avatar from '@mui/material/Avatar';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 export default function AppMenu() {
     const authContext = useContext(AuthContext);//利用useContext hook取得AuthContext裡的值
     return (
@@ -18,7 +19,10 @@ export default function AppMenu() {
                 {/* <Button component={Link} to='/' color="inherit">index</Button> //這個我不知道是殺小先註解掉 */}
                 {authContext.status === "signOut" ? ( //查看預設狀態
                     <SignOut/>
-                ):"預設個人帳號位置"}
+                ):("")}
+                {authContext.status === "signOut" ? (
+                    <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar> //頭像Avatar 位置有點怪 帶修正
+                ):("我這裏是帳號頭像之類的地方哦")}
                 
             </Toolbar>
         </AppBar>

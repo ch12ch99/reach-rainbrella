@@ -19,6 +19,9 @@ const theme = createTheme({
     secondary: {
       main: "#1d98cd",
     },
+    superqiuqiu: {
+      main: "#E91E63",
+    },
   },
 });
 ReactDOM.render(
