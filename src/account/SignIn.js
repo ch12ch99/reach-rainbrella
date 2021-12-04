@@ -5,7 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import "../account/SignIn.css";
-
+import { Alert } from "@mui/material";
 //import { Box } from '@mui/system';
 
 export default function SignIn() {
@@ -65,7 +65,9 @@ export default function SignIn() {
   return (
     <div class="container">
       <form>
-        <h1>怎樣？不登錄就想用噶？</h1>
+        <Alert variant="filled" severity="error">
+          怎樣？不登錄就想用噶？
+        </Alert>
         <TextField
           type="email"
           name="email"
@@ -97,7 +99,9 @@ export default function SignIn() {
 
         <Button variant="contained" color="secondary" onClick={changeStatus}>
           我要註冊
-        </Button><br/><br/>
+        </Button>
+        <br />
+        <br />
 
         <Button variant="contained" color="superqiuqiu" onClick={superStatus}>
           我是超級按鈕！

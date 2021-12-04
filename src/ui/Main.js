@@ -14,6 +14,7 @@ export default function Main() {
 
   return (
     <div>
+      <AppMenu />
       {authContext.status === "signUp" ? ( //查看預設狀態
         <SignUp />
       ) : authContext.status === "signIn" ? (
