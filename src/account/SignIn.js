@@ -65,9 +65,7 @@ export default function SignIn() {
   return (
     <div class="container">
       <form>
-        <Alert variant="filled" severity="error">
-          怎樣？不登錄就想用噶？
-        </Alert>
+      <Alert variant="filled" severity="error">怎樣？不登錄就想用噶？</Alert>
         <TextField
           type="email"
           name="email"
@@ -99,9 +97,7 @@ export default function SignIn() {
 
         <Button variant="contained" color="secondary" onClick={changeStatus}>
           我要註冊
-        </Button>
-        <br />
-        <br />
+        </Button><br/><br/>
 
         <Button variant="contained" color="superqiuqiu" onClick={superStatus}>
           我是超級按鈕！
