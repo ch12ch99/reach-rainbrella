@@ -14,8 +14,8 @@ export default function AppMenu() {
                 <Button component={Link} to='/account' color="inherit">account</Button>
                 <Button component={Link} to='/umbrella' color="inherit">umbrella</Button>
                 <Button component={Link} to='/machine' color="inherit">machine</Button>
-                <Button component={Link} to='/admin' color="inherit">admin</Button>
-                <Button component={Link} to='/' color="inherit">index</Button>
+                {/* <Button component={Link} to='/admin' color="inherit">admin</Button> //這個我不知道是殺小先註解掉 */}
+                {/* <Button component={Link} to='/' color="inherit">index</Button> //這個我不知道是殺小先註解掉 */}
                 {authContext.status === "signOut" ? ( //查看預設狀態
                     <SignOut/>
                 ):"預設個人帳號位置"}

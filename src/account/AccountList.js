@@ -160,18 +160,22 @@ export default function AccountList() {
                 :
                 <CircularProgress />
               } */}
-      <Fab
-        color="primary"
-        aria-label="新增"
-        onClick={addData}
-        sx={{
-          position: "fixed",
-          bottom: (theme) => theme.spacing(2),
-          right: (theme) => theme.spacing(8),
-        }}
-      >
-        <AddIcon />
-      </Fab>
+      {authContext.status === STATUS.toSignIn ? (
+        <Box></Box>
+      ) : (
+        <Fab
+          color="primary"
+          aria-label="新增"
+          onClick={addData}
+          sx={{
+            position: "fixed",
+            bottom: (theme) => theme.spacing(2),
+            right: (theme) => theme.spacing(8),
+          }}
+        >
+          <AddIcon />
+        </Fab>
+      )}
       <AccountAddEdit open={open} close={close} account={currentAccount} />
     </Box>
   );
