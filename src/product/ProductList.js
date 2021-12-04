@@ -111,9 +111,9 @@ export default function ProductList() {
       <AppMenu />
       {authContext.status === "signOut" ? ( //查看預設狀態
         <ProductListComponent />
-      ) : authContext.status === "signUp" ?(
+      ) : authContext.status === "signUp" ? (
         <SignUp />
-      ):(
+      ) : (
         <SignIn />
       )}
 
@@ -122,9 +122,8 @@ export default function ProductList() {
         :
         <CircularProgress /> 我不會塞isLoading在context裏面
       } */}
-      {authContext.status === STATUS.toSignIn || STATUS.toSignUp ? (
-        null
-      ) : (
+      {authContext.status === STATUS.toSignIn ? (null): authContext.status ===
+        STATUS.toSignUp ? null : (
         <Fab
           color="primary"
           aria-label="新增"

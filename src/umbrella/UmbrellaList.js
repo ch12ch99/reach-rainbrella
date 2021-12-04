@@ -153,7 +153,8 @@ export default function UmbrellaList() {
         <SignIn />
       )}
       {/* {!isLoading ? <UmbrellaListComponent /> : <CircularProgress />} */}
-      {authContext.status === STATUS.toSignIn || STATUS.toSignUp ? null : (
+      {authContext.status === STATUS.toSignIn ? null : authContext.status ===
+        STATUS.toSignUp ? null : (
         <Fab
           color="primary"
           aria-label="新增"
