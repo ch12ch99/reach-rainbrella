@@ -100,7 +100,7 @@ export default function SignIn() {
         </Button><br/><br/>
 
         <Button variant="contained" color="superqiuqiu" onClick={superStatus}>
-          我是超級按鈕！
+          我是管理者按鈕！
         </Button>
       </form>
     </div>

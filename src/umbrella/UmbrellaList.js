@@ -14,6 +14,8 @@ import AppMenu from "../ui/AppMenu";
 import UmbrellaAddEdit from "./UmbrellaAddEdit";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
+import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+import UmbrellaIcon from '@mui/icons-material/Umbrella';
 export default function UmbrellaList() {
   const authContext = useContext(AuthContext);
   const firebaseApp = initializeApp(config);
@@ -69,6 +71,16 @@ export default function UmbrellaList() {
     }
   };
 
+  //借雨傘位置
+  const borrowUmberlla = async function(){
+    alert("借用雨傘成功");
+  };
+
+  //還雨傘
+  const backUmberlla = async function(){
+    alert("雨傘成功歸還");
+  };
+
   const close = async function () {
     setOpen(false);
   };
@@ -82,6 +94,7 @@ export default function UmbrellaList() {
               primary={"狀態:" + umbrella.umbrella_Status}
               secondary={"機台:" + umbrella.machine_Id}
             ></ListItemText>
+            {/* 修改 */}
             <IconButton
               edge="end"
               aria-label="edit"
@@ -89,12 +102,29 @@ export default function UmbrellaList() {
             >
               <CreateIcon />
             </IconButton>
+            {/* 刪除 */}
             <IconButton
               edge="end"
               aria-label="delete"
               onClick={() => deleteData(umbrella.id)}
             >
               <DeleteIcon />
+            </IconButton>
+            {/* 借雨傘 */}
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={() => borrowUmberlla()}
+            >
+              <BeachAccessIcon />
+            </IconButton>
+            {/* 還雨傘 */}
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={() => backUmberlla()}
+            >
+              <UmbrellaIcon />
             </IconButton>
           </ListItem>
         ))}
