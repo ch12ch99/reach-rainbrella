@@ -14,6 +14,7 @@ import AppMenu from "../ui/AppMenu";
 import AccountAddEdit from "./AccountAddEdit";
 import SignIn from "./SignIn";
 import { AuthContext, STATUS } from "../account/AuthContext";
+import SignUp from "../account/SignUp";
 
 export default function AccountList() {
   const firebaseApp = initializeApp(config);
@@ -152,6 +153,8 @@ export default function AccountList() {
       <AppMenu />
       {authContext.status === "signOut" ? ( //查看預設狀態
         <AccountListComponent />
+      ) : authContext.status === "signUp" ? (
+        <SignUp />
       ) : (
         <SignIn />
       )}
@@ -160,9 +163,7 @@ export default function AccountList() {
                 :
                 <CircularProgress />
               } */}
-      {authContext.status === STATUS.toSignIn ? (
-        <Box></Box>
-      ) : (
+      {authContext.status === STATUS.toSignIn || STATUS.toSignUp ? null : (
         <Fab
           color="primary"
           aria-label="新增"

@@ -12,8 +12,9 @@ import { collection } from "@firebase/firestore";
 import { config } from "../settings/firebaseConfig";
 import AppMenu from "../ui/AppMenu";
 import MachineAddEdit from "./MachineAddEdit";
-import { AuthContext,STATUS } from "../account/AuthContext";
+import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
+import SignUp from "../account/SignUp";
 export default function MachineList() {
   const firebaseApp = initializeApp(config);
   const db = getFirestore();
@@ -115,6 +116,8 @@ export default function MachineList() {
       <AppMenu />
       {authContext.status === "signOut" ? ( //查看預設狀態
         <MachineListComponent />
+      ) : authContext.status === "signUp" ? (
+        <SignUp />
       ) : (
         <SignIn />
       )}
@@ -123,9 +126,7 @@ export default function MachineList() {
                 :
                 <CircularProgress />
               } */}
-      {authContext.status === STATUS.toSignIn ? (
-        <Box></Box>
-      ) : (
+      {authContext.status === STATUS.toSignIn || STATUS.toSignUp ? null : (
         <Fab
           color="primary"
           aria-label="新增"

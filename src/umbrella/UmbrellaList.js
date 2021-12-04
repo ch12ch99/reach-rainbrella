@@ -14,8 +14,9 @@ import AppMenu from "../ui/AppMenu";
 import UmbrellaAddEdit from "./UmbrellaAddEdit";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
-import UmbrellaIcon from '@mui/icons-material/Umbrella';
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import UmbrellaIcon from "@mui/icons-material/Umbrella";
+import SignUp from "../account/SignUp";
 export default function UmbrellaList() {
   const authContext = useContext(AuthContext);
   const firebaseApp = initializeApp(config);
@@ -26,6 +27,7 @@ export default function UmbrellaList() {
   const [umbrellas, setUmbrellas] = useState([]); //useState是存firebase的資料 所以要用[]
   const [currentUmbrella, setCurrentUmbrella] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  console.log(authContext.status);
   useEffect(() => {
     async function readData() {
       setIsLoading(true);
@@ -72,12 +74,12 @@ export default function UmbrellaList() {
   };
 
   //借雨傘位置
-  const borrowUmberlla = async function(){
+  const borrowUmberlla = async function () {
     alert("借用雨傘成功");
   };
 
   //還雨傘
-  const backUmberlla = async function(){
+  const backUmberlla = async function () {
     alert("雨傘成功歸還");
   };
 
@@ -145,13 +147,13 @@ export default function UmbrellaList() {
       <AppMenu />
       {authContext.status === "signOut" ? ( //查看預設狀態
         <UmbrellaListComponent />
+      ) : authContext.status === "signUp" ? (
+        <SignUp />
       ) : (
         <SignIn />
       )}
       {/* {!isLoading ? <UmbrellaListComponent /> : <CircularProgress />} */}
-      {authContext.status === STATUS.toSignIn ? (
-        <Box></Box>
-      ) : (
+      {authContext.status === STATUS.toSignIn || STATUS.toSignUp ? null : (
         <Fab
           color="primary"
           aria-label="新增"

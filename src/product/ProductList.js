@@ -14,6 +14,7 @@ import AppMenu from "../ui/AppMenu";
 import ProductAddEdit from "./ProductAddEdit";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
+import SignUp from "../account/SignUp";
 
 export default function ProductList() {
   const firebaseApp = initializeApp(config);
@@ -110,7 +111,9 @@ export default function ProductList() {
       <AppMenu />
       {authContext.status === "signOut" ? ( //查看預設狀態
         <ProductListComponent />
-      ) : (
+      ) : authContext.status === "signUp" ?(
+        <SignUp />
+      ):(
         <SignIn />
       )}
 
@@ -119,8 +122,8 @@ export default function ProductList() {
         :
         <CircularProgress /> 我不會塞isLoading在context裏面
       } */}
-      {authContext.status === STATUS.toSignIn ? (
-        <Box></Box>
+      {authContext.status === STATUS.toSignIn || STATUS.toSignUp ? (
+        null
       ) : (
         <Fab
           color="primary"

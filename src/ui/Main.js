@@ -20,7 +20,7 @@ export default function Main() {
       ) : authContext.status === "signIn" ? (
         <SignIn />
       ) : (
-        <AppMenu />
+        null
       )}
     </div>
   );
