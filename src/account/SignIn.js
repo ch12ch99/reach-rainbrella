@@ -4,11 +4,11 @@ import { getApps, initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
+import "../account/SignIn.css";
 
 //import { Box } from '@mui/system';
- 
+
 export default function SignIn() {
-  
   if (getApps().length === 0) {
     initializeApp(config);
   }
@@ -63,43 +63,46 @@ export default function SignIn() {
   };
 
   return (
-    <form>
-      <TextField
-        type="email"
-        name="email"
-        value={account.email}
-        placeholder="電子郵件信箱"
-        label="電子郵件信箱:"
-        onChange={handleChange}
-        autoComplete="email"
-      />
-      <br />
+    <div class="container">
+      <form>
+        <h1>欲想使用請先登錄</h1>
+        <TextField
+          type="email"
+          name="email"
+          value={account.email}
+          placeholder="電子郵件信箱"
+          label="電子郵件信箱:"
+          onChange={handleChange}
+          autoComplete="email"
+        />
+        <br />
 
-      <TextField
-        type="password"
-        name="password"
-        value={account.password}
-        placeholder="密碼"
-        label="密碼:"
-        onChange={handleChange}
-        autoComplete="current-password"
-      />
-      <br />
+        <TextField
+          type="password"
+          name="password"
+          value={account.password}
+          placeholder="密碼"
+          label="密碼:"
+          onChange={handleChange}
+          autoComplete="current-password"
+        />
+        <br />
 
-      {message}
-      <br />
+        {message}
+        <br />
 
-      <Button variant="contained" color="primary" onClick={handleSubmit}>
-        登入
-      </Button>
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
+          登入
+        </Button>
 
-      <Button variant="contained" color="secondary" onClick={changeStatus} >
-        我要註冊
-      </Button>
+        <Button variant="contained" color="secondary" onClick={changeStatus}>
+          我要註冊
+        </Button><br/><br/>
 
-      <Button variant="contained" color="secondary" onClick={superStatus} >
-        我是超級按鈕！
-      </Button>
-    </form>
+        <Button variant="contained" color="secondary" onClick={superStatus}>
+          我是超級按鈕！
+        </Button>
+      </form>
+    </div>
   );
 }
