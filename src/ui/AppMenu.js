@@ -23,7 +23,7 @@ export default function AppMenu() {
         <Button component={Link} to="/machine" color="inherit">
           machine
         </Button>
-        <Button component={Link} to="/renter_MachineList" color="inherit">
+        <Button component={Link} to="/renter" color="inherit">
           renter-machine
         </Button>
         {/* <Button component={Link} to='/admin' color="inherit">admin</Button> //這個我不知道是殺小先註解掉 */}

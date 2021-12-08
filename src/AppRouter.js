@@ -8,6 +8,7 @@ import ProductList from "./product/ProductList";
 import AccountList from "./account/AccountList";
 import UmbrellaList from "./umbrella/UmbrellaList";
 import MachineList from "./machine/MachineList";
+import renter_MachineList from "./renter/renter_MachineList";
 import SignOut from "./account/SignOut";
 
 
@@ -19,13 +20,15 @@ export default function AppRouter() {
     <AuthContext.Provider value={{ status, setStatus}}>
       <Router>
         <Switch>
-          <Route exact path="/" component={Main} /> //Route版本5.3.0要使用exact來path 不然他只會到上層
+          <Route exact path="/" component={Main} /> 
           <Route path="/product" component={ProductList} />
           <Route path="/account" component={AccountList} />
           <Route path="/umbrella" component={UmbrellaList} />
           <Route path="/machine" component={MachineList} />
+          <Route path="/renter" component={renter_MachineList} />
         </Switch>
       </Router>
     </AuthContext.Provider>
   );
 }
+//Route版本5.3.0要使用exact來path 不然他只會到上層

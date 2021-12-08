@@ -8,6 +8,7 @@ import ProductList from "./product/ProductList";
 import AccountList from "./account/AccountList";
 import UmbrellaList from "./umbrella/UmbrellaList";
 import MachineList from "./machine/MachineList";
+import renter_MachineList from "./renter/renter_MachineList";
 import Main from "./ui/Main";
 import AppRouter from "./AppRouter";
 
