@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 //改用Switch，是react的switch喲
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Main from "./ui/Main";
 import { AuthContext, STATUS } from "./account/AuthContext";
 //import { Switch } from "@mui/material";
