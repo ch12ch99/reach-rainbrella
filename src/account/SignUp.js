@@ -75,6 +75,7 @@ export default function SignUp() {
       });
 
       const auth = getAuth();
+      console.log(auth);
       const res = await createUserWithEmailAndPassword(
         auth,
         account.email,
@@ -82,7 +83,6 @@ export default function SignUp() {
       );
       //console.log(res);
       if (res) {
-        //console.log(res.user);
         await updateProfile(auth.currentUser, {
           displayName: account.displayName,
         });
