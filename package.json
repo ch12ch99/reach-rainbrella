@@ -1,5 +1,7 @@
 {
-  "name": "1110",
+  "name": "rainbrella", //react專案名稱
+  "homepage": "https://ch12ch99.github.io/reach-rainbrella/",
+  //"name": "1110",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
