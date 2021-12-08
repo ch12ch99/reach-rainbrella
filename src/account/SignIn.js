@@ -13,7 +13,7 @@ export default function SignIn() {
     initializeApp(config);
   }
   const authContext = useContext(AuthContext); //利用useContext取得authContext
-  console.log(authContext);
+  console.log(authContext); //看一下登錄狀態的
   const [account, setAccount] = useState({
     email: "",
     password: "",

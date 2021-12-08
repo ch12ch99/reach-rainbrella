@@ -22,8 +22,7 @@ export default function AppMenu() {
                 ):("")}
                 {authContext.status === "signOut" ? (
                     <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar> //頭像Avatar 位置有點怪 帶修正
-                ):("我這裏是帳號頭像之類的地方哦")}
-                
+                ):("")}
             </Toolbar>
         </AppBar>
     )

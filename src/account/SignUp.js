@@ -8,25 +8,72 @@ import {
 } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
-//import { Box } from '@mui/system';
+import AccountAddEdit from "./AccountAddEdit";
 import "../account/SignIn.css";
+import { addDoc } from "@firebase/firestore";
+import { collection } from "@firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 export default function SignUp() {
+  const db = getFirestore();
   if (getApps().length === 0) {
     initializeApp(config);
   }
   const authContext = useContext(AuthContext);
+  //在firebase預設的新增我們資料庫的
   const [account, setAccount] = useState({
     email: "",
     password: "",
     displayName: "",
+    account_Authority: "",
+    account_Email: "",
+    account_Id: "",
+    account_Name: "",
+    account_Password: "",
+    account_Phone: "",
+    umbrella_Id: null,
   });
+  //使用handleChange把value賦予account屬性 所以當賦值後 accout.displayName就可以在console看到 39行
+  const handleChange = function (v) {
+    setAccount({ ...account, [v.target.name]: v.target.value });
+    console.log(account);
+  };
   const [message, setMessage] = useState("");
-  const handleChange = function (e) {
-    setAccount({ ...account, [e.target.name]: e.target.value });
+  const [currentAccount, setCurrentAccount] = useState(false);
+  const addData = async function () {
+    setCurrentAccount({
+      account_Email: "",
+      account_Name: "",
+      account_Password: "",
+    });
   };
   const handleSubmit = async function () {
     try {
+      const docRef = await addDoc(collection(db, "account"), {
+        account_Authority: Boolean(account.account_Authority),
+        account_Name: account.displayName,
+        account_Email: account.email,
+        account_Id: account.account_Id,
+        account_Password: account.password,
+        umbrella_Id: account.umbrella_Id,
+      });
+      console.log(docRef.id);
+      const temp = [];
+      docRef.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        temp.push({
+          id: doc.id,
+          account_Authority: doc.data().account_Authority,
+          account_Email: doc.data().account_Email,
+          account_Id: doc.data().account_Id,
+          account_Name: doc.data().account_Name,
+          account_Password: doc.data().account_Password,
+          account_Phone: doc.data().account_Phone,
+          umbrella_Id: doc.data().umbrella_Id,
+        });
+      });
+
       const auth = getAuth();
       const res = await createUserWithEmailAndPassword(
         auth,
@@ -45,8 +92,8 @@ export default function SignUp() {
       setMessage("" + error);
     }
   };
+
   const changeStatus = function () {
-    // props.setStatus("signIn");
     authContext.setStatus(STATUS.toSignIn); //設定
   };
   return (
