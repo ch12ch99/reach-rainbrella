@@ -15,6 +15,7 @@ export default function AppMenu() {
                 <Button component={Link} to='/account' color="inherit">account</Button>
                 <Button component={Link} to='/umbrella' color="inherit">umbrella</Button>
                 <Button component={Link} to='/machine' color="inherit">machine</Button>
+                <Button component={Link} to='/renter_MachineList' color="inherit">renter-machine</Button>
                 {/* <Button component={Link} to='/admin' color="inherit">admin</Button> //這個我不知道是殺小先註解掉 */}
                 {/* <Button component={Link} to='/' color="inherit">index</Button> //這個我不知道是殺小先註解掉 */}
                 {authContext.status === "signOut" ? ( //查看預設狀態
@@ -22,7 +23,7 @@ export default function AppMenu() {
                 ):("")}
                 {authContext.status === "signOut" ? (
                     <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar> //頭像Avatar 位置有點怪 帶修正
-                ):("我這裏是帳號頭像之類的地方哦")}
+                ):("")}
                 
             </Toolbar>
         </AppBar>
