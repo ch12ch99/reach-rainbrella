@@ -15,6 +15,7 @@ import MachineAddEdit from "./MachineAddEdit";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
 import SignUp from "../account/SignUp";
+
 export default function MachineList() {
   const firebaseApp = initializeApp(config);
   const db = getFirestore();
@@ -35,7 +36,7 @@ export default function MachineList() {
           id: doc.id,
           machine_Id: doc.data().machine_Id,
           machine_Address: doc.data().machine_Address,
-          machine_Spaces: doc.data().machine_Spaces,
+          machine_Spaces: doc.data().machine_Spaces
         });
         //自己設的umbrella_Id與系統給的id不同
         console.log(doc.id);
