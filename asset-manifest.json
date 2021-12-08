@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/reach-rainbrella/static/css/main.91a3ec42.chunk.css",
+    "main.js": "/reach-rainbrella/static/js/main.75630b99.chunk.js",
+    "main.js.map": "/reach-rainbrella/static/js/main.75630b99.chunk.js.map",
+    "runtime-main.js": "/reach-rainbrella/static/js/runtime-main.528483fd.js",
+    "runtime-main.js.map": "/reach-rainbrella/static/js/runtime-main.528483fd.js.map",
+    "static/js/2.a878c09f.chunk.js": "/reach-rainbrella/static/js/2.a878c09f.chunk.js",
+    "static/js/2.a878c09f.chunk.js.map": "/reach-rainbrella/static/js/2.a878c09f.chunk.js.map",
+    "static/js/3.81d08cde.chunk.js": "/reach-rainbrella/static/js/3.81d08cde.chunk.js",
+    "static/js/3.81d08cde.chunk.js.map": "/reach-rainbrella/static/js/3.81d08cde.chunk.js.map",
+    "index.html": "/reach-rainbrella/index.html",
+    "service-worker.js": "/reach-rainbrella/service-worker.js",
+    "service-worker.js.map": "/reach-rainbrella/service-worker.js.map",
+    "static/css/main.91a3ec42.chunk.css.map": "/reach-rainbrella/static/css/main.91a3ec42.chunk.css.map",
+    "static/js/2.a878c09f.chunk.js.LICENSE.txt": "/reach-rainbrella/static/js/2.a878c09f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.528483fd.js",
+    "static/js/2.a878c09f.chunk.js",
+    "static/css/main.91a3ec42.chunk.css",
+    "static/js/main.75630b99.chunk.js"
+  ]
+}
