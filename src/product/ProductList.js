@@ -15,6 +15,15 @@ import ProductAddEdit from "./ProductAddEdit";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
 import SignUp from "../account/SignUp";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import { styled } from '@mui/material/styles';
+import { tableCellClasses } from '@mui/material/TableCell';
 
 export default function ProductList() {
   const firebaseApp = initializeApp(config);
@@ -69,32 +78,69 @@ export default function ProductList() {
     setOpen(false);
   };
 
+  function createData(des, price) {
+    return { des, price };
+  }
+
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 30,
+    },
+  }));
+
   const ProductListComponent = function () {
     return (
-      <List subheader="Product list" aria-label="product list">
-        {products.map((product, index) => (
-          <ListItem divider key={index}>
-            <ListItemText
-              primary={product.des}
-              secondary={"NT$" + product.price}
-            ></ListItemText>
-            <IconButton
-              edge="end"
-              aria-label="edit"
-              onClick={() => editData(index)}
-            >
-              <CreateIcon />
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => deleteData(product.id)}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </ListItem>
-        ))}
-      </List>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>產品名</StyledTableCell>
+              <StyledTableCell align="leaft">價格</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {products.map((row) => (
+              <TableRow
+                key={row.des}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.des}
+                </TableCell>
+                <TableCell align="leaft">{row.price}</TableCell>        
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      // {<List subheader="Product list" aria-label="product list">
+      //   {products.map((product, index) => (
+      //     <ListItem divider key={index}>
+      //       <ListItemText
+      //         primary={product.des}
+      //         secondary={"NT$" + product.price}
+      //       ></ListItemText>
+      //       <IconButton
+      //         edge="end"
+      //         aria-label="edit"
+      //         onClick={() => editData(index)}
+      //       >
+      //         <CreateIcon />
+      //       </IconButton>
+      //       <IconButton
+      //         edge="end"
+      //         aria-label="delete"
+      //         onClick={() => deleteData(product.id)}
+      //       >
+      //         <DeleteIcon />
+      //       </IconButton>
+      //     </ListItem>
+      //   ))}
+      // </List>}
     );
   };
   return (
@@ -108,7 +154,7 @@ export default function ProductList() {
         textAlign: "left",
       }}
     >
-      <AppMenu />
+      <AppMenu /><br/>
       {authContext.status === "signOut" ? ( //查看預設狀態
         <ProductListComponent />
       ) : authContext.status === "signUp" ? (
@@ -122,7 +168,7 @@ export default function ProductList() {
         :
         <CircularProgress /> 我不會塞isLoading在context裏面
       } */}
-      {authContext.status === STATUS.toSignIn ? (null): authContext.status ===
+      {authContext.status === STATUS.toSignIn ? null : authContext.status ===
         STATUS.toSignUp ? null : (
         <Fab
           color="primary"
