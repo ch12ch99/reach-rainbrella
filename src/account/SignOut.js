@@ -26,7 +26,7 @@ export default function SignOut(props) {
   return (
     <form>
       <Button variant="contained" color="primary" onClick={handleSubmit}>
-        這個是登出按了將會改變STATUS
+        登出
       </Button>
       {message}
       <br />
