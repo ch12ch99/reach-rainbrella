@@ -84,8 +84,8 @@ export default function ProductList() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+      backgroundColor: '#59FFFF',
+      color: 'black',
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 30,
@@ -97,7 +97,7 @@ export default function ProductList() {
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
-            <TableRow>
+            <TableRow >
               <StyledTableCell>產品名</StyledTableCell>
               <StyledTableCell align="leaft">價格</StyledTableCell>
             </TableRow>
