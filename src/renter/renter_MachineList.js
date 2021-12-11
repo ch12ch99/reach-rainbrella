@@ -11,6 +11,15 @@ import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
 import SignUp from "../account/SignUp";
  import "../account/SignIn.css";
+ import { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import { styled } from '@mui/material/styles';
+import TableContainer from "@mui/material/TableContainer";
 
 export default function MachineList() {
   const firebaseApp = initializeApp(config);
@@ -41,23 +50,64 @@ export default function MachineList() {
     readData();
   }, [db]);
 
+  const editData = async function (duck) {
+    console.log(duck);
+    setCurrentMachine({ ...machines[duck] });
+    setOpen(true);
+  };
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: '#59FFFF',
+      color: 'black',
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 30,
+    },
+  }));
+
   const MachineListComponent = function () {
     return (
-      <div class="container">
-        <List subheader="Machine list" aria-label="machine list">
-          <br />
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow >
+            <StyledTableCell>地址</StyledTableCell>
+            <StyledTableCell align="left">空間</StyledTableCell>
+            <StyledTableCell align="left"></StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           {machines.map((machine, duck) => (
-            <ListItem divider key={duck}>
-              <Button>
-                <ListItemText
-                  primary={"地址:" + machine.machine_Address}
-                  secondary={"空間:" + machine.machine_Spaces}
-                ></ListItemText>
-              </Button><br />
-            </ListItem>
+            <TableRow
+              key={machine.machine_Address}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {machine.machine_Address}
+              </TableCell>
+              <TableCell align="leat">{machine.machine_Spaces}</TableCell>
+              <TableCell align="right">
+            </TableCell>        
+            </TableRow>
           ))}
-        </List>
-      </div>
+        </TableBody>
+      </Table>
+    </TableContainer>
+      // <div class="container">
+      //   <List subheader="Machine list" aria-label="machine list">
+      //     <br />
+      //     {machines.map((machine, duck) => (
+      //       <ListItem divider key={duck}>
+      //         <Button>
+      //           <ListItemText
+      //             primary={"地址:" + machine.machine_Address}
+      //             secondary={"空間:" + machine.machine_Spaces}
+      //           ></ListItemText>
+      //         </Button><br />
+      //       </ListItem>
+      //     ))}
+      //   </List>
+      // </div>
     );
   };
   return (
