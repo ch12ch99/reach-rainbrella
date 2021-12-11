@@ -101,8 +101,8 @@ export default function MachineList() {
         <TableHead>
           <TableRow >
             <StyledTableCell>地址</StyledTableCell>
-            <StyledTableCell align="leaft">空間</StyledTableCell>
-            <StyledTableCell align="leaft"></StyledTableCell>
+            <StyledTableCell align="left">空間</StyledTableCell>
+            <StyledTableCell align="left"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -115,6 +115,7 @@ export default function MachineList() {
                 {machine.machine_Address}
               </TableCell>
               <TableCell align="leaft">{machine.machine_Spaces}</TableCell>
+              <TableCell align="right">
               <IconButton
               edge="end"
               aria-label="edit"
@@ -128,7 +129,8 @@ export default function MachineList() {
               onClick={() => deleteData(machine.id)}
             >
               <DeleteIcon />
-            </IconButton>        
+            </IconButton>
+            </TableCell>        
             </TableRow>
           ))}
         </TableBody>

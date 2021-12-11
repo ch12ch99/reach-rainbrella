@@ -17,6 +17,16 @@ import SignIn from "../account/SignIn";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import UmbrellaIcon from "@mui/icons-material/Umbrella";
 import SignUp from "../account/SignUp";
+import { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import { styled } from '@mui/material/styles';
+import TableContainer from "@mui/material/TableContainer";
+
 export default function UmbrellaList() {
   const authContext = useContext(AuthContext);
   const firebaseApp = initializeApp(config);
@@ -87,17 +97,41 @@ export default function UmbrellaList() {
     setOpen(false);
   };
 
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: '#59FFFF',
+      color: 'black',
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 30,
+    },
+  }));
+
+
   const UmbrellaListComponent = function () {
     return (
-      <List subheader="Umbrella list" aria-label="umbrella list">
-        {umbrellas.map((umbrella, orange) => (
-          <ListItem divider key={orange}>
-            <ListItemText
-              primary={"狀態:" + umbrella.umbrella_Status}
-              secondary={"機台:" + umbrella.machine_Id}
-            ></ListItemText>
-            {/* 修改 */}
-            <IconButton
+      <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow >
+            <StyledTableCell>狀態</StyledTableCell>
+            <StyledTableCell align="center">機台</StyledTableCell>
+            <StyledTableCell align="left"></StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {umbrellas.map((umbrella, orange) => (
+            <TableRow
+              key={umbrella.umbrella_Status}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {umbrella.umbrella_Status}
+              </TableCell>
+              <TableCell align="leaft">{umbrella.umbrella_Id}</TableCell>
+              <TableCell align="right">
+              {/* 修改 */}
+              <IconButton
               edge="end"
               aria-label="edit"
               onClick={() => editData(orange)}
@@ -127,10 +161,55 @@ export default function UmbrellaList() {
               onClick={() => backUmberlla()}
             >
               <UmbrellaIcon />
-            </IconButton>
-          </ListItem>
-        ))}
-      </List>
+            </IconButton> 
+            </TableCell>       
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+      // <List subheader="Umbrella list" aria-label="umbrella list">
+      //   {umbrellas.map((umbrella, orange) => (
+      //     <ListItem divider key={orange}>
+      //       <ListItemText
+      //         primary={"狀態:" + umbrella.umbrella_Status}
+      //         secondary={"機台:" + umbrella.machine_Id}
+      //       ></ListItemText>
+            // {/* 修改 */}
+            // <IconButton
+            //   edge="end"
+            //   aria-label="edit"
+            //   onClick={() => editData(orange)}
+            // >
+            //   <CreateIcon />
+            // </IconButton>
+            // {/* 刪除 */}
+            // <IconButton
+            //   edge="end"
+            //   aria-label="delete"
+            //   onClick={() => deleteData(umbrella.id)}
+            // >
+            //   <DeleteIcon />
+            // </IconButton>
+            // {/* 借雨傘 */}
+            // <IconButton
+            //   edge="end"
+            //   aria-label="delete"
+            //   onClick={() => borrowUmberlla()}
+            // >
+            //   <BeachAccessIcon />
+            // </IconButton>
+            // {/* 還雨傘 */}
+            // <IconButton
+            //   edge="end"
+            //   aria-label="delete"
+            //   onClick={() => backUmberlla()}
+            // >
+            //   <UmbrellaIcon />
+            // </IconButton>
+      //     </ListItem>
+      //   ))}
+      // </List>
     );
   };
   return (
