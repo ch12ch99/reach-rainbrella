@@ -19,7 +19,6 @@ export default function AccountAdd(props) {
         account_Name: account.account_Name,
         account_Email: account.account_Email,
         account_Id: account.account_Id,
-        account_Password: account.account_Password,
         umbrella_Id: account.umbrella_Id,
       });
       console.log(docRef.id);
@@ -34,7 +33,6 @@ export default function AccountAdd(props) {
           account_Id: doc.data().account_Id,
           account_Name: doc.data().account_Name,
           account_Password: doc.data().account_Password,
-          account_Phone: doc.data().account_Phone,
           umbrella_Id: doc.data().umbrella_Id,
         });
       });
@@ -46,11 +44,10 @@ export default function AccountAdd(props) {
   const [account, setaccount] = useState({
     account_Authority: "",
     account_Email: "",
-    account_Id: "",
+    account_Id: 0,
     account_Name: "",
     account_Password: "",
-    account_Phone: "",
-    umbrella_Id: "",
+    umbrella_Id: 0,
   });
   const handleClick = function (e) {
     setaccount({ ...account, [e.target.name]: e.target.value });

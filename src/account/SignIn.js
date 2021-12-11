@@ -6,9 +6,12 @@ import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import "../account/SignIn.css";
 import { Alert } from "@mui/material";
+
+
 //import { Box } from '@mui/system';
 
 export default function SignIn() {
+  
   if (getApps().length === 0) {
     initializeApp(config);
   }
@@ -87,21 +90,14 @@ export default function SignIn() {
           autoComplete="current-password"
         />
         <br />
-
         {message}
         <br />
 
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          登入
-        </Button><br/><br/>
-
-        <Button variant="contained" color="secondary" onClick={changeStatus}>
-          我要註冊
-        </Button><br/><br/>
-
-        <Button variant="contained" color="superqiuqiu" onClick={superStatus}>
-          管理者
-        </Button>
+        <Button variant="filled" variant="contained"  color="primary" onClick={handleSubmit} >登入</Button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Button variant="contained" color="secondary" onClick={changeStatus} >註冊</Button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <Button variant="contained" color="error" onClick={superStatus}>管理者</Button>
       </form>
     </div>
   );

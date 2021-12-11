@@ -48,7 +48,6 @@ export default function AccountList() {
           account_Id: doc.data().account_Id,
           account_Name: doc.data().account_Name,
           account_Password: doc.data().account_Password,
-          account_Phone: doc.data().account_Phone,
           umbrella_Id: doc.data().umbrella_Id,
         });
         //自己設的_Id與系統給的id不同
@@ -65,11 +64,10 @@ export default function AccountList() {
     setCurrentAccount({
       account_Authority: "",
       account_Email: "",
-      account_Id: "",
+      account_Id: 0,
       account_Name: "",
       account_Password: "",
-      account_Phone: "",
-      umbrella_Id: "",
+      umbrella_Id: 0,
     });
     setOpen(true);
   };
