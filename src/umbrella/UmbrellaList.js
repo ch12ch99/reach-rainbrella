@@ -128,7 +128,7 @@ export default function UmbrellaList() {
               <TableCell component="th" scope="row">
                 {umbrella.umbrella_Status}
               </TableCell>
-              <TableCell align="leaft">{umbrella.umbrella_Id}</TableCell>
+              <TableCell align="center">{umbrella.machine_Id}</TableCell>
               <TableCell align="right">
               {/* 修改 */}
               <IconButton
@@ -175,38 +175,38 @@ export default function UmbrellaList() {
       //         primary={"狀態:" + umbrella.umbrella_Status}
       //         secondary={"機台:" + umbrella.machine_Id}
       //       ></ListItemText>
-            // {/* 修改 */}
-            // <IconButton
-            //   edge="end"
-            //   aria-label="edit"
-            //   onClick={() => editData(orange)}
-            // >
-            //   <CreateIcon />
-            // </IconButton>
-            // {/* 刪除 */}
-            // <IconButton
-            //   edge="end"
-            //   aria-label="delete"
-            //   onClick={() => deleteData(umbrella.id)}
-            // >
-            //   <DeleteIcon />
-            // </IconButton>
-            // {/* 借雨傘 */}
-            // <IconButton
-            //   edge="end"
-            //   aria-label="delete"
-            //   onClick={() => borrowUmberlla()}
-            // >
-            //   <BeachAccessIcon />
-            // </IconButton>
-            // {/* 還雨傘 */}
-            // <IconButton
-            //   edge="end"
-            //   aria-label="delete"
-            //   onClick={() => backUmberlla()}
-            // >
-            //   <UmbrellaIcon />
-            // </IconButton>
+      //       {/* 修改 */}
+      //       <IconButton
+      //         edge="end"
+      //         aria-label="edit"
+      //         onClick={() => editData(orange)}
+      //       >
+      //         <CreateIcon />
+      //       </IconButton>
+      //       {/* 刪除 */}
+      //       <IconButton
+      //         edge="end"
+      //         aria-label="delete"
+      //         onClick={() => deleteData(umbrella.id)}
+      //       >
+      //         <DeleteIcon />
+      //       </IconButton>
+      //       {/* 借雨傘 */}
+      //       <IconButton
+      //         edge="end"
+      //         aria-label="delete"
+      //         onClick={() => borrowUmberlla()}
+      //       >
+      //         <BeachAccessIcon />
+      //       </IconButton>
+      //       {/* 還雨傘 */}
+      //       <IconButton
+      //         edge="end"
+      //         aria-label="delete"
+      //         onClick={() => backUmberlla()}
+      //       >
+      //         <UmbrellaIcon />
+      //       </IconButton>
       //     </ListItem>
       //   ))}
       // </List>
