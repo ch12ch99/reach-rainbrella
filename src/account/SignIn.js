@@ -6,12 +6,9 @@ import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import "../account/SignIn.css";
 import { Alert } from "@mui/material";
-
-
 //import { Box } from '@mui/system';
 
 export default function SignIn() {
-  
   if (getApps().length === 0) {
     initializeApp(config);
   }
@@ -66,39 +63,55 @@ export default function SignIn() {
   };
 
   return (
-    <div class="container">
-      <form>
-      <Alert variant="filled" severity="error">請先登入</Alert>
-        <TextField
-          type="email"
-          name="email"
-          value={account.email}
-          placeholder="電子郵件信箱"
-          label="電子郵件信箱:"
-          onChange={handleChange}
-          autoComplete="email"
-        />
-        <br />
+    <div class="sidenav">
+      <div class="container">
+        
+        <form>
+          <Alert variant="filled" severity="error">
+            請先登入
+          </Alert>
+          <TextField
+            type="email"
+            name="email"
+            value={account.email}
+            placeholder="電子郵件信箱"
+            label="電子郵件信箱:"
+            onChange={handleChange}
+            autoComplete="email"
+          />
+          <br />
 
-        <TextField
-          type="password"
-          name="password"
-          value={account.password}
-          placeholder="密碼"
-          label="密碼:"
-          onChange={handleChange}
-          autoComplete="current-password"
-        />
-        <br />
-        {message}
-        <br />
+          <TextField
+            type="password"
+            name="password"
+            value={account.password}
+            placeholder="密碼"
+            label="密碼:"
+            onChange={handleChange}
+            autoComplete="current-password"
+          />
+          <br />
 
-        <Button variant="filled" variant="contained"  color="primary" onClick={handleSubmit} >登入</Button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <Button variant="contained" color="secondary" onClick={changeStatus} >註冊</Button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <Button variant="contained" color="error" onClick={superStatus}>管理者</Button>
-      </form>
+          {message}
+          <br />
+
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            登入
+          </Button>
+          <br />
+          <br />
+
+          <Button variant="contained" color="secondary" onClick={changeStatus}>
+            我要註冊
+          </Button>
+          <br />
+          <br />
+
+          <Button variant="contained" color="superqiuqiu" onClick={superStatus}>
+            管理者
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }
