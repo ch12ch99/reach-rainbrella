@@ -15,6 +15,15 @@ import AccountAddEdit from "./AccountAddEdit";
 import SignIn from "./SignIn";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import SignUp from "../account/SignUp";
+import { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import { styled } from '@mui/material/styles';
+import TableContainer from "@mui/material/TableContainer";
 
 export default function AccountList() {
   const firebaseApp = initializeApp(config);
@@ -97,46 +106,90 @@ export default function AccountList() {
   //        { field: "age", headerName: "編輯", width: 90 },
   //        { field: "age", headerName: "刪除", width: 90 }
   //      ];
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: '#59FFFF',
+      color: 'black',
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 30,
+    },
+  }));
   const AccountListComponent = function () {
-    return (
-      <List subheader="Account list" aria-label="account list">
-        {accounts.map((account, red) => (
-          <ListItem divider key={red}>
-            <ListItemText
-              primary={"帳號名稱 : " + account.account_Name}
-            ></ListItemText>
-            <ListItemText
-              secondary={"E-mail : " + account.account_Email}
-            ></ListItemText>
-            <ListItemText
-              secondary={"Id : " + account.account_Id}
-            ></ListItemText>
-            <ListItemText
-              secondary={"Password : " + account.account_Password}
-            ></ListItemText>
-            <ListItemText
-              secondary={"雨傘編號 : " + account.umbrella_Id}
-            ></ListItemText>
-            <ListItemText
-              secondary={"是否為管理者 : " + account.account_Authority}
-            ></ListItemText>
-            <IconButton
-              edge="end"
-              aria-label="edit"
-              onClick={() => editData(red)}
+    return (      
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow >
+            <StyledTableCell>帳號名稱</StyledTableCell>
+            <StyledTableCell align="leaft">Email</StyledTableCell>
+            <StyledTableCell align="leaft">ID</StyledTableCell>
+            <StyledTableCell align="leaft">密碼</StyledTableCell>
+            <StyledTableCell align="leaft">雨傘編號</StyledTableCell>
+            <StyledTableCell align="leaft">管理者</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {accounts.map((account, red) => (
+            <TableRow
+              key={account.account_Name}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <CreateIcon />
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => deleteData(account.id)}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </ListItem>
-        ))}
-      </List>
+              <TableCell component="th" scope="row">
+                {account.account_Name}
+              </TableCell>
+              <TableCell align="leaft">{account.account_Email}</TableCell>  
+              
+              <TableCell align="leaft">{account.account_Id}</TableCell>  
+              
+              <TableCell align="leaft">{account.account_Password}</TableCell>  
+              
+              <TableCell align="leaft">{account.umbrella_Id}</TableCell>  
+              
+              <TableCell align="leaft">{account.account_Authority}</TableCell>        
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+      // <List subheader="Account list" aria-label="account list">
+      //   {accounts.map((account, red) => (
+      //     <ListItem divider key={red}>
+      //       <ListItemText
+      //         primary={"帳號名稱 : " + account.account_Name}
+      //       ></ListItemText>
+      //       <ListItemText
+      //         secondary={"E-mail : " + account.account_Email}
+      //       ></ListItemText>
+      //       <ListItemText
+      //         secondary={"Id : " + account.account_Id}
+      //       ></ListItemText>
+      //       <ListItemText
+      //         secondary={"Password : " + account.account_Password}
+      //       ></ListItemText>
+      //       <ListItemText
+      //         secondary={"雨傘編號 : " + account.umbrella_Id}
+      //       ></ListItemText>
+      //       <ListItemText
+      //         secondary={"是否為管理者 : " + account.account_Authority}
+      //       ></ListItemText>
+      //       <IconButton
+      //         edge="end"
+      //         aria-label="edit"
+      //         onClick={() => editData(red)}
+      //       >
+      //         <CreateIcon />
+      //       </IconButton>
+      //       <IconButton
+      //         edge="end"
+      //         aria-label="delete"
+      //         onClick={() => deleteData(account.id)}
+      //       >
+      //         <DeleteIcon />
+      //       </IconButton>
+      //     </ListItem>
+      //   ))}
+      // </List>
     );
   };
   return (
