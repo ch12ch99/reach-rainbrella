@@ -121,7 +121,7 @@ export default function MachineList() {
         textAlign: "left",
       }}
     >
-      <AppMenu />
+      <AppMenu /><br/>
       {authContext.status === "signOut" ? ( //查看預設狀態
         <MachineListComponent />
       ) : authContext.status === "signUp" ? (

@@ -201,7 +201,7 @@ export default function AccountList() {
         textAlign: "left",
       }}
     >
-      <AppMenu />
+      <AppMenu /><br/>
       {authContext.status === "signOut" ? ( //查看預設狀態
         <AccountListComponent />
       ) : authContext.status === "signUp" ? (

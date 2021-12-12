@@ -18,7 +18,7 @@ const theme = createTheme({
       main: "#1d98cd",
     },
     secondary: {
-      main: "#1d98cd",
+      main: "#ff4500",
     },
     superqiuqiu: {
       main: "#E91E63",

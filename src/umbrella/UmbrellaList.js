@@ -223,7 +223,7 @@ export default function UmbrellaList() {
         textAlign: "left",
       }}
     >
-      <AppMenu />
+      <AppMenu /><br/>
       {authContext.status === "signOut" ? ( //查看預設狀態
         <UmbrellaListComponent />
       ) : authContext.status === "signUp" ? (
