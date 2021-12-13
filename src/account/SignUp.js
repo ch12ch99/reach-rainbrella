@@ -27,10 +27,9 @@ export default function SignUp() {
     displayName: "",
     account_Authority: "",
     account_Email: "",
-    account_Id: "",
+    account_Id: 0,
     account_Name: "",
     account_Password: "",
-    account_Phone: "",
     umbrella_Id: null,
   });
   //使用handleChange把value賦予account屬性 所以當賦值後 accout.displayName就可以在console看到 39行
@@ -49,6 +48,23 @@ export default function SignUp() {
   };
   const handleSubmit = async function () {
     try {
+      const auth = getAuth();
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        account.email,
+        account.password
+      );
+      //console.log(res);
+      if (res) {
+        //console.log(res.user);
+        await updateProfile(auth.currentUser, {
+          displayName: account.displayName,
+        });
+      }
+      setMessage("");
+    } catch (error) {
+      setMessage("" + error);
+
       const docRef = await addDoc(collection(db, "account"), {
         account_Authority: Boolean(account.account_Authority),
         account_Name: account.displayName,
@@ -69,27 +85,9 @@ export default function SignUp() {
           account_Id: doc.data().account_Id,
           account_Name: doc.data().account_Name,
           account_Password: doc.data().account_Password,
-          account_Phone: doc.data().account_Phone,
           umbrella_Id: doc.data().umbrella_Id,
         });
       });
-
-      const auth = getAuth();
-      const res = await createUserWithEmailAndPassword(
-        auth,
-        account.email,
-        account.password
-      );
-      //console.log(res);
-      if (res) {
-        //console.log(res.user);
-        await updateProfile(auth.currentUser, {
-          displayName: account.displayName,
-        });
-      }
-      setMessage("");
-    } catch (error) {
-      setMessage("" + error);
     }
   };
 
