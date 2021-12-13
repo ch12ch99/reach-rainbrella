@@ -131,9 +131,9 @@ export default function SignUp() {
         <Button variant="contained" color="primary" onClick={handleSubmit}>
           註冊
         </Button>
-        <br></br><br></br>
+        &nbsp;&nbsp;
         <Button variant="contained" color="secondary" onClick={changeStatus}>
-          已經註冊，我要登入
+          已註冊，我要登入
         </Button>
       </form>
     </div>
