@@ -15,14 +15,14 @@ import AccountAddEdit from "./AccountAddEdit";
 import SignIn from "./SignIn";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import SignUp from "../account/SignUp";
-import { tableCellClasses } from '@mui/material/TableCell';
+import { tableCellClasses } from "@mui/material/TableCell";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
 
 export default function AccountList() {
@@ -106,50 +106,65 @@ export default function AccountList() {
   //      ];
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#59FFFF',
-      color: 'black',
+      backgroundColor: "#59FFFF",
+      color: "black",
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 30,
     },
   }));
   const AccountListComponent = function () {
-    return (      
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow >
-            <StyledTableCell>帳號名稱</StyledTableCell>
-            <StyledTableCell align="leaft">Email</StyledTableCell>
-            <StyledTableCell align="leaft">ID</StyledTableCell>
-            <StyledTableCell align="leaft">密碼</StyledTableCell>
-            <StyledTableCell align="leaft">雨傘編號</StyledTableCell>
-            <StyledTableCell align="leaft">管理者</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {accounts.map((account, red) => (
-            <TableRow
-              key={account.account_Name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {account.account_Name}
-              </TableCell>
-              <TableCell align="leaft">{account.account_Email}</TableCell>  
-              
-              <TableCell align="leaft">{account.account_Id}</TableCell>  
-              
-              <TableCell align="leaft">{account.account_Password}</TableCell>  
-              
-              <TableCell align="leaft">{account.umbrella_Id}</TableCell>  
-              
-              <TableCell align="leaft">{account.account_Authority}</TableCell>        
+    return (
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>帳號名稱</StyledTableCell>
+              <StyledTableCell align="leaft">Email</StyledTableCell>
+              <StyledTableCell align="leaft">ID</StyledTableCell>
+              <StyledTableCell align="leaft">密碼</StyledTableCell>
+              <StyledTableCell align="leaft">雨傘編號</StyledTableCell>
+              <StyledTableCell align="leaft">管理者</StyledTableCell>
+              <StyledTableCell align="leaft">控制</StyledTableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {accounts.map((account, red) => (
+              <TableRow
+                key={account.account_Name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {account.account_Name}
+                </TableCell>
+                <TableCell align="leaft">{account.account_Email}</TableCell>
+
+                <TableCell align="leaft">{account.account_Id}</TableCell>
+
+                <TableCell align="leaft">{account.account_Password}</TableCell>
+
+                <TableCell align="leaft">{account.umbrella_Id}</TableCell>
+
+                <TableCell align="leaft">{account.account_Authority}</TableCell>
+                <IconButton
+                  edge="end"
+                  aria-label="edit"
+                  onClick={() => editData(red)}
+                >
+                  <CreateIcon />
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => deleteData(account.id)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       // <List subheader="Account list" aria-label="account list">
       //   {accounts.map((account, red) => (
       //     <ListItem divider key={red}>
@@ -201,7 +216,8 @@ export default function AccountList() {
         textAlign: "left",
       }}
     >
-      <AppMenu /><br/>
+      <AppMenu />
+      <br />
       {authContext.status === "signOut" ? ( //查看預設狀態
         <AccountListComponent />
       ) : authContext.status === "signUp" ? (
