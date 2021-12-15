@@ -12,19 +12,19 @@ export default function AppMenu() {
     <AppBar position="sticky">
       <Toolbar>
         <Button component={Link} to="/product" color="inherit">
-          product
+          產品
         </Button>
         <Button component={Link} to="/account" color="inherit">
-          account
+          用戶
         </Button>
         <Button component={Link} to="/umbrella" color="inherit">
-          umbrella
+          雨傘
         </Button>
         <Button component={Link} to="/machine" color="inherit">
-          machine
+          機台
         </Button>
         <Button component={Link} to="/renter" color="inherit">
-          renter-machine
+          租借雨傘
         </Button>
         {/* <Button component={Link} to='/admin' color="inherit">admin</Button> //這個我不知道是殺小先註解掉 */}
         {/* <Button component={Link} to='/' color="inherit">index</Button> //這個我不知道是殺小先註解掉 */}
