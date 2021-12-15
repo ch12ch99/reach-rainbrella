@@ -39,12 +39,15 @@ export default function SignIn() {
 
       const db = getFirestore();
       const accountconn = collection(db, "account");
-      const authResult = query(accountconn, where("account_Email", "==",account.email));
+      const authResult = query(
+        accountconn,
+        where("account_Email", "==", account.email)
+      );
       const q1 = await getDocs(authResult);
       q1.forEach((doc) => {
         console.log(doc.data());
         console.log(doc.data().account_Authority);
-    });
+      });
       console.log(q1);
       console.log(authResult);
 
@@ -54,7 +57,6 @@ export default function SignIn() {
         setMessage("");
 
         authContext.setStatus(STATUS.toSignOut);
-
       }
     } catch (error) {
       setMessage("" + error);
@@ -88,7 +90,6 @@ export default function SignIn() {
             autoComplete="email"
           />
           <br />
-
           <TextField
             type="password"
             name="password"
@@ -99,10 +100,8 @@ export default function SignIn() {
             autoComplete="current-password"
           />
           <br />
-
           {message}
           <br />
-
           <Button variant="contained" color="primary" onClick={handleSubmit}>
             登入
           </Button>
