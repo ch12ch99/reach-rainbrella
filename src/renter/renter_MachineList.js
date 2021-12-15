@@ -10,7 +10,7 @@ import AppMenu from "../ui/AppMenu";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
 import SignUp from "../account/SignUp";
-<<<<<<< Updated upstream
+import UmbrellaRent from "./UmbrellaRent";
  import "../account/SignIn.css";
  import { tableCellClasses } from '@mui/material/TableCell';
 import TableCell from "@mui/material/TableCell";
@@ -21,10 +21,6 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import { styled } from '@mui/material/styles';
 import TableContainer from "@mui/material/TableContainer";
-=======
-import UmbrellaRent from "./UmbrellaRent";
-import "../account/SignIn.css";
->>>>>>> Stashed changes
 
 export default function MachineList() {
   const firebaseApp = initializeApp(config);
@@ -39,9 +35,7 @@ export default function MachineList() {
   useEffect(() => {
     async function readData() {
       const querySnapshot = await getDocs(collection(db, "machine"));
-      const umbrellasameid = await getDocs(query(collection(db, "umbrella"), where('machine_Id', '==', 2)));
       const temp = [];
-      const temp2 = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
@@ -52,6 +46,10 @@ export default function MachineList() {
           machine_Spaces: doc.data().machine_Spaces
         });
       });
+      console.log(temp);
+      setMachines([...temp]);
+      const umbrellasameid = await getDocs(query(collection(db, "umbrella"), where('machine_Id', '==', 2)));
+      const temp2 = [];
       umbrellasameid.forEach((doc) =>{
         console.log(doc.id, " => ", doc.data());
         temp2.push({
@@ -60,20 +58,18 @@ export default function MachineList() {
           umbrella_Status: doc.data().umbrella_Status
         });
       });
-      console.log(temp);
       console.log(temp2);
-      setMachines([...temp]);      
       setUmbrellas([...temp2]);
     }
     readData();
   }, [db]);
 
-<<<<<<< Updated upstream
-  const editData = async function (duck) {
-    console.log(duck);
-    setCurrentMachine({ ...machines[duck] });
+  const rent = async function (chicken) {
+    console.log(chicken);
+    setCurrentUmbrella({ ...umbrellas[chicken] });
     setOpen(true);
   };
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: '#59FFFF',
@@ -83,17 +79,10 @@ export default function MachineList() {
       fontSize: 30,
     },
   }));
-=======
-  const rent = async function (chicken) {
-    console.log(chicken);
-    setCurrentUmbrella({ ...umbrellas[chicken] });
-    setOpen(true);
-  };
 
   const close = async function () {
     setOpen(false);
   };
->>>>>>> Stashed changes
 
   const MachineListComponent = function () {
     return (
@@ -103,55 +92,43 @@ export default function MachineList() {
           <TableRow >
             <StyledTableCell>地址</StyledTableCell>
             <StyledTableCell align="left">空間</StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
+            <StyledTableCell align="left">機台雨傘</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {machines.map((machine, duck) => (
-<<<<<<< Updated upstream
+            
             <TableRow
               key={machine.machine_Address}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {machine.machine_Address}
-              </TableCell>
+              <TableCell component="th" scope="row">{machine.machine_Address}</TableCell>
               <TableCell align="leat">{machine.machine_Spaces}</TableCell>
+             
+              {umbrellas.map((umbrella, chicken) => (
               <TableCell align="right">
-            </TableCell>        
+              <Button variant="primary"
+                   value={umbrella.umbrella_Id}
+                   onClick={() => rent(chicken)}>{umbrella.umbrella_Id}
+              </Button></TableCell>
+                   ))}
             </TableRow>
-=======
-            <ListItem divider key={duck}>
-                <ListItemText primary={"地址:" + machine.machine_Address} secondary={"空間:" + machine.machine_Spaces}
-                ></ListItemText>
-                {umbrellas.map((umbrella, chicken) => (
-                  <Button
-                  primary={umbrella.umbrella_Id}
-                  onClick={() => rent(chicken)}
-                  >
-                </Button>
-                ))}
-            </ListItem>
->>>>>>> Stashed changes
-          ))}
+            // <ListItem divider key={duck}>
+            //     <ListItemText primary={"地址:" + machine.machine_Address} secondary={"空間:" + machine.machine_Spaces}
+            //     ></ListItemText>
+            //     {umbrellas.map((umbrella, chicken) => (
+            //       <Button 
+            //       variant="primary"
+            //       value={umbrella.umbrella_Id}
+            //       onClick={() => rent(chicken)}
+            //       >
+            //     </Button>
+            //     ))}
+            // </ListItem>
+           ))}
         </TableBody>
       </Table>
     </TableContainer>
-      // <div class="container">
-      //   <List subheader="Machine list" aria-label="machine list">
-      //     <br />
-      //     {machines.map((machine, duck) => (
-      //       <ListItem divider key={duck}>
-      //         <Button>
-      //           <ListItemText
-      //             primary={"地址:" + machine.machine_Address}
-      //             secondary={"空間:" + machine.machine_Spaces}
-      //           ></ListItemText>
-      //         </Button><br />
-      //       </ListItem>
-      //     ))}
-      //   </List>
-      // </div>
     );
   };
   return (

@@ -32,7 +32,7 @@ export default function UmbrellaRent(props) {
         <Dialog open={props.open}>
             <DialogTitle>租借</DialogTitle>
             <DialogActions>
-                <Button variant="outlined" color="primary" onClick={umbrellaupdate}></Button>
+                <Button variant="outlined" color="primary" onClick={umbrellaupdate}>租借</Button>
                 <Button variant="outlined" color="secondary" onClick={props.close}>取消</Button>
             </DialogActions>
         </Dialog>
