@@ -7,7 +7,8 @@ import { AuthContext, STATUS } from "../account/AuthContext";
 import "../account/SignIn.css";
 import { Alert } from "@mui/material";
 //import { Box } from '@mui/system';
-
+import { collection, getDocs, getFirestore, query } from "@firebase/firestore";
+import { where } from "@firebase/firestore";
 export default function SignIn() {
   if (getApps().length === 0) {
     initializeApp(config);
@@ -36,7 +37,18 @@ export default function SignIn() {
         account.password
       );
 
-      //console.log(res);
+      const db = getFirestore();
+      const accountconn = collection(db, "account");
+      const authResult = query(accountconn, where("account_Email", "==",account.email));
+      const q1 = await getDocs(authResult);
+      q1.forEach((doc) => {
+        console.log(doc.data());
+        console.log(doc.data().account_Authority);
+    });
+      console.log(q1);
+      console.log(authResult);
+      //console.log(q1.);
+
 
       if (res) {
         console.log(auth.currentUser.displayName);
@@ -45,7 +57,6 @@ export default function SignIn() {
 
         authContext.setStatus(STATUS.toSignOut);
 
-        //updateProfile(auth.currentUser,{displayName: account.displayName});
       }
     } catch (error) {
       setMessage("" + error);
