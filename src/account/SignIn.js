@@ -47,8 +47,6 @@ export default function SignIn() {
     });
       console.log(q1);
       console.log(authResult);
-      //console.log(q1.);
-
 
       if (res) {
         console.log(auth.currentUser.displayName);
