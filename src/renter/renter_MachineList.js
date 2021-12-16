@@ -11,15 +11,15 @@ import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
 import SignUp from "../account/SignUp";
 import UmbrellaRent from "./UmbrellaRent";
- import "../account/SignIn.css";
- import { tableCellClasses } from '@mui/material/TableCell';
+import "../account/SignIn.css";
+import { tableCellClasses } from "@mui/material/TableCell";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
 
 export default function MachineList() {
@@ -43,19 +43,21 @@ export default function MachineList() {
           id: doc.id,
           machine_Id: doc.data().machine_Id,
           machine_Address: doc.data().machine_Address,
-          machine_Spaces: doc.data().machine_Spaces
+          machine_Spaces: doc.data().machine_Spaces,
         });
       });
       console.log(temp);
       setMachines([...temp]);
-      const umbrellasameid = await getDocs(query(collection(db, "umbrella"), where('machine_Id', '==', 2)));
+      const umbrellasameid = await getDocs(
+        query(collection(db, "umbrella"), where("machine_Id", "==", 2))
+      );
       const temp2 = [];
-      umbrellasameid.forEach((doc) =>{
+      umbrellasameid.forEach((doc) => {
         console.log(doc.id, " => ", doc.data());
         temp2.push({
           id: doc.id,
           umbrella_Id: doc.data().umbrella_Id,
-          umbrella_Status: doc.data().umbrella_Status
+          umbrella_Status: doc.data().umbrella_Status,
         });
       });
       console.log(temp2);
@@ -72,8 +74,8 @@ export default function MachineList() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#59FFFF',
-      color: 'black',
+      backgroundColor: "#59FFFF",
+      color: "black",
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 30,
@@ -87,48 +89,53 @@ export default function MachineList() {
   const MachineListComponent = function () {
     return (
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow >
-            <StyledTableCell>地址</StyledTableCell>
-            <StyledTableCell align="left">空間</StyledTableCell>
-            <StyledTableCell align="left">機台雨傘</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {machines.map((machine, duck) => (
-            
-            <TableRow
-              key={machine.machine_Address}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">{machine.machine_Address}</TableCell>
-              <TableCell align="leat">{machine.machine_Spaces}</TableCell>
-             
-              {umbrellas.map((umbrella, chicken) => (
-              <TableCell align="right">
-              <Button variant="primary"
-                   value={umbrella.umbrella_Id}
-                   onClick={() => rent(chicken)}>{umbrella.umbrella_Id}
-              </Button></TableCell>
-                   ))}
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>地址</StyledTableCell>
+              <StyledTableCell align="left">空間</StyledTableCell>
+              <StyledTableCell align="left">機台雨傘</StyledTableCell>
             </TableRow>
-            // <ListItem divider key={duck}>
-            //     <ListItemText primary={"地址:" + machine.machine_Address} secondary={"空間:" + machine.machine_Spaces}
-            //     ></ListItemText>
-            //     {umbrellas.map((umbrella, chicken) => (
-            //       <Button 
-            //       variant="primary"
-            //       value={umbrella.umbrella_Id}
-            //       onClick={() => rent(chicken)}
-            //       >
-            //     </Button>
-            //     ))}
-            // </ListItem>
-           ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {machines.map((machine, duck) => (
+              <TableRow
+                key={machine.machine_Address}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {machine.machine_Address}
+                </TableCell>
+                <TableCell align="leat">{machine.machine_Spaces}</TableCell>
+
+                {umbrellas.map((umbrella, chicken) => (
+                  <TableCell align="right">
+                    <Button
+                      variant="primary"
+                      value={umbrella.umbrella_Id}
+                      onClick={() => rent(chicken)}
+                    >
+                      {umbrella.umbrella_Id}
+                    </Button>
+                  </TableCell>
+                ))}
+              </TableRow>
+              // <ListItem divider key={duck}>
+              //     <ListItemText primary={"地址:" + machine.machine_Address} secondary={"空間:" + machine.machine_Spaces}
+              //     ></ListItemText>
+              //     {umbrellas.map((umbrella, chicken) => (
+              //       <Button
+              //       variant="primary"
+              //       value={umbrella.umbrella_Id}
+              //       onClick={() => rent(chicken)}
+              //       >
+              //     </Button>
+              //     ))}
+              // </ListItem>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     );
   };
   return (
@@ -142,7 +149,8 @@ export default function MachineList() {
         textAlign: "left",
       }}
     >
-      <AppMenu /><br/>
+      <AppMenu />
+      <br />
       {authContext.status === "signOut" ? ( //查看預設狀態
         <MachineListComponent />
       ) : authContext.status === "signUp" ? (

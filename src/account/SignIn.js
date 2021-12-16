@@ -3,7 +3,12 @@ import { Button, TextField } from "@mui/material";
 import { getApps, initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
-import { AuthContext, STATUS } from "../account/AuthContext";
+import {
+  AuthContext,
+  LEVEL,
+  LevelContext,
+  STATUS,
+} from "../account/AuthContext";
 import "../account/SignIn.css";
 import { Alert } from "@mui/material";
 //import { Box } from '@mui/system';
@@ -15,16 +20,13 @@ export default function SignIn() {
   }
   const authContext = useContext(AuthContext); //利用useContext取得authContext
   console.log(authContext); //看一下登錄狀態的
-  const [account, setAccount] = useState({
-    email: "",
-    password: "",
-    displayName: "",
-  });
+  const [account, setAccount] = useState({});
 
   const [message, setMessage] = useState("");
 
   const handleChange = function (e) {
     setAccount({ ...account, [e.target.name]: e.target.value });
+    console.log(account);
   };
 
   const handleSubmit = async function () {
@@ -37,26 +39,31 @@ export default function SignIn() {
         account.password
       );
 
-      const db = getFirestore();
-      const accountconn = collection(db, "account");
-      const authResult = query(
-        accountconn,
-        where("account_Email", "==", account.email)
-      );
-      const q1 = await getDocs(authResult);
-      q1.forEach((doc) => {
-        console.log(doc.data());
-        console.log(doc.data().account_Authority);
-      });
-      console.log(q1);
-      console.log(authResult);
-
       if (res) {
         console.log(auth.currentUser.displayName);
-
         setMessage("");
-
         authContext.setStatus(STATUS.toSignOut);
+
+        const db = getFirestore();
+        const accountconn = collection(db, "account");
+        const authResult = query(
+          accountconn,
+          where("account_Email", "==", account.email)
+        );
+        const q1 = await getDocs(authResult);
+        const temp = [];
+        q1.forEach((doc) => {
+          temp.push({
+            account_Authority: doc.data().account_Authority,
+          });
+        });
+        const userAuth = temp.account_Authority;
+
+        if (userAuth === 1) {
+          LevelContext.setLevel(LEVEL.isUser);
+        } else {
+          LevelContext.setLevel(LEVEL.administrator);
+        }
       }
     } catch (error) {
       setMessage("" + error);
@@ -72,7 +79,6 @@ export default function SignIn() {
     authContext.setStatus(STATUS.toSignOut); //設定
     console.log(authContext); //看現在到底是什麼狀態
   };
-
   return (
     <div class="sidenav">
       <div class="container">

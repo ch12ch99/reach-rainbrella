@@ -8,6 +8,11 @@ export const STATUS = {
   toSignUp: "signUp",
 };
 
+export const LEVEL = {
+  isUser: "user",
+  isAdministrator: "administrator",
+};
+
 export const AuthContext = React.createContext({
   status: STATUS.toSignIn,
   setStatus: (newStatus) => {
@@ -15,6 +20,12 @@ export const AuthContext = React.createContext({
   },
 });
 
+export const LevelContext = React.createContext({
+  level: LEVEL.isUser,
+  setLevel: (newLevel) => {
+    this.level = newLevel;
+  },
+});
 /*
 status及setStatus在provider會被覆蓋
 status為toSignIn 已註冊，將要登入

@@ -11,9 +11,13 @@ export default function AppMenu() {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <Button component={Link} to="/product" color="inherit">
-          產品
-        </Button>
+        {authContext.status === "user" ? (
+          <Button component={Link} to="/product" color="inherit">
+            產品
+          </Button>
+        ) : (
+          ""
+        )}
         <Button component={Link} to="/account" color="inherit">
           用戶
         </Button>
