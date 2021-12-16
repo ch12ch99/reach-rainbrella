@@ -3,12 +3,7 @@ import { Button, TextField } from "@mui/material";
 import { getApps, initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
-import {
-  AuthContext,
-  LEVEL,
-  LevelContext,
-  STATUS,
-} from "../account/AuthContext";
+import { AuthContext, STATUS } from "../account/AuthContext";
 import "../account/SignIn.css";
 import { Alert } from "@mui/material";
 //import { Box } from '@mui/system';
@@ -42,7 +37,6 @@ export default function SignIn() {
       if (res) {
         console.log(auth.currentUser.displayName);
         setMessage("");
-        authContext.setStatus(STATUS.toSignOut);
 
         const db = getFirestore();
         const accountconn = collection(db, "account");
@@ -57,12 +51,15 @@ export default function SignIn() {
             account_Authority: doc.data().account_Authority,
           });
         });
-        const userAuth = temp.account_Authority;
-
-        if (userAuth === 1) {
-          LevelContext.setLevel(LEVEL.isUser);
+        const userAuth = temp[0].account_Authority;
+        console.log(userAuth);
+        if (userAuth == 1) {
+          console.log("我有執行到if");
+          authContext.setStatus(STATUS.isUser);
+          authContext.setStatus(STATUS.toSignOut);
+          console.log(authContext);
         } else {
-          LevelContext.setLevel(LEVEL.administrator);
+          authContext.setStatus(STATUS.toSignOut);
         }
       }
     } catch (error) {
