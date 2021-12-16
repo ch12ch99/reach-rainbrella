@@ -4,6 +4,7 @@ import { getApps, initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
+import { LevelContext, LEVEL } from "../account/LevelContext";
 import "../account/SignIn.css";
 import { Alert } from "@mui/material";
 //import { Box } from '@mui/system';
@@ -14,6 +15,8 @@ export default function SignIn() {
     initializeApp(config);
   }
   const authContext = useContext(AuthContext); //利用useContext取得authContext
+  const levelContext = useContext(LevelContext); //利用useContext取得authContext
+  console.log(levelContext);
   console.log(authContext); //看一下登錄狀態的
   const [account, setAccount] = useState({});
 
@@ -54,8 +57,7 @@ export default function SignIn() {
         const userAuth = temp[0].account_Authority;
         console.log(userAuth);
         if (userAuth == 1) {
-          console.log("我有執行到if");
-          authContext.setStatus(STATUS.isUser);
+          levelContext.setStatus(LEVEL.isUser);
           authContext.setStatus(STATUS.toSignOut);
           console.log(authContext);
         } else {

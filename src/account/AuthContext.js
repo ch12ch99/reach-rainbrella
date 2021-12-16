@@ -6,18 +6,7 @@ export const STATUS = {
   toSignOut: "signOut",
 
   toSignUp: "signUp",
-
-  isUser: "user",
-
-  isAdministrator: "administrator",
 };
-
-// export const LevelContext = React.createContext({
-//   level: LEVEL.isAdministrator,
-//   setStatus: (newLevel) => {
-//     this.level = newLevel;
-//   },
-// });
 
 export const AuthContext = React.createContext({
   status: STATUS.toSignIn,
