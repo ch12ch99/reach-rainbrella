@@ -6,12 +6,14 @@ import SignIn from "../account/SignIn";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange, deepPurple } from "@mui/material/colors";
+import { LevelContext } from "../account/LevelContext";
 export default function AppMenu() {
   const authContext = useContext(AuthContext); //利用useContext hook取得AuthContext裡的值
+  const levelContext = useContext(LevelContext);
   return (
     <AppBar position="sticky">
       <Toolbar>
-        {authContext.status === "user" ? (
+        {levelContext.level === "user" ? (
           <Button component={Link} to="/product" color="inherit">
             產品
           </Button>

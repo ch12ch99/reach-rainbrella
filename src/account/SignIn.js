@@ -57,11 +57,11 @@ export default function SignIn() {
         const userAuth = temp[0].account_Authority;
         console.log(userAuth);
         if (userAuth == 1) {
-          levelContext.setStatus(LEVEL.isUser);
+          levelContext.setLevel(LEVEL.isUser);
           authContext.setStatus(STATUS.toSignOut);
-          console.log(authContext);
+          console.log(levelContext);
         } else {
-          authContext.setStatus(STATUS.toSignOut);
+          authContext.Provider(STATUS.toSignOut);
         }
       }
     } catch (error) {

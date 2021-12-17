@@ -7,8 +7,8 @@ export const LEVEL = {
 };
 
 export const LevelContext = React.createContext({
-  status: LEVEL.isAdministrator,
-  setStatus: (newStatus) => {
-    this.status = newStatus;
+  level: LEVEL.isUser,
+  setLevel: (newLevel) => {
+    this.level = newLevel;
   },
 });
