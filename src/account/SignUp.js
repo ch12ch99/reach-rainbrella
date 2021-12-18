@@ -1,18 +1,16 @@
 import React, { useState, useContext } from "react";
 import { Button, Container, TextField } from "@mui/material";
 import { getApps, initializeApp } from "firebase/app";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import AccountAddEdit from "./AccountAddEdit";
-import "../account/SignIn.css";
 import { addDoc } from "@firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { getFirestore } from "firebase/firestore";
+import { Alert } from "@mui/material";
+
+import "../account/SignIn.css";
 
 export default function SignUp() {
   const db = getFirestore();
@@ -75,6 +73,7 @@ export default function SignUp() {
       });
       console.log(docRef.id);
       const temp = [];
+      docRef = Array.from(docRef);
       docRef.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
@@ -95,8 +94,12 @@ export default function SignUp() {
     authContext.setStatus(STATUS.toSignIn); //設定
   };
   return (
+  <div class="signUp">
     <div class="container">
       <form>
+      <Alert variant="filled" severity="info">
+            請先註冊
+          </Alert>
         <TextField
           type="text"
           name="displayName"
@@ -137,5 +140,6 @@ export default function SignUp() {
         </Button>
       </form>
     </div>
+  </div>
   );
 }

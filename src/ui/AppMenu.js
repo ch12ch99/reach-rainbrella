@@ -7,30 +7,49 @@ import { AuthContext, STATUS } from "../account/AuthContext";
 import Avatar from "@mui/material/Avatar";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import { LevelContext } from "../account/LevelContext";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+
 export default function AppMenu() {
   const authContext = useContext(AuthContext); //利用useContext hook取得AuthContext裡的值
   const levelContext = useContext(LevelContext);
+  const theme = createTheme({
+    typography: {
+      // Tell MUI what's the font-size on the html element is.
+      htmlFontSize: 15,
+    },
+  });
   return (
     <AppBar position="sticky">
       <Toolbar>
         {levelContext.level === "user" ? (
           <Button component={Link} to="/product" color="inherit">
-            產品
+            <ThemeProvider theme={theme}>
+              <Typography><strong>產品</strong></Typography>
+              </ThemeProvider>
           </Button>
         ) : (
           ""
         )}
         <Button component={Link} to="/account" color="inherit">
-          用戶
+          <ThemeProvider theme={theme}>
+            <Typography><strong>用戶</strong></Typography>
+            </ThemeProvider>
         </Button>
         <Button component={Link} to="/umbrella" color="inherit">
-          雨傘
+          <ThemeProvider theme={theme}>
+            <Typography><strong>雨傘</strong></Typography>
+              </ThemeProvider>
         </Button>
         <Button component={Link} to="/machine" color="inherit">
-          機台
+          <ThemeProvider theme={theme}>
+            <Typography><strong>機台</strong></Typography>
+              </ThemeProvider>
         </Button>
         <Button component={Link} to="/renter" color="inherit">
-          租借雨傘
+          <ThemeProvider theme={theme}>
+            <Typography><strong>租借雨傘</strong></Typography>
+              </ThemeProvider>
         </Button>
         {/* <Button component={Link} to='/admin' color="inherit">admin</Button> //這個我不知道是殺小先註解掉 */}
         {/* <Button component={Link} to='/' color="inherit">index</Button> //這個我不知道是殺小先註解掉 */}
