@@ -49,7 +49,6 @@ export default function SignIn() {
         );
         const q1 = await getDocs(authResult);
         const temp = [];
-        q1 = Array.from(q1);
         q1.forEach((doc) => {
           temp.push({
             account_Authority: doc.data().account_Authority,

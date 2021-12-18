@@ -25,9 +25,11 @@ export default function SignOut(props) {
   };
   return (
     <form>
+      &nbsp;&nbsp;
       <Button variant="contained" color="primary" onClick={handleSubmit}>
-        登出
+        <strong>登出</strong>
       </Button>
+      &nbsp;&nbsp;
       {message}
       <br />
     </form>
