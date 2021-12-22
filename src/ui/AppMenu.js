@@ -87,7 +87,7 @@ export default function AppMenu() {
           ""
         )}
         {authContext.status === "signOut" ? (
-          <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar> //頭像Avatar 位置有點怪 帶修正
+          <Avatar sx={{ bgcolor: deepOrange[50] }}><img src="https://anitar.dev/get/r" width="45" height="45" alt="Anitar" /></Avatar> //頭像Avatar 位置有點怪 帶修正
         ) : (
           ""
         )}
