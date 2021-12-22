@@ -38,7 +38,11 @@ export default function AppMenu() {
             </ThemeProvider>
         </Button>
         ) : (
-          ""
+          <Button component={Link} to="/account" color="inherit">
+          <ThemeProvider theme={theme}>
+            <Typography><strong>用戶</strong></Typography>
+            </ThemeProvider>
+        </Button>
         )}
         {levelContext.level === "administrator" ? (
         <Button component={Link} to="/umbrella" color="inherit">
@@ -47,7 +51,11 @@ export default function AppMenu() {
               </ThemeProvider>
         </Button>
         ) : (
-          ""
+          <Button component={Link} to="/umbrella" color="inherit">
+          <ThemeProvider theme={theme}>
+            <Typography><strong>雨傘</strong></Typography>
+              </ThemeProvider>
+        </Button>
         )}
         {levelContext.level === "administrator" ? (
         <Button component={Link} to="/machine" color="inherit">
@@ -56,7 +64,11 @@ export default function AppMenu() {
               </ThemeProvider>
         </Button>
         ) : (
-          ""
+          <Button component={Link} to="/machine" color="inherit">
+          <ThemeProvider theme={theme}>
+            <Typography><strong>機台</strong></Typography>
+              </ThemeProvider>
+        </Button>
         )}
         {levelContext.level === "administrator" ? (
         <Button component={Link} to="/renter" color="inherit">
@@ -65,7 +77,11 @@ export default function AppMenu() {
               </ThemeProvider>
         </Button>
         ) : (
-          ""
+          <Button component={Link} to="/renter" color="inherit">
+          <ThemeProvider theme={theme}>
+            <Typography><strong>租借雨傘</strong></Typography>
+              </ThemeProvider>
+        </Button>
         )}
         {/* <Button component={Link} to='/admin' color="inherit">admin</Button> //這個我不知道是殺小先註解掉 */}
         {/* <Button component={Link} to='/' color="inherit">index</Button> //這個我不知道是殺小先註解掉 */}
