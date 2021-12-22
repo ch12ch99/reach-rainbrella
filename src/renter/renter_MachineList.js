@@ -74,7 +74,7 @@ export default function MachineList() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#59FFFF",
+      backgroundColor: "#99BBFF",
       color: "black",
     },
     [`&.${tableCellClasses.body}`]: {
@@ -92,9 +92,9 @@ export default function MachineList() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>地址</StyledTableCell>
-              <StyledTableCell align="left">空間</StyledTableCell>
-              <StyledTableCell align="left">機台雨傘</StyledTableCell>
+              <StyledTableCell><strong>地址</strong></StyledTableCell>
+              <StyledTableCell align="left"><strong>空間</strong></StyledTableCell>
+              <StyledTableCell align="left"><strong>機台雨傘</strong></StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
