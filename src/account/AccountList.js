@@ -108,11 +108,11 @@ export default function AccountList() {
   //      ];
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#59FFFF",
+      backgroundColor: "#99BBFF",
       color: "black",
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 30,
+      fontSize: 35,
     },
   }));
   const AccountListComponent = function () {
@@ -121,14 +121,14 @@ export default function AccountList() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>帳號名稱</StyledTableCell>
-              <StyledTableCell align="leaft">Email</StyledTableCell>
-              <StyledTableCell align="leaft">ID</StyledTableCell>
-              <StyledTableCell align="leaft">密碼</StyledTableCell>
-              <StyledTableCell align="leaft">雨傘編號</StyledTableCell>
-              <StyledTableCell align="leaft">管理者</StyledTableCell>
+              <StyledTableCell><strong>帳號名稱</strong></StyledTableCell>
+              <StyledTableCell align="leaft"><strong>Email</strong></StyledTableCell>
+              <StyledTableCell align="leaft"><strong>ID</strong></StyledTableCell>
+              <StyledTableCell align="leaft"><strong>密碼</strong></StyledTableCell>
+              <StyledTableCell align="leaft"><strong>雨傘編號</strong></StyledTableCell>
+              <StyledTableCell align="leaft"><strong>管理者</strong></StyledTableCell>
               {levelContext.level === "administrator" ? (
-              <StyledTableCell align="leaft">控制
+              <StyledTableCell align="leaft">
               </StyledTableCell>
               ):(
                 ""

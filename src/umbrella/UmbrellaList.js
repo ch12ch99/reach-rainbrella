@@ -101,11 +101,11 @@ export default function UmbrellaList() {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#59FFFF',
+      backgroundColor: '#99BBFF',
       color: 'black',
     },
     [`&.${tableCellClasses.body}`]: {
-      fontSize: 30,
+      fontSize: 35,
     },
   }));
 
@@ -116,9 +116,9 @@ export default function UmbrellaList() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow >
-            <StyledTableCell>ID</StyledTableCell>
+            <StyledTableCell><strong>ID</strong></StyledTableCell>
             <StyledTableCell>狀態</StyledTableCell>
-            <StyledTableCell align="center">機台</StyledTableCell>
+            <StyledTableCell align="center"><strong>機台</strong></StyledTableCell>
             <StyledTableCell align="left"></StyledTableCell>
           </TableRow>
         </TableHead>
