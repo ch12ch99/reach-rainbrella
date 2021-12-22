@@ -61,7 +61,7 @@ export default function SignIn() {
           authContext.setStatus(STATUS.toSignOut);
           console.log(levelContext);
         } else {
-          authContext.Provider(STATUS.toSignOut);
+          levelContext.setLevel(LEVEL.isAdministrator);
         }
       }
     } catch (error) {
