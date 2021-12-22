@@ -64,7 +64,7 @@ export default function SignUp() {
       setMessage("" + error);
 
       const docRef = await addDoc(collection(db, "account"), {
-        account_Authority: Boolean(account.account_Authority),
+        account_Authority: "1",
         account_Name: account.displayName,
         account_Email: account.email,
         account_Id: account.account_Id,
