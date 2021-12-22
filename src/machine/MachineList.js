@@ -24,6 +24,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import { styled } from '@mui/material/styles';
 import TableContainer from "@mui/material/TableContainer";
+import { LevelContext } from "../account/LevelContext";
 
 export default function MachineList() {
   const firebaseApp = initializeApp(config);
@@ -34,6 +35,7 @@ export default function MachineList() {
   const [machines, setMachines] = useState([]); //useState是存firebase的資料 所以要用[]
   const [currentMachine, setCurrentMachine] = useState(false);
   const authContext = useContext(AuthContext);
+  const levelContext = useContext(LevelContext);
 
   useEffect(() => {
     async function readData() {
@@ -116,6 +118,7 @@ export default function MachineList() {
               </TableCell>
               <TableCell align="leaft">{machine.machine_Spaces}</TableCell>
               <TableCell align="right">
+              {levelContext.level === "administrator" ? (                
               <IconButton
               edge="end"
               aria-label="edit"
@@ -123,6 +126,10 @@ export default function MachineList() {
             >
               <CreateIcon />
             </IconButton>
+            ):(
+              ""
+            )}
+            {levelContext.level === "administrator" ? ( 
             <IconButton
               edge="end"
               aria-label="delete"
@@ -130,6 +137,9 @@ export default function MachineList() {
             >
               <DeleteIcon />
             </IconButton>
+            ):(
+              ""
+            )}
             </TableCell>        
             </TableRow>
           ))}

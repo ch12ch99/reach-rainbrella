@@ -24,6 +24,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
+import { LevelContext } from "../account/LevelContext";
 
 export default function AccountList() {
   const firebaseApp = initializeApp(config);
@@ -34,6 +35,7 @@ export default function AccountList() {
   const [currentAccount, setCurrentAccount] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const authContext = useContext(AuthContext); //利用useContext hook取得AuthContext裡的值
+  const levelContext = useContext(LevelContext);
 
   useEffect(() => {
     async function readData() {
@@ -125,7 +127,12 @@ export default function AccountList() {
               <StyledTableCell align="leaft">密碼</StyledTableCell>
               <StyledTableCell align="leaft">雨傘編號</StyledTableCell>
               <StyledTableCell align="leaft">管理者</StyledTableCell>
-              <StyledTableCell align="leaft">控制</StyledTableCell>
+              {levelContext.level === "administrator" ? (
+              <StyledTableCell align="leaft">控制
+              </StyledTableCell>
+              ):(
+                ""
+              )}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -146,6 +153,7 @@ export default function AccountList() {
                 <TableCell align="leaft">{account.umbrella_Id}</TableCell>
 
                 <TableCell align="leaft">{account.account_Authority}</TableCell>
+                {levelContext.level === "administrator" ? (
                 <IconButton
                   edge="end"
                   aria-label="edit"
@@ -153,6 +161,10 @@ export default function AccountList() {
                 >
                   <CreateIcon />
                 </IconButton>
+                ) : (
+                  ""
+                )}
+                {levelContext.level === "administrator" ? (
                 <IconButton
                   edge="end"
                   aria-label="delete"
@@ -160,6 +172,9 @@ export default function AccountList() {
                 >
                   <DeleteIcon />
                 </IconButton>
+                ) : (
+                  ""
+                )}
               </TableRow>
             ))}
           </TableBody>

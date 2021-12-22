@@ -38,11 +38,7 @@ export default function AppMenu() {
             </ThemeProvider>
         </Button>
         ) : (
-          <Button component={Link} to="/account" color="inherit">
-          <ThemeProvider theme={theme}>
-            <Typography><strong>用戶</strong></Typography>
-            </ThemeProvider>
-        </Button>
+          ""
         )}
         {levelContext.level === "administrator" ? (
         <Button component={Link} to="/umbrella" color="inherit">
@@ -70,7 +66,7 @@ export default function AppMenu() {
               </ThemeProvider>
         </Button>
         )}
-        {levelContext.level === "administrator" ? (
+  {levelContext.level === "administrator" ? (      
         <Button component={Link} to="/renter" color="inherit">
           <ThemeProvider theme={theme}>
             <Typography><strong>租借雨傘</strong></Typography>

@@ -26,6 +26,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import { styled } from '@mui/material/styles';
 import TableContainer from "@mui/material/TableContainer";
+import { LevelContext } from "../account/LevelContext";
 
 export default function UmbrellaList() {
   const authContext = useContext(AuthContext);
@@ -37,6 +38,7 @@ export default function UmbrellaList() {
   const [umbrellas, setUmbrellas] = useState([]); //useState是存firebase的資料 所以要用[]
   const [currentUmbrella, setCurrentUmbrella] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const levelContext = useContext(LevelContext);
   console.log(authContext.status);
   useEffect(() => {
     async function readData() {
@@ -131,6 +133,7 @@ export default function UmbrellaList() {
               <TableCell align="center">{umbrella.machine_Id}</TableCell>
               <TableCell align="right">
               {/* 修改 */}
+              {levelContext.level === "administrator" ? ( 
               <IconButton
               edge="end"
               aria-label="edit"
@@ -138,7 +141,11 @@ export default function UmbrellaList() {
             >
               <CreateIcon />
             </IconButton>
+              ):(
+                ""
+              )}
             {/* 刪除 */}
+              {levelContext.level === "administrator" ? ( 
             <IconButton
               edge="end"
               aria-label="delete"
@@ -146,6 +153,9 @@ export default function UmbrellaList() {
             >
               <DeleteIcon />
             </IconButton>
+              ):(
+                ""
+              )}
             {/* 借雨傘 */}
             <IconButton
               edge="end"
