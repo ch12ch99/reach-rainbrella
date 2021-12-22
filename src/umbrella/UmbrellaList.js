@@ -48,7 +48,7 @@ export default function UmbrellaList() {
       querySnapshot.forEach((doc) => {
         temp.push({
           id: doc.id,
-          umbrella_Id: doc.umbrella_Id,
+          umbrella_Id: doc.data().umbrella_Id,
           umbrella_Status: doc.data().umbrella_Status,
           machine_Id: doc.data().machine_Id,
         });
@@ -116,6 +116,7 @@ export default function UmbrellaList() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow >
+            <StyledTableCell>ID</StyledTableCell>
             <StyledTableCell>狀態</StyledTableCell>
             <StyledTableCell align="center">機台</StyledTableCell>
             <StyledTableCell align="left"></StyledTableCell>
@@ -127,6 +128,9 @@ export default function UmbrellaList() {
               key={umbrella.umbrella_Status}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
+              <TableCell component="th" scope="row">
+                {umbrella.umbrella_Id}
+              </TableCell>
               <TableCell component="th" scope="row">
                 {umbrella.umbrella_Status}
               </TableCell>

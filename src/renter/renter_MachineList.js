@@ -36,9 +36,11 @@ export default function MachineList() {
     async function readData() {
       const querySnapshot = await getDocs(collection(db, "machine"));
       const temp = [];
+      let u_ids = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
+        u_ids.push(doc.data().machine_Id);
         temp.push({
           id: doc.id,
           machine_Id: doc.data().machine_Id,
@@ -47,9 +49,10 @@ export default function MachineList() {
         });
       });
       console.log(temp);
+      console.log(u_ids);
       setMachines([...temp]);
       const umbrellasameid = await getDocs(
-        query(collection(db, "umbrella"), where("machine_Id", "==", 2))
+        query(collection(db, "umbrella"), where("machine_Id", "in", u_ids))
       );
       const temp2 = [];
       umbrellasameid.forEach((doc) => {
@@ -66,9 +69,9 @@ export default function MachineList() {
     readData();
   }, [db]);
 
-  const rent = async function (chicken) {
-    console.log(chicken);
-    setCurrentUmbrella({ ...umbrellas[chicken] });
+  const rent = async function (rain) {
+    console.log(rain);
+    setCurrentUmbrella({ ...umbrellas[rain] });
     setOpen(true);
   };
 
@@ -103,35 +106,20 @@ export default function MachineList() {
                 key={machine.machine_Address}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {machine.machine_Address}
-                </TableCell>
-                <TableCell align="leat">{machine.machine_Spaces}</TableCell>
-
-                {umbrellas.map((umbrella, chicken) => (
-                  <TableCell align="left">
+                <TableCell component="th" scope="row">{machine.machine_Address}</TableCell>
+                <TableCell>{machine.machine_Spaces}</TableCell>
+                <TableCell>
+                  {umbrellas.map((umbrella, rain) => (
                     <Button
                       variant="primary"
                       value={umbrella.umbrella_Id}
-                      onClick={() => rent(chicken)}
+                      onClick={() => rent(rain)}
                     >
                       {umbrella.umbrella_Id}
                     </Button>
+                    ))}
                   </TableCell>
-                ))}
               </TableRow>
-              // <ListItem divider key={duck}>
-              //     <ListItemText primary={"地址:" + machine.machine_Address} secondary={"空間:" + machine.machine_Spaces}
-              //     ></ListItemText>
-              //     {umbrellas.map((umbrella, chicken) => (
-              //       <Button
-              //       variant="primary"
-              //       value={umbrella.umbrella_Id}
-              //       onClick={() => rent(chicken)}
-              //       >
-              //     </Button>
-              //     ))}
-              // </ListItem>
             ))}
           </TableBody>
         </Table>
