@@ -109,7 +109,7 @@ export default function MachineList() {
                 <TableCell align="leat">{machine.machine_Spaces}</TableCell>
 
                 {umbrellas.map((umbrella, chicken) => (
-                  <TableCell align="right">
+                  <TableCell align="left">
                     <Button
                       variant="primary"
                       value={umbrella.umbrella_Id}
