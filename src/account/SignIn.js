@@ -76,6 +76,7 @@ export default function SignIn() {
 
   const superStatus = function () {
     authContext.setStatus(STATUS.toSignOut); //設定
+    levelContext.setLevel(LEVEL.isAdministrator)
     console.log(authContext); //看現在到底是什麼狀態
   };
   return (

@@ -22,7 +22,7 @@ export default function AppMenu() {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        {levelContext.level === "user" ? (
+        {levelContext.level === "administrator" ? (
           <Button component={Link} to="/product" color="inherit">
             <ThemeProvider theme={theme}>
               <Typography><strong>產品</strong></Typography>
