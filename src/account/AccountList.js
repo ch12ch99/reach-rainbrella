@@ -25,6 +25,7 @@ import Table from "@mui/material/Table";
 import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
 import { LevelContext } from "../account/LevelContext";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function AccountList() {
   const firebaseApp = initializeApp(config);
@@ -115,6 +116,14 @@ export default function AccountList() {
       fontSize: 35,
     },
   }));
+  const AddData = createTheme({
+    palette: {
+      color: "blue",
+      primary: {
+        main: '#7D7DFF',
+      },
+    },
+  });
   const AccountListComponent = function () {
     return (
       <TableContainer component={Paper}>
@@ -128,9 +137,9 @@ export default function AccountList() {
               <StyledTableCell align="leaft"><strong>雨傘編號</strong></StyledTableCell>
               <StyledTableCell align="leaft"><strong>管理者</strong></StyledTableCell>
               {levelContext.level === "administrator" ? (
-              <StyledTableCell align="leaft">
-              </StyledTableCell>
-              ):(
+                <StyledTableCell align="leaft">
+                </StyledTableCell>
+              ) : (
                 ""
               )}
             </TableRow>
@@ -154,24 +163,24 @@ export default function AccountList() {
 
                 <TableCell align="leaft">{account.account_Authority}</TableCell>
                 {levelContext.level === "administrator" ? (
-                <IconButton
-                  edge="end"
-                  aria-label="edit"
-                  onClick={() => editData(red)}
-                >
-                  <CreateIcon />
-                </IconButton>
+                  <IconButton
+                    edge="end"
+                    aria-label="edit"
+                    onClick={() => editData(red)}
+                  >
+                    <CreateIcon />
+                  </IconButton>
                 ) : (
                   ""
                 )}
                 {levelContext.level === "administrator" ? (
-                <IconButton
-                  edge="end"
-                  aria-label="delete"
-                  onClick={() => deleteData(account.id)}
-                >
-                  <DeleteIcon />
-                </IconButton>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => deleteData(account.id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
                 ) : (
                   ""
                 )}
@@ -247,18 +256,20 @@ export default function AccountList() {
               } */}
       {authContext.status === STATUS.toSignIn ? null : authContext.status ===
         STATUS.toSignUp ? null : (
-        <Fab
-          color="primary"
-          aria-label="新增"
-          onClick={addData}
-          sx={{
-            position: "fixed",
-            bottom: (theme) => theme.spacing(2),
-            right: (theme) => theme.spacing(8),
-          }}
-        >
-          <AddIcon />
-        </Fab>
+        <ThemeProvider theme={AddData}>
+          <Fab
+            color="primary"
+            aria-label="新增"
+            onClick={addData}
+            sx={{
+              position: "fixed",
+              bottom: (theme) => theme.spacing(2),
+              right: (theme) => theme.spacing(8),
+            }}
+          >
+            <AddIcon />
+          </Fab>
+        </ThemeProvider>
       )}
       <AccountAddEdit open={open} close={close} account={currentAccount} />
     </Box>

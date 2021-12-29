@@ -27,6 +27,7 @@ import Table from "@mui/material/Table";
 import { styled } from '@mui/material/styles';
 import TableContainer from "@mui/material/TableContainer";
 import { LevelContext } from "../account/LevelContext";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function UmbrellaList() {
   const authContext = useContext(AuthContext);
@@ -108,80 +109,87 @@ export default function UmbrellaList() {
       fontSize: 35,
     },
   }));
-
+  const AddData = createTheme({
+    palette: {
+      color: "blue",
+      primary: {
+        main: '#7D7DFF',
+      },
+    },
+  });
 
   const UmbrellaListComponent = function () {
     return (
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow >
-            <StyledTableCell><strong>ID</strong></StyledTableCell>
-            <StyledTableCell>狀態</StyledTableCell>
-            <StyledTableCell align="center"><strong>機台</strong></StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {umbrellas.map((umbrella, orange) => (
-            <TableRow
-              key={umbrella.umbrella_Status}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {umbrella.umbrella_Id}
-              </TableCell>
-              <TableCell component="th" scope="row">
-                {umbrella.umbrella_Status}
-              </TableCell>
-              <TableCell align="center">{umbrella.machine_Id}</TableCell>
-              <TableCell align="right">
-              {/* 修改 */}
-              {levelContext.level === "administrator" ? ( 
-              <IconButton
-              edge="end"
-              aria-label="edit"
-              onClick={() => editData(orange)}
-            >
-              <CreateIcon />
-            </IconButton>
-              ):(
-                ""
-              )}
-            {/* 刪除 */}
-              {levelContext.level === "administrator" ? ( 
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => deleteData(umbrella.id)}
-            >
-              <DeleteIcon />
-            </IconButton>
-              ):(
-                ""
-              )}
-            {/* 借雨傘 */}
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => borrowUmberlla()}
-            >
-              <BeachAccessIcon />
-            </IconButton>
-            {/* 還雨傘 */}
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => backUmberlla()}
-            >
-              <UmbrellaIcon />
-            </IconButton> 
-            </TableCell>       
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow >
+              <StyledTableCell><strong>ID</strong></StyledTableCell>
+              <StyledTableCell>狀態</StyledTableCell>
+              <StyledTableCell align="center"><strong>機台</strong></StyledTableCell>
+              <StyledTableCell align="left"></StyledTableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {umbrellas.map((umbrella, orange) => (
+              <TableRow
+                key={umbrella.umbrella_Status}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {umbrella.umbrella_Id}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {umbrella.umbrella_Status}
+                </TableCell>
+                <TableCell align="center">{umbrella.machine_Id}</TableCell>
+                <TableCell align="right">
+                  {/* 修改 */}
+                  {levelContext.level === "administrator" ? (
+                    <IconButton
+                      edge="end"
+                      aria-label="edit"
+                      onClick={() => editData(orange)}
+                    >
+                      <CreateIcon />
+                    </IconButton>
+                  ) : (
+                    ""
+                  )}
+                  {/* 刪除 */}
+                  {levelContext.level === "administrator" ? (
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => deleteData(umbrella.id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  ) : (
+                    ""
+                  )}
+                  {/* 借雨傘 */}
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => borrowUmberlla()}
+                  >
+                    <BeachAccessIcon />
+                  </IconButton>
+                  {/* 還雨傘 */}
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => backUmberlla()}
+                  >
+                    <UmbrellaIcon />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       // <List subheader="Umbrella list" aria-label="umbrella list">
       //   {umbrellas.map((umbrella, orange) => (
       //     <ListItem divider key={orange}>
@@ -237,7 +245,7 @@ export default function UmbrellaList() {
         textAlign: "left",
       }}
     >
-      <AppMenu /><br/>
+      <AppMenu /><br />
       {authContext.status === "signOut" ? ( //查看預設狀態
         <UmbrellaListComponent />
       ) : authContext.status === "signUp" ? (
@@ -248,18 +256,20 @@ export default function UmbrellaList() {
       {/* {!isLoading ? <UmbrellaListComponent /> : <CircularProgress />} */}
       {authContext.status === STATUS.toSignIn ? null : authContext.status ===
         STATUS.toSignUp ? null : (
-        <Fab
-          color="primary"
-          aria-label="新增"
-          onClick={addData}
-          sx={{
-            position: "fixed",
-            bottom: (theme) => theme.spacing(2),
-            right: (theme) => theme.spacing(8),
-          }}
-        >
-          <AddIcon />
-        </Fab>
+        <ThemeProvider theme={AddData}>
+          <Fab
+            color="primary"
+            aria-label="新增"
+            onClick={addData}
+            sx={{
+              position: "fixed",
+              bottom: (theme) => theme.spacing(2),
+              right: (theme) => theme.spacing(8),
+            }}
+          >
+            <AddIcon />
+          </Fab>
+        </ThemeProvider>
       )}
       <UmbrellaAddEdit open={open} close={close} umbrella={currentUmbrella} />
     </Box>

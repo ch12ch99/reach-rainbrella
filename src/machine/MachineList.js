@@ -25,6 +25,7 @@ import Table from "@mui/material/Table";
 import { styled } from '@mui/material/styles';
 import TableContainer from "@mui/material/TableContainer";
 import { LevelContext } from "../account/LevelContext";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function MachineList() {
   const firebaseApp = initializeApp(config);
@@ -95,57 +96,64 @@ export default function MachineList() {
       fontSize: 35,
     },
   }));
-
+  const AddData = createTheme({
+    palette: {
+      color: "blue",
+      primary: {
+        main: '#7D7DFF',
+      },
+    },
+  });
   const MachineListComponent = function () {
     return (
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow >
-            <StyledTableCell><strong>地址</strong></StyledTableCell>
-            <StyledTableCell align="left"><strong>空間</strong></StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {machines.map((machine, duck) => (
-            <TableRow
-              key={machine.machine_Address}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {machine.machine_Address}
-              </TableCell>
-              <TableCell align="leaft">{machine.machine_Spaces}</TableCell>
-              <TableCell align="right">
-              {levelContext.level === "administrator" ? (                
-              <IconButton
-              edge="end"
-              aria-label="edit"
-              onClick={() => editData(duck)}
-            >
-              <CreateIcon />
-            </IconButton>
-            ):(
-              ""
-            )}
-            {levelContext.level === "administrator" ? ( 
-            <IconButton
-              edge="end"
-              aria-label="delete"
-              onClick={() => deleteData(machine.id)}
-            >
-              <DeleteIcon />
-            </IconButton>
-            ):(
-              ""
-            )}
-            </TableCell>        
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow >
+              <StyledTableCell><strong>地址</strong></StyledTableCell>
+              <StyledTableCell align="left"><strong>空間</strong></StyledTableCell>
+              <StyledTableCell align="left"></StyledTableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {machines.map((machine, duck) => (
+              <TableRow
+                key={machine.machine_Address}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {machine.machine_Address}
+                </TableCell>
+                <TableCell align="leaft">{machine.machine_Spaces}</TableCell>
+                <TableCell align="right">
+                  {levelContext.level === "administrator" ? (
+                    <IconButton
+                      edge="end"
+                      aria-label="edit"
+                      onClick={() => editData(duck)}
+                    >
+                      <CreateIcon />
+                    </IconButton>
+                  ) : (
+                    ""
+                  )}
+                  {levelContext.level === "administrator" ? (
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => deleteData(machine.id)}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  ) : (
+                    ""
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       // <List subheader="Machine list" aria-label="machine list">
       //   {machines.map((machine, duck) => (
       //     <ListItem divider key={duck}>
@@ -183,7 +191,7 @@ export default function MachineList() {
         textAlign: "left",
       }}
     >
-      <AppMenu /><br/>
+      <AppMenu /><br />
       {authContext.status === "signOut" ? ( //查看預設狀態
         <MachineListComponent />
       ) : authContext.status === "signUp" ? (
@@ -198,18 +206,20 @@ export default function MachineList() {
               } */}
       {authContext.status === STATUS.toSignIn ? null : authContext.status ===
         STATUS.toSignUp ? null : (
-        <Fab
-          color="primary"
-          aria-label="新增"
-          onClick={addData}
-          sx={{
-            position: "fixed",
-            bottom: (theme) => theme.spacing(2),
-            right: (theme) => theme.spacing(8),
-          }}
-        >
-          <AddIcon />
-        </Fab>
+        <ThemeProvider theme={AddData}>
+          <Fab
+            color="primary"
+            aria-label="新增"
+            onClick={addData}
+            sx={{
+              position: "fixed",
+              bottom: (theme) => theme.spacing(2),
+              right: (theme) => theme.spacing(8),
+            }}
+          >
+            <AddIcon />
+          </Fab>
+        </ThemeProvider>
       )}
       <MachineAddEdit open={open} close={close} machine={currentMachine} />
     </Box>
