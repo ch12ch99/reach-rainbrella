@@ -27,6 +27,13 @@ export default function AppMenu() {
       },
     },
   });
+
+  const meow = function () {
+    var random = Math.floor(Math.random() * 50);
+    console.log(random);
+    alert("喵~" * random);
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar position="sticky" >
@@ -100,7 +107,12 @@ export default function AppMenu() {
           ) : (
             ""
           )}
-           <img src={cat}/>
+          <Button onClick={() => meow()}>
+            <ThemeProvider theme={fonttheme}>
+              <img src={cat} />
+            </ThemeProvider>
+          </Button>
+
         </Toolbar>
       </AppBar>
     </ThemeProvider>
