@@ -9,7 +9,7 @@ import { deepOrange, deepPurple } from "@mui/material/colors";
 import { LevelContext } from "../account/LevelContext";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-
+import cat from "../cat.gif";
 export default function AppMenu() {
   const authContext = useContext(AuthContext); //利用useContext hook取得AuthContext裡的值
   const levelContext = useContext(LevelContext);
@@ -100,6 +100,7 @@ export default function AppMenu() {
           ) : (
             ""
           )}
+           <img src={cat}/>
         </Toolbar>
       </AppBar>
     </ThemeProvider>
