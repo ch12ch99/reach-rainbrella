@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Box, List, ListItem, ListItemText } from "@mui/material";
+import { Box } from "@mui/material";
 import { Button } from "@mui/material";
 import { initializeApp } from "firebase/app";
-import { doc, getDocs } from "@firebase/firestore";
+import { doc, setDoc, getDocs } from "@firebase/firestore";
 import { getFirestore } from "@firebase/firestore";
 import { collection, query, where } from "@firebase/firestore";
 import { config } from "../settings/firebaseConfig";
@@ -22,12 +22,13 @@ import Table from "@mui/material/Table";
 import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
 
-export default function MachineList() {
+export default function MachineList(props) {
   const firebaseApp = initializeApp(config);
   const db = getFirestore();
+  const [account, setAccount] = useState({ account_Status:"", machine_Id: 0 });
+  useEffect(() => setAccount({ ...props.account }), [props.account]);
   const [open, setOpen] = useState(false);
   const [machines, setMachines] = useState([]); //useState是存firebase的資料 所以要用[]
-  const [umbrellas, setUmbrellas] = useState([]);
   const [currentMachine, setCurrentMachine] = useState(false);
   const [currentUmbrella, setCurrentUmbrella] = useState(false);
   const authContext = useContext(AuthContext);
@@ -37,41 +38,50 @@ export default function MachineList() {
       const querySnapshot = await getDocs(collection(db, "machine"));
       const temp = [];
       let u_ids = [];
-      querySnapshot.forEach((doc) => {
+      setMachines([]);
+      
+      querySnapshot.forEach(async (doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        console.log("machine:", doc.id, " => ", doc.data());
         u_ids.push(doc.data().machine_Id);
-        temp.push({
+        
+        const umbrellasameid = await getDocs(
+          query(collection(db, "umbrella"), where("machine_Id", "==",doc.data().machine_Id))
+        );
+        const temp2 = [];
+        umbrellasameid.forEach((doc) => {
+          console.log("umbrella", doc.id, " => ", doc.data());
+          temp2.push({
+            id: doc.id,
+            umbrella_Id: doc.data().umbrella_Id,
+            umbrella_Status: doc.data().umbrella_Status,
+          });
+        });
+        const data = {
           id: doc.id,
           machine_Id: doc.data().machine_Id,
           machine_Address: doc.data().machine_Address,
           machine_Spaces: doc.data().machine_Spaces,
-        });
+          umbrellas: [...temp2]
+        }
+        setMachines((currentMachine)=>[...currentMachine, data]);
       });
-      console.log(temp);
-      console.log(u_ids);
-      setMachines([...temp]);
-      const umbrellasameid = await getDocs(
-        query(collection(db, "umbrella"), where("machine_Id", "in", u_ids))
-      );
-      const temp2 = [];
-      umbrellasameid.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        temp2.push({
-          id: doc.id,
-          umbrella_Id: doc.data().umbrella_Id,
-          umbrella_Status: doc.data().umbrella_Status,
-        });
-      });
-      console.log(temp2);
-      setUmbrellas([...temp2]);
     }
     readData();
   }, [db]);
 
   const rent = async function (rain) {
+  
+    console.log ("in rent:");
     console.log(rain);
-    setCurrentUmbrella({ ...umbrellas[rain] });
+    const handleChange = function (e) {
+      setAccount({ ...account, [e.target.name]: e.target.value })
+    }
+    const rentumbrella = await setDoc(doc(db, "account", account.id), {
+        account_Id: doc.data().account_Id,
+        umbrella_Id: account.umbrella_Id
+    });
+//    setCurrentUmbrella({ ...umbrellas[rain] });
     setOpen(true);
   };
 
@@ -101,7 +111,9 @@ export default function MachineList() {
             </TableRow>
           </TableHead>
           <TableBody>
+          {console.log("machine in view:")}{console.log(machines)}
             {machines.map((machine, duck) => (
+
               <TableRow
                 key={machine.machine_Address}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -109,15 +121,16 @@ export default function MachineList() {
                 <TableCell component="th" scope="row">{machine.machine_Address}</TableCell>
                 <TableCell>{machine.machine_Spaces}</TableCell>
                 <TableCell>
-                  {umbrellas.map((umbrella, rain) => (
+                {machine.umbrellas.map((umbrella) => (
                     <Button
-                      variant="primary"
+                    variant="contained" color="primary"
                       value={umbrella.umbrella_Id}
-                      onClick={() => rent(rain)}
+                      onClick={() => rent(umbrella.umbrella_Id)}
                     >
                       {umbrella.umbrella_Id}
                     </Button>
-                    ))}
+                ))}
+
                   </TableCell>
               </TableRow>
             ))}
@@ -150,3 +163,4 @@ export default function MachineList() {
     </Box>
   );
 }
+

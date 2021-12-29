@@ -1,15 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-//import './index.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import reportWebVitals from "./reportWebVitals";
-import ProductList from "./product/ProductList";
-import AccountList from "./account/AccountList";
-import UmbrellaList from "./umbrella/UmbrellaList";
-import MachineList from "./machine/MachineList";
-import renter_MachineList from "./renter/renter_MachineList";
-import Main from "./ui/Main";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import AppRouter from "./AppRouter";
 

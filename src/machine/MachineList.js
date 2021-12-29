@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Fab } from "@mui/material";
-import { CircularProgress } from "@mui/material";
-import { Box, List, ListItem, ListItemText, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";

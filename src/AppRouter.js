@@ -1,16 +1,13 @@
 import React, { useState, useContext } from "react";
-//改用Switch，是react的switch喲
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Main from "./ui/Main";
 import { AuthContext, STATUS } from "./account/AuthContext";
 import { LevelContext, LEVEL } from "./account/LevelContext";
-//import { Switch } from "@mui/material";
 import ProductList from "./product/ProductList";
 import AccountList from "./account/AccountList";
 import UmbrellaList from "./umbrella/UmbrellaList";
 import MachineList from "./machine/MachineList";
 import renter_MachineList from "./renter/renter_MachineList";
-import SignOut from "./account/SignOut";
 
 export default function AppRouter() {
   const authContext = useContext(AuthContext);

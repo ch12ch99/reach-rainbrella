@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Button, Container, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { getApps, initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
-import AccountAddEdit from "./AccountAddEdit";
 import { addDoc } from "@firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { getFirestore } from "firebase/firestore";

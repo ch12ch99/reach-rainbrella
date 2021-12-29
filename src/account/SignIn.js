@@ -7,7 +7,6 @@ import { AuthContext, STATUS } from "../account/AuthContext";
 import { LevelContext, LEVEL } from "../account/LevelContext";
 import "../account/SignIn.css";
 import { Alert } from "@mui/material";
-//import { Box } from '@mui/system';
 import { collection, getDocs, getFirestore, query } from "@firebase/firestore";
 import { where } from "@firebase/firestore";
 export default function SignIn() {
@@ -55,6 +54,7 @@ export default function SignIn() {
           });
         });
         const userAuth = temp[0].account_Authority;
+        
         console.log(userAuth);
         if (userAuth == 1) {
           levelContext.setLevel(LEVEL.isUser);

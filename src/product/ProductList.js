@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Box, List, ListItem, ListItemText, IconButton } from "@mui/material";
-import { CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CreateIcon from "@mui/icons-material/Create";
 import { initializeApp } from "firebase/app";
 import { collection } from "@firebase/firestore";
 import { getDocs, doc, deleteDoc } from "@firebase/firestore";
@@ -17,11 +14,8 @@ import SignIn from "../account/SignIn";
 import SignUp from "../account/SignUp";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
 import { styled } from '@mui/material/styles';
 import { tableCellClasses } from '@mui/material/TableCell';
 
