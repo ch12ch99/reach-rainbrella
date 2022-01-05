@@ -167,22 +167,7 @@ export default function UmbrellaList() {
                   ) : (
                     ""
                   )}
-                  {/* 借雨傘 */}
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => borrowUmberlla()}
-                  >
-                    <BeachAccessIcon />
-                  </IconButton>
-                  {/* 還雨傘 */}
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => backUmberlla()}
-                  >
-                    <UmbrellaIcon />
-                  </IconButton>
+                  
                 </TableCell>
               </TableRow>
             ))}
