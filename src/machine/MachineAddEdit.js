@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { Button } from '@mui/material';
 import { TextField } from '@mui/material';
-import { getFirestore, collection, doc, addDoc, setDoc } from '@firebase/firestore';
+import { getFirestore, collection, doc, addDoc, updateDoc } from '@firebase/firestore';
 
 export default function MachineAddEdit(props) {
     const [machine, setMachine] = useState({ machine_Address:"", machine_Spaces: 0 })
@@ -22,7 +22,7 @@ export default function MachineAddEdit(props) {
                 console.log(docRef.id);
             }
             else {
-                await setDoc(doc(db, "machine", machine.id), {
+                await updateDoc(doc(db, "machine", machine.id), {
                     machine_Address: machine.machine_Address,
                     machine_Spaces: parseInt(machine.machine_Spaces)
                 });

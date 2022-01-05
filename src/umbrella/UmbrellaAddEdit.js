@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { Button } from '@mui/material';
 import { TextField } from '@mui/material';
-import { getFirestore, collection, doc, addDoc, setDoc } from '@firebase/firestore';
+import { getFirestore, collection, doc, addDoc, updateDoc } from '@firebase/firestore';
 
 export default function UmbrellaAddEdit(props) {
     const [umbrella, setUmbrella] = useState({ umbrella_Status:"", machine_Id: 0 })
@@ -22,7 +22,7 @@ export default function UmbrellaAddEdit(props) {
                 console.log(docRef.id);
             }
             else {
-                await setDoc(doc(db, "umbrella", umbrella.id), {
+                await updateDoc(doc(db, "umbrella", umbrella.id), {
                     umbrella_Status: umbrella.umbrella_Status,
                     machine_Id: parseInt(umbrella.machine_Id)
                 });

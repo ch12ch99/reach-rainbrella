@@ -2,10 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import { Box } from "@mui/material";
 import { Button } from "@mui/material";
 import { initializeApp } from "firebase/app";
-import { doc, setDoc, getDocs } from "@firebase/firestore";
+import { doc, updateDoc, getDocs } from "@firebase/firestore";
 import { getFirestore } from "@firebase/firestore";
 import { collection, query, where } from "@firebase/firestore";
 import { config } from "../settings/firebaseConfig";
+import { getAuth } from "firebase/auth";
 import AppMenu from "../ui/AppMenu";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import SignIn from "../account/SignIn";
@@ -21,7 +22,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
-import { addDoc } from "firebase/firestore";
+
 export default function MachineList(props) {
   const firebaseApp = initializeApp(config);
   const db = getFirestore();
@@ -70,18 +71,6 @@ export default function MachineList(props) {
     readData();
   }, [db]);
 
-  const rent = async function (rain) {
-
-    console.log("in rent:");
-    console.log(rain);
-    const handleChange = function (e) {
-      setAccount({ ...account, [e.target.name]: e.target.value })
-    }
-
-    //    setCurrentUmbrella({ ...umbrellas[rain] });
-    setOpen(true);
-  };
-
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: "#99BBFF",
@@ -96,17 +85,29 @@ export default function MachineList(props) {
     setOpen(false);
   };
 
-  // const rentumbrella = await setDoc(doc(db, "account", account.id), {
-  //   account_Id: doc.data().account_Id,
-  //   umbrella_Id: account.umbrella_Id
-  // });
-
   const rentumbrella = async function (umbrella_Id) {
     const db = getFirestore();
-    const docRef = await addDoc(collection(db, "account"), {
-      umbrella_Id:umbrella_Id
+    const getumbrellaid = await getDocs(
+      query(collection(db, "umbrella"), where("umbrella_Id", "==", umbrella_Id))
+    );
+    let temp = "";
+    getumbrellaid.forEach((doc) => {
+      console.log("umbrella", doc.id, " => ", doc.data());
+      temp=doc.id;
+    });
+    console.log(temp);
+    const docRef2 = await updateDoc(doc(db, "umbrella",temp), {
+      machine_Id: "0",
+      umbrella_Status: "false"
+    });
+    const auth =getAuth(); 
+    const user = auth.currentUser;
+    console.log(user);
+    const docRef = await updateDoc(doc(db, "account", account.id), {
+      umbrella_Id:account.umbrella_Id
   });
-  }
+  setOpen(true);
+  };
 
   const MachineListComponent = function () {
     return (

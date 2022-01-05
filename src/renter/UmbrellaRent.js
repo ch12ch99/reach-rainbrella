@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Dialog, DialogTitle, DialogActions } from "@mui/material";
+import { Dialog, DialogActions, DialogContent } from "@mui/material";
 import { Button } from '@mui/material';
 import { TextField } from '@mui/material';
 import { getFirestore, collection, doc, setDoc } from '@firebase/firestore';
@@ -30,7 +30,7 @@ export default function UmbrellaRent(props) {
     }
     return (
         <Dialog open={props.open}>
-            <DialogTitle>租借</DialogTitle>
+            <DialogContent>租借</DialogContent>
             <DialogActions>
                 <Button variant="outlined" color="primary" onClick={umbrellaupdate}>租借</Button>
                 <Button variant="outlined" color="secondary" onClick={props.close}>取消</Button>

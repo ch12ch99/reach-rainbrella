@@ -174,48 +174,6 @@ export default function UmbrellaList() {
           </TableBody>
         </Table>
       </TableContainer>
-      // <List subheader="Umbrella list" aria-label="umbrella list">
-      //   {umbrellas.map((umbrella, orange) => (
-      //     <ListItem divider key={orange}>
-      //       <ListItemText
-      //         primary={"狀態:" + umbrella.umbrella_Status}
-      //         secondary={"機台:" + umbrella.machine_Id}
-      //       ></ListItemText>
-      //       {/* 修改 */}
-      //       <IconButton
-      //         edge="end"
-      //         aria-label="edit"
-      //         onClick={() => editData(orange)}
-      //       >
-      //         <CreateIcon />
-      //       </IconButton>
-      //       {/* 刪除 */}
-      //       <IconButton
-      //         edge="end"
-      //         aria-label="delete"
-      //         onClick={() => deleteData(umbrella.id)}
-      //       >
-      //         <DeleteIcon />
-      //       </IconButton>
-      //       {/* 借雨傘 */}
-      //       <IconButton
-      //         edge="end"
-      //         aria-label="delete"
-      //         onClick={() => borrowUmberlla()}
-      //       >
-      //         <BeachAccessIcon />
-      //       </IconButton>
-      //       {/* 還雨傘 */}
-      //       <IconButton
-      //         edge="end"
-      //         aria-label="delete"
-      //         onClick={() => backUmberlla()}
-      //       >
-      //         <UmbrellaIcon />
-      //       </IconButton>
-      //     </ListItem>
-      //   ))}
-      // </List>
     );
   };
   return (
