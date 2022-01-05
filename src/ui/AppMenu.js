@@ -30,7 +30,7 @@ export default function AppMenu() {
   const meow = function () {
     var random = Math.floor(Math.random() * 50);
     console.log(random);
-    alert("喵~" * random);
+    alert("喵~".repeat(random));
   };
 
   return (

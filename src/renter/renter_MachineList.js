@@ -21,11 +21,11 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
-
+import { addDoc } from "firebase/firestore";
 export default function MachineList(props) {
   const firebaseApp = initializeApp(config);
   const db = getFirestore();
-  const [account, setAccount] = useState({ account_Status:"", machine_Id: 0 });
+  const [account, setAccount] = useState({ account_Status: "", machine_Id: 0 });
   useEffect(() => setAccount({ ...props.account }), [props.account]);
   const [open, setOpen] = useState(false);
   const [machines, setMachines] = useState([]); //useState是存firebase的資料 所以要用[]
@@ -39,14 +39,14 @@ export default function MachineList(props) {
       const temp = [];
       let u_ids = [];
       setMachines([]);
-      
+
       querySnapshot.forEach(async (doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log("machine:", doc.id, " => ", doc.data());
         u_ids.push(doc.data().machine_Id);
-        
+
         const umbrellasameid = await getDocs(
-          query(collection(db, "umbrella"), where("machine_Id", "==",doc.data().machine_Id))
+          query(collection(db, "umbrella"), where("machine_Id", "==", doc.data().machine_Id))
         );
         const temp2 = [];
         umbrellasameid.forEach((doc) => {
@@ -64,24 +64,21 @@ export default function MachineList(props) {
           machine_Spaces: doc.data().machine_Spaces,
           umbrellas: [...temp2]
         }
-        setMachines((currentMachine)=>[...currentMachine, data]);
+        setMachines((currentMachine) => [...currentMachine, data]);
       });
     }
     readData();
   }, [db]);
 
   const rent = async function (rain) {
-  
-    console.log ("in rent:");
+
+    console.log("in rent:");
     console.log(rain);
     const handleChange = function (e) {
       setAccount({ ...account, [e.target.name]: e.target.value })
     }
-    const rentumbrella = await setDoc(doc(db, "account", account.id), {
-        account_Id: doc.data().account_Id,
-        umbrella_Id: account.umbrella_Id
-    });
-//    setCurrentUmbrella({ ...umbrellas[rain] });
+
+    //    setCurrentUmbrella({ ...umbrellas[rain] });
     setOpen(true);
   };
 
@@ -99,6 +96,18 @@ export default function MachineList(props) {
     setOpen(false);
   };
 
+  // const rentumbrella = await setDoc(doc(db, "account", account.id), {
+  //   account_Id: doc.data().account_Id,
+  //   umbrella_Id: account.umbrella_Id
+  // });
+
+  const rentumbrella = async function (umbrella_Id) {
+    const db = getFirestore();
+    const docRef = await addDoc(collection(db, "account"), {
+      umbrella_Id:umbrella_Id
+  });
+  }
+
   const MachineListComponent = function () {
     return (
       <TableContainer component={Paper}>
@@ -111,7 +120,7 @@ export default function MachineList(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-          {console.log("machine in view:")}{console.log(machines)}
+            {console.log("machine in view:")}{console.log(machines)}
             {machines.map((machine, duck) => (
 
               <TableRow
@@ -121,17 +130,17 @@ export default function MachineList(props) {
                 <TableCell component="th" scope="row">{machine.machine_Address}</TableCell>
                 <TableCell>{machine.machine_Spaces}</TableCell>
                 <TableCell>
-                {machine.umbrellas.map((umbrella) => (
+                  {machine.umbrellas.map((umbrella) => (
                     <Button
-                    variant="contained" color="primary"
+                      variant="contained" color="primary"
                       value={umbrella.umbrella_Id}
-                      onClick={() => rent(umbrella.umbrella_Id)}
+                      onClick={() => rentumbrella(umbrella.umbrella_Id)}
                     >
                       {umbrella.umbrella_Id}
                     </Button>
-                ))}
+                  ))}
 
-                  </TableCell>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
