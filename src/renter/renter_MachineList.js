@@ -47,7 +47,10 @@ export default function MachineList(props) {
         u_ids.push(doc.data().machine_Id);
 
         const umbrellasameid = await getDocs(
-          query(collection(db, "umbrella"), where("machine_Id", "==", doc.data().machine_Id))
+          query(
+            collection(db, "umbrella"),
+            where("machine_Id", "==", doc.data().machine_Id)
+          )
         );
         const temp2 = [];
         umbrellasameid.forEach((doc) => {
@@ -63,8 +66,8 @@ export default function MachineList(props) {
           machine_Id: doc.data().machine_Id,
           machine_Address: doc.data().machine_Address,
           machine_Spaces: doc.data().machine_Spaces,
-          umbrellas: [...temp2]
-        }
+          umbrellas: [...temp2],
+        };
         setMachines((currentMachine) => [...currentMachine, data]);
       });
     }
@@ -86,27 +89,41 @@ export default function MachineList(props) {
   };
 
   const rentumbrella = async function (umbrella_Id) {
+    //user
     const db = getFirestore();
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const u_email = user.email;
+    console.log(u_email);
+    const accountconn = collection(db, "account");
+    const Result = query(accountconn, where("account_Email", "==", u_email));
+    const q1 = await getDocs(Result);
+    const put_umbrella = [];
+    q1.forEach((doc) => {
+      put_umbrella.push({
+        id: doc.id,
+      });
+    });
+    const u_id = put_umbrella[0].id;
+    console.log(u_id);
+    const docRef = await updateDoc(doc(db, "account", put_umbrella[0].id), {
+      umbrella_Id: umbrella_Id,
+    });
+
+    //umbrella
     const getumbrellaid = await getDocs(
       query(collection(db, "umbrella"), where("umbrella_Id", "==", umbrella_Id))
     );
     let temp = "";
     getumbrellaid.forEach((doc) => {
       console.log("umbrella", doc.id, " => ", doc.data());
-      temp=doc.id;
+      temp = doc.id;
     });
-    console.log(temp);
-    const docRef2 = await updateDoc(doc(db, "umbrella",temp), {
+    const docRef2 = await updateDoc(doc(db, "umbrella", temp), {
       machine_Id: "0",
-      umbrella_Status: "false"
+      umbrella_Status: "false",
     });
-    const auth =getAuth(); 
-    const user = auth.currentUser;
-    console.log(user);
-    const docRef = await updateDoc(doc(db, "account", account.id), {
-      umbrella_Id:account.umbrella_Id
-  });
-  setOpen(true);
+    setOpen(true);
   };
 
   const MachineListComponent = function () {
@@ -115,32 +132,40 @@ export default function MachineList(props) {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <StyledTableCell><strong>地址</strong></StyledTableCell>
-              <StyledTableCell align="left"><strong>空間</strong></StyledTableCell>
-              <StyledTableCell align="left"><strong>機台雨傘</strong></StyledTableCell>
+              <StyledTableCell>
+                <strong>地址</strong>
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                <strong>空間</strong>
+              </StyledTableCell>
+              <StyledTableCell align="left">
+                <strong>機台雨傘</strong>
+              </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {console.log("machine in view:")}{console.log(machines)}
+            {console.log("machine in view:")}
+            {console.log(machines)}
             {machines.map((machine, duck) => (
-
               <TableRow
                 key={machine.machine_Address}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">{machine.machine_Address}</TableCell>
+                <TableCell component="th" scope="row">
+                  {machine.machine_Address}
+                </TableCell>
                 <TableCell>{machine.machine_Spaces}</TableCell>
                 <TableCell>
                   {machine.umbrellas.map((umbrella) => (
                     <Button
-                      variant="contained" color="primary"
+                      variant="contained"
+                      color="primary"
                       value={umbrella.umbrella_Id}
                       onClick={() => rentumbrella(umbrella.umbrella_Id)}
                     >
                       {umbrella.umbrella_Id}
                     </Button>
                   ))}
-
                 </TableCell>
               </TableRow>
             ))}
@@ -173,4 +198,3 @@ export default function MachineList(props) {
     </Box>
   );
 }
-
