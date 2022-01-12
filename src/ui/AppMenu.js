@@ -98,6 +98,7 @@ export default function AppMenu() {
           ) : (
             ""
           )}
+          <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要還傘請按彩虹喵喵</strong>
           <Button onClick={() => meow()}>
             <ThemeProvider theme={fonttheme}>
               <img src={cat} />

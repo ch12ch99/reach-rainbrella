@@ -5,7 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { initializeApp } from "firebase/app";
-import { doc, getDocs, deleteDoc } from "@firebase/firestore";
+import { doc, getDocs, deleteDoc, updateDoc } from "@firebase/firestore";
 import { getFirestore } from "@firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { config } from "../settings/firebaseConfig";
@@ -85,6 +85,20 @@ export default function UmbrellaList() {
     }
   };
 
+  const umbrella_Back = async function (id) {
+    try {
+      setIsLoading(true);
+      await updateDoc(doc(db, "umbrella"), {
+        machine_Id: "5",
+        umbrella_Status: "true"
+      });
+      setDeleted(deleted + 1);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //借雨傘位置
   const borrowUmberlla = async function () {
     alert("借用雨傘成功");
@@ -126,7 +140,7 @@ export default function UmbrellaList() {
               <StyledTableCell><strong>ID</strong></StyledTableCell>
               <StyledTableCell>狀態</StyledTableCell>
               <StyledTableCell align="center"><strong>機台</strong></StyledTableCell>
-              <StyledTableCell align="left"></StyledTableCell>
+              <StyledTableCell align="left"><button onClick={() => umbrella_Back()}>全部歸還</button></StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
