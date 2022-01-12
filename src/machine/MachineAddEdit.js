@@ -37,8 +37,9 @@ export default function MachineAddEdit(props) {
         <Dialog open={props.open}>
             <DialogTitle>{action}機台</DialogTitle>
             <DialogContent>
-                <TextField label="機台位址" name="machine_Address" variant="outlined" value={machine.machine_Address} onChange={handleChange} />
-                <TextField label="機台空間" type="number" name="machine_Spaces" variant="outlined" value={machine.machine_Spaces} onChange={handleChange} />
+                <TextField label="機台位址" name="machine_Address" variant="outlined" value={machine.machine_Address} onChange={handleChange} /><br />
+                <TextField label="機台空間" type="number" name="machine_Spaces" variant="outlined" value={machine.machine_Spaces} onChange={handleChange} /><br />
+                <TextField label="機台ID" type="number" name="machine_Id" variant="outlined" value={machine.machine_Id} onChange={handleChange} />
             </DialogContent>
             <DialogActions>
                 <Button variant="outlined" color="primary" onClick={machineupdate}>{action}</Button>

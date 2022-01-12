@@ -48,6 +48,8 @@ export default function MachineAdd(props) {
                     機台位址:<input type="text" name="machine_Address" value={machine.machine_Address} onChange={handleClick} /><br />
                     <br />
                     機台空間:<input type="text" name="machine_Spaces" value={machine.machine_Spaces} onChange={handleClick} /><br />
+                    <br />
+                    機台ID:<input type="text" name="machine_Id" value={machine.machine_Id} onChange={handleClick} /><br />
                 </DialogContent>
                 <DialogActions>
                     <button variant="outlined" onClick={addmachine}>新增</button>
