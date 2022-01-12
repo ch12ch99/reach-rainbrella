@@ -211,7 +211,7 @@ export default function ProductList() {
         :
         <CircularProgress /> 我不會塞isLoading在context裏面
       } */}
-      {authContext.status === STATUS.toSignIn ? null : authContext.status ===
+      {/* {authContext.status === STATUS.toSignIn ? null : authContext.status ===
         STATUS.toSignUp ? null : (
         <Fab
           color="primary"
@@ -225,7 +225,7 @@ export default function ProductList() {
         >
           <AddIcon />
         </Fab>
-      )}
+      )} */}
       <ProductAddEdit open={open} close={close} product={currentProduct} />
     </Box>
   );
