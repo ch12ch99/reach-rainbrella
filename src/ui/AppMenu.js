@@ -97,13 +97,7 @@ export default function AppMenu() {
               </ThemeProvider>
             </Button>
           ) : (
-            <Button component={Link} to="/umbrella" color="inherit">
-              <ThemeProvider theme={fonttheme}>
-                <Typography>
-                  <strong>雨傘</strong>
-                </Typography>
-              </ThemeProvider>
-            </Button>
+            ""
           )}
           {levelContext.level === "administrator" ? (
             <Button component={Link} to="/machine" color="inherit">
@@ -114,13 +108,7 @@ export default function AppMenu() {
               </ThemeProvider>
             </Button>
           ) : (
-            <Button component={Link} to="/machine" color="inherit">
-              <ThemeProvider theme={fonttheme}>
-                <Typography>
-                  <strong>機台</strong>
-                </Typography>
-              </ThemeProvider>
-            </Button>
+           ""
           )}
           {levelContext.level === "administrator" ? (
             <Button component={Link} to="/renter" color="inherit">
@@ -158,6 +146,7 @@ export default function AppMenu() {
           ) : (
             ""
           )}
+          <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要還傘請按彩虹喵喵</strong>
           <Button onClick={() => meow()}>
             <ThemeProvider theme={fonttheme}>
               <img src={cat} />
