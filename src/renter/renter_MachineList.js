@@ -125,6 +125,7 @@ export default function MachineList(props) {
       machine_Id: "0",
       umbrella_Status: "false",
     });
+    <renter_MachineList />;
     setOpen(true);
   };
 

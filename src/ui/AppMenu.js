@@ -50,8 +50,21 @@ export default function AppMenu() {
     const u_id = put_umbrella[0].id;
     const umbrella_id = put_umbrella[0].umbrella_Id;
     console.log(u_id, umbrella_id);
+
     if (umbrella_id != 0) {
       alert("back umbrella!");
+      const umbrellaconn = collection(db, "umbrella");
+      const umbrellaTemp = [];
+      const nmbrella_id = query(
+        umbrellaconn,
+        where("umbrella_Id", "==", umbrella_id)
+      );
+      const update = await updateDoc(doc(db, "umbrella", nmbrella_id), {
+        machine_Id: "5",
+      });
+
+      const um_Id = umbrellaTemp.id;
+      console.log(um_Id);
       const docRef = await updateDoc(doc(db, "account", u_id), {
         umbrella_Id: "",
       });
