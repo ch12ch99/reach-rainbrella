@@ -55,18 +55,25 @@ export default function AppMenu() {
       alert("back umbrella!");
       const umbrellaconn = collection(db, "umbrella");
       const umbrellaTemp = [];
-      const nmbrella_id = query(
-        umbrellaconn,
-        where("umbrella_Id", "==", umbrella_id)
+      const umbrellaQuery = await getDocs(
+        query(umbrellaconn, where("umbrella_Id", "==", umbrella_id))
       );
-      const update = await updateDoc(doc(db, "umbrella", nmbrella_id), {
-        machine_Id: "5",
+      console.log(umbrellaQuery);
+      umbrellaQuery.forEach((doc) => {
+        umbrellaTemp.push({
+          id: doc.id,
+        });
       });
-
-      const um_Id = umbrellaTemp.id;
-      console.log(um_Id);
-      const docRef = await updateDoc(doc(db, "account", u_id), {
-        umbrella_Id: "",
+      console.log(umbrellaTemp[0]);
+      const random_umbrella_id = umbrellaTemp[0].id;
+      const updateumbrella = await updateDoc(
+        doc(db, "umbrella", random_umbrella_id),
+        {
+          machine_Id: "5",
+        }
+      );
+      const updateuser = await updateDoc(doc(db, "account", u_id), {
+        umbrella_Id: "0",
       });
     } else {
       var random = Math.floor(Math.random() * 50);
