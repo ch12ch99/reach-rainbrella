@@ -44,12 +44,12 @@ export default function AppMenu() {
     q1.forEach((doc) => {
       put_umbrella.push({
         id: doc.id,
-        umbrella_Id: doc.data().umbrella_Id
+        umbrella_Id: doc.data().umbrella_Id,
       });
     });
     const u_id = put_umbrella[0].id;
     const umbrella_id = put_umbrella[0].umbrella_Id;
-    console.log(u_id,umbrella_id);
+    console.log(u_id, umbrella_id);
     if (umbrella_id != 0) {
       alert("back umbrella!");
       const docRef = await updateDoc(doc(db, "account", u_id), {
@@ -108,7 +108,7 @@ export default function AppMenu() {
               </ThemeProvider>
             </Button>
           ) : (
-           ""
+            ""
           )}
           {levelContext.level === "administrator" ? (
             <Button component={Link} to="/renter" color="inherit">
@@ -146,7 +146,7 @@ export default function AppMenu() {
           ) : (
             ""
           )}
-          <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;要還傘請按彩虹喵喵</strong>
+
           <Button onClick={() => meow()}>
             <ThemeProvider theme={fonttheme}>
               <img src={cat} />

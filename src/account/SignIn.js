@@ -29,7 +29,6 @@ export default function SignIn() {
   const handleSubmit = async function () {
     try {
       const auth = getAuth();
-
       const res = await signInWithEmailAndPassword(
         auth,
         account.email,
@@ -48,13 +47,17 @@ export default function SignIn() {
         );
         const q1 = await getDocs(authResult);
         const temp = [];
+
         q1.forEach((doc) => {
           temp.push({
             account_Authority: doc.data().account_Authority,
+            umbrella_Id: doc.data().umbrella_Id,
           });
         });
+        console.log(temp);
         const userAuth = temp[0].account_Authority;
-        
+        const userUmbrella = temp[0].umbrella_Id;
+        console.log(userUmbrella);
         console.log(userAuth);
         if (userAuth == 1) {
           levelContext.setLevel(LEVEL.isUser);
@@ -62,6 +65,11 @@ export default function SignIn() {
           console.log(levelContext);
         } else {
           levelContext.setLevel(LEVEL.isAdministrator);
+        }
+        if (userUmbrella != 0) {
+          alert("記得還傘！");
+        } else {
+          alert("快下雨了 不騙你 快點借把傘！");
         }
       }
     } catch (error) {
@@ -76,7 +84,7 @@ export default function SignIn() {
 
   const superStatus = function () {
     authContext.setStatus(STATUS.toSignOut); //設定
-    levelContext.setLevel(LEVEL.isAdministrator)
+    levelContext.setLevel(LEVEL.isAdministrator);
     console.log(authContext); //看現在到底是什麼狀態
   };
   return (

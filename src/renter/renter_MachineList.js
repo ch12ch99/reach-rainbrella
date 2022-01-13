@@ -36,31 +36,32 @@ export default function MachineList(props) {
 
   useEffect(() => {
     async function readData() {
-      const querySnapshot = await getDocs(collection(db, "machine"));
-      const temp = [];
-      let u_ids = [];
+      //查看現在有哪些機臺
+      const queryMachine = await getDocs(collection(db, "machine"));
+      const u_ids = [];
       setMachines([]);
-
-      querySnapshot.forEach(async (doc) => {
-        // doc.data() is never undefined for query doc snapshots
+      queryMachine.forEach(async (doc) => {
         console.log("machine:", doc.id, " => ", doc.data());
-        u_ids.push(doc.data().machine_Id);
-
+        u_ids.push({
+          machine_Id: doc.data().machine_Id,
+        });
+        console.log("機臺有" + u_ids.machine_Id);
+        //機臺找傘
         const umbrellasameid = await getDocs(
           query(
             collection(db, "umbrella"),
-            where("machine_Id", "==", doc.data().machine_Id)
+            where("machine_Id", "==", doc.data().machine_Id) //
           )
         );
         const temp2 = [];
         umbrellasameid.forEach((doc) => {
-          console.log("umbrella", doc.id, " => ", doc.data());
+          console.log("umbrella:", doc.id, " => ", doc.data());
           temp2.push({
             id: doc.id,
             umbrella_Id: doc.data().umbrella_Id,
-            umbrella_Status: doc.data().umbrella_Status,
           });
         });
+        console.log(temp2);
         const data = {
           id: doc.id,
           machine_Id: doc.data().machine_Id,
@@ -68,6 +69,7 @@ export default function MachineList(props) {
           machine_Spaces: doc.data().machine_Spaces,
           umbrellas: [...temp2],
         };
+        console.log(data.umbrellas);
         setMachines((currentMachine) => [...currentMachine, data]);
       });
     }
@@ -146,7 +148,7 @@ export default function MachineList(props) {
           <TableBody>
             {console.log("machine in view:")}
             {console.log(machines)}
-            {machines.map((machine, duck) => (
+            {machines.map((machine) => (
               <TableRow
                 key={machine.machine_Address}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
