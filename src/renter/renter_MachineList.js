@@ -74,7 +74,7 @@ export default function MachineList(props) {
       });
     }
     readData();
-  }, [db]);
+  }, [db, open]);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {

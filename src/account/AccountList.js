@@ -24,7 +24,7 @@ import Table from "@mui/material/Table";
 import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
 import { LevelContext } from "../account/LevelContext";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export default function AccountList() {
   const firebaseApp = initializeApp(config);
@@ -109,7 +109,7 @@ export default function AccountList() {
     palette: {
       color: "blue",
       primary: {
-        main: '#7D7DFF',
+        main: "#7D7DFF",
       },
     },
   });
@@ -119,15 +119,26 @@ export default function AccountList() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <StyledTableCell><strong>帳號名稱</strong></StyledTableCell>
-              <StyledTableCell align="leaft"><strong>Email</strong></StyledTableCell>
-              <StyledTableCell align="leaft"><strong>ID</strong></StyledTableCell>
-              <StyledTableCell align="leaft"><strong>密碼</strong></StyledTableCell>
-              <StyledTableCell align="leaft"><strong>雨傘編號</strong></StyledTableCell>
-              <StyledTableCell align="leaft"><strong>管理者</strong></StyledTableCell>
+              <StyledTableCell>
+                <strong>帳號名稱</strong>
+              </StyledTableCell>
+              <StyledTableCell align="leaft">
+                <strong>Email</strong>
+              </StyledTableCell>
+              <StyledTableCell align="leaft">
+                <strong>ID</strong>
+              </StyledTableCell>
+              <StyledTableCell align="leaft">
+                <strong>密碼</strong>
+              </StyledTableCell>
+              <StyledTableCell align="leaft">
+                <strong>雨傘編號</strong>
+              </StyledTableCell>
+              <StyledTableCell align="leaft">
+                <strong>管理者</strong>
+              </StyledTableCell>
               {levelContext.level === "administrator" ? (
-                <StyledTableCell align="leaft">
-                </StyledTableCell>
+                <StyledTableCell align="leaft"></StyledTableCell>
               ) : (
                 ""
               )}
@@ -178,44 +189,6 @@ export default function AccountList() {
           </TableBody>
         </Table>
       </TableContainer>
-      // <List subheader="Account list" aria-label="account list">
-      //   {accounts.map((account, red) => (
-      //     <ListItem divider key={red}>
-      //       <ListItemText
-      //         primary={"帳號名稱 : " + account.account_Name}
-      //       ></ListItemText>
-      //       <ListItemText
-      //         secondary={"E-mail : " + account.account_Email}
-      //       ></ListItemText>
-      //       <ListItemText
-      //         secondary={"Id : " + account.account_Id}
-      //       ></ListItemText>
-      //       <ListItemText
-      //         secondary={"Password : " + account.account_Password}
-      //       ></ListItemText>
-      //       <ListItemText
-      //         secondary={"雨傘編號 : " + account.umbrella_Id}
-      //       ></ListItemText>
-      //       <ListItemText
-      //         secondary={"是否為管理者 : " + account.account_Authority}
-      //       ></ListItemText>
-      //       <IconButton
-      //         edge="end"
-      //         aria-label="edit"
-      //         onClick={() => editData(red)}
-      //       >
-      //         <CreateIcon />
-      //       </IconButton>
-      //       <IconButton
-      //         edge="end"
-      //         aria-label="delete"
-      //         onClick={() => deleteData(account.id)}
-      //       >
-      //         <DeleteIcon />
-      //       </IconButton>
-      //     </ListItem>
-      //   ))}
-      // </List>
     );
   };
   return (
