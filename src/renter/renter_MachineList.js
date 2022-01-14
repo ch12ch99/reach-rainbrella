@@ -33,7 +33,6 @@ export default function MachineList(props) {
   const [currentMachine, setCurrentMachine] = useState(false);
   const [currentUmbrella, setCurrentUmbrella] = useState(false);
   const authContext = useContext(AuthContext);
-  const [count, setCount] = useState(0);
   useEffect(() => {
     async function readData() {
       //查看現在有哪些機臺
@@ -74,7 +73,6 @@ export default function MachineList(props) {
       });
     }
     readData();
-    setInterval(() => setCount((c) => c + 1), 1000);
   }, [db, open]);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
