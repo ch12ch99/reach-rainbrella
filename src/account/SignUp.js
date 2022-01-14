@@ -14,7 +14,8 @@ import { getFirestore } from "firebase/firestore";
 import { Alert } from "@mui/material";
 import "../account/SignIn.css";
 import { query, where, getDocs } from "firebase/firestore";
-
+import SignIn from "./SignIn";
+import { GolfCourse } from "@mui/icons-material";
 export default function SignUp() {
   const db = getFirestore();
   if (getApps().length === 0) {
@@ -55,48 +56,28 @@ export default function SignUp() {
         account.email,
         account.password
       );
-      //console.log(res);
+      console.log(res);
       if (res) {
+        console.log("我有進來if");
         await updateProfile(auth.currentUser, {
           displayName: account.displayName,
         });
-      }
-      setMessage("");
-    } catch (error) {
-      setMessage("" + error);
-      const connaccount = collection(db, "account");
-      const q = query(connaccount, where("account_Email", "==", account.email));
-      const querySnapshot = await getDocs(q);
-      console.log(querySnapshot, account.email);
-      if (querySnapshot) {
-        alert("帳號重複");
-      } else {
+
         const docRef = await addDoc(collection(db, "account"), {
           account_Authority: "1",
           account_Name: account.displayName,
           account_Email: account.email,
-          account_Id: account.account_Id,
+          account_Id: account.email + 1,
           account_Password: account.password,
-          umbrella_Id: account.umbrella_Id,
+          umbrella_Id: null,
         });
 
         console.log(docRef.id);
-        const temp = [];
-        docRef = Array.from(docRef);
-        docRef.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
-          temp.push({
-            id: doc.id,
-            account_Authority: doc.data().account_Authority,
-            account_Email: doc.data().account_Email,
-            account_Id: doc.data().account_Id,
-            account_Name: doc.data().account_Name,
-            account_Password: doc.data().account_Password,
-            umbrella_Id: doc.data().umbrella_Id,
-          });
-        });
+        alert("註冊成功");
       }
+      setMessage("");
+    } catch (error) {
+      // setMessage("" + error + "我是66行錯誤");
     }
   };
 
