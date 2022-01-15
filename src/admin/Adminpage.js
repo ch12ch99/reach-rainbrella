@@ -10,7 +10,6 @@ import { doc, getDocs, deleteDoc } from '@firebase/firestore';
 import { getFirestore } from '@firebase/firestore';
 import { collection } from '@firebase/firestore';
 import { config } from '../settings/firebaseConfig';
-import AppMenu from '../ui/AppMenu';
 import MachineAddEdit from './MachineAddEdit';
 
 export default function MachineList() {

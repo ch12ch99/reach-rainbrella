@@ -1,11 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Button, TextField } from "@mui/material";
 import { getApps, initializeApp } from "firebase/app";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { config } from "../settings/firebaseConfig";
 import { AuthContext, STATUS } from "../account/AuthContext";
 import { addDoc } from "@firebase/firestore";
@@ -74,6 +70,7 @@ export default function SignUp() {
 
         console.log(docRef.id);
         alert("註冊成功");
+        window.location.href="/SignIn";
       }
       setMessage("");
     } catch (error) {

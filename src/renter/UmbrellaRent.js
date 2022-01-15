@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Dialog, DialogActions, DialogContent } from "@mui/material";
 import { Button } from '@mui/material';
-import { TextField } from '@mui/material';
-import { getFirestore, collection, doc, setDoc } from '@firebase/firestore';
+import { getFirestore, doc, setDoc } from '@firebase/firestore';
 
 export default function UmbrellaRent(props) {
     const [umbrella, setUmbrella] = useState({ machine_Id:"", umbrella_Status: 0 })

@@ -30,7 +30,6 @@ export default function MachineList(props) {
   useEffect(() => setAccount({ ...props.account }), [props.account]);
   const [open, setOpen] = useState(false);
   const [machines, setMachines] = useState([]); //useState是存firebase的資料 所以要用[]
-  const [currentMachine, setCurrentMachine] = useState(false);
   const [currentUmbrella, setCurrentUmbrella] = useState(false);
   const authContext = useContext(AuthContext);
   useEffect(() => {
@@ -107,7 +106,7 @@ export default function MachineList(props) {
     });
     const u_id = put_umbrella[0].id;
     console.log(u_id);
-    const docRef = await updateDoc(doc(db, "account", put_umbrella[0].id), {
+    await updateDoc(doc(db, "account", put_umbrella[0].id), {
       umbrella_Id: umbrella_Id,
     });
 
@@ -120,7 +119,7 @@ export default function MachineList(props) {
       console.log("umbrella", doc.id, " => ", doc.data());
       temp = doc.id;
     });
-    const docRef2 = await updateDoc(doc(db, "umbrella", temp), {
+    await updateDoc(doc(db, "umbrella", temp), {
       machine_Id: "0",
       umbrella_Status: "false",
     });
