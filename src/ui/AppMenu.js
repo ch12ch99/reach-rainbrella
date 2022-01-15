@@ -34,58 +34,53 @@ export default function AppMenu() {
   });
 
   const meow = async function () {
-    console.log(mewoif);
-    if (mewoif == signOut) {
-      const db = getFirestore();
-      const auth = getAuth();
-      const user = auth.currentUser;
-      const u_email = user.email;
-      console.log(u_email);
-      const accountconn = collection(db, "account");
-      const Result = query(accountconn, where("account_Email", "==", u_email));
-      const q1 = await getDocs(Result);
-      const put_umbrella = [];
-      q1.forEach((doc) => {
-        put_umbrella.push({
+    const db = getFirestore();
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const u_email = user.email;
+    console.log(u_email);
+    const accountconn = collection(db, "account");
+    const Result = query(accountconn, where("account_Email", "==", u_email));
+    const q1 = await getDocs(Result);
+    const put_umbrella = [];
+    q1.forEach((doc) => {
+      put_umbrella.push({
+        id: doc.id,
+        umbrella_Id: doc.data().umbrella_Id,
+      });
+    });
+    const u_id = put_umbrella[0].id;
+    const umbrella_id = put_umbrella[0].umbrella_Id;
+    console.log(u_id, umbrella_id);
+
+    if (umbrella_id != 0) {
+      alert("back umbrella!");
+      const umbrellaconn = collection(db, "umbrella");
+      const umbrellaTemp = [];
+      const umbrellaQuery = await getDocs(
+        query(umbrellaconn, where("umbrella_Id", "==", umbrella_id))
+      );
+      console.log(umbrellaQuery);
+      umbrellaQuery.forEach((doc) => {
+        umbrellaTemp.push({
           id: doc.id,
-          umbrella_Id: doc.data().umbrella_Id,
         });
       });
-      const u_id = put_umbrella[0].id;
-      const umbrella_id = put_umbrella[0].umbrella_Id;
-      console.log(u_id, umbrella_id);
-
-      if (umbrella_id != 0) {
-        alert("back umbrella!");
-        const umbrellaconn = collection(db, "umbrella");
-        const umbrellaTemp = [];
-        const umbrellaQuery = await getDocs(
-          query(umbrellaconn, where("umbrella_Id", "==", umbrella_id))
-        );
-        console.log(umbrellaQuery);
-        umbrellaQuery.forEach((doc) => {
-          umbrellaTemp.push({
-            id: doc.id,
-          });
-        });
-        console.log(umbrellaTemp[0]);
-        const random_umbrella_id = umbrellaTemp[0].id;
-        const updateumbrella = await updateDoc(
-          doc(db, "umbrella", random_umbrella_id),
-          {
-            machine_Id: "5",
-          }
-        );
-        const updateuser = await updateDoc(doc(db, "account", u_id), {
-          umbrella_Id: "0",
-        });
-      } else {
-        var random = Math.floor(Math.random() * 50);
-        console.log(random);
-        alert("喵~".repeat(random));
-      }
+      console.log(umbrellaTemp[0]);
+      const random_umbrella_id = umbrellaTemp[0].id;
+      const updateumbrella = await updateDoc(
+        doc(db, "umbrella", random_umbrella_id),
+        {
+          machine_Id: "5",
+        }
+      );
+      const updateuser = await updateDoc(doc(db, "account", u_id), {
+        umbrella_Id: "0",
+      });
     } else {
-      alert("麻煩登錄一下再按本喵！");
+      var random = Math.floor(Math.random() * 50);
+      console.log(random);
+      alert("喵~".repeat(random));
     }
   };
 
