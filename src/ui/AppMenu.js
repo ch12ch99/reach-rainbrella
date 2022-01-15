@@ -35,7 +35,7 @@ export default function AppMenu() {
 
   const meow = async function () {
     console.log(mewoif);
-    if (mewoif) {
+    if (mewoif == signOut) {
       const db = getFirestore();
       const auth = getAuth();
       const user = auth.currentUser;
