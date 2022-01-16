@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AppBar, Button, Toolbar } from "@mui/material";
 import SignOut from "../account/SignOut";
@@ -14,6 +14,7 @@ import { collection, query, where } from "@firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
 import { doc, updateDoc, getDocs } from "@firebase/firestore";
 export default function AppMenu() {
+  const [open, setOpen] = useState(false);
   const authContext = useContext(AuthContext); //利用useContext hook取得AuthContext裡的值
   const mewoif = authContext.status;
   console.log(mewoif);
@@ -37,54 +38,55 @@ export default function AppMenu() {
     const db = getFirestore();
     const auth = getAuth();
 
-    if (auth.currentUser != null){
-    const user = auth.currentUser;
-    const u_email = user.email;
-    console.log(u_email);
-    const accountconn = collection(db, "account");
-    const Result = query(accountconn, where("account_Email", "==", u_email));
-    const q1 = await getDocs(Result);
-    const put_umbrella = [];
-    q1.forEach((doc) => {
-      put_umbrella.push({
-        id: doc.id,
-        umbrella_Id: doc.data().umbrella_Id,
-      });
-    });
-    const u_id = put_umbrella[0].id;
-    const umbrella_id = put_umbrella[0].umbrella_Id;
-    console.log(u_id, umbrella_id);
-
-    if (umbrella_id != 0) {
-      alert("return umbrella!");
-      const umbrellaconn = collection(db, "umbrella");
-      const umbrellaTemp = [];
-      const umbrellaQuery = await getDocs(
-        query(umbrellaconn, where("umbrella_Id", "==", umbrella_id))
-      );
-      console.log(umbrellaQuery);
-      umbrellaQuery.forEach((doc) => {
-        umbrellaTemp.push({
+    if (auth.currentUser != null) {
+      const user = auth.currentUser;
+      const u_email = user.email;
+      console.log(u_email);
+      const accountconn = collection(db, "account");
+      const Result = query(accountconn, where("account_Email", "==", u_email));
+      const q1 = await getDocs(Result);
+      const put_umbrella = [];
+      q1.forEach((doc) => {
+        put_umbrella.push({
           id: doc.id,
+          umbrella_Id: doc.data().umbrella_Id,
         });
       });
-      console.log(umbrellaTemp[0]);
-      const random_umbrella_id = umbrellaTemp[0].id;
-      const updateumbrella = await updateDoc(
-        doc(db, "umbrella", random_umbrella_id),
-        {
-          machine_Id: "5",
-        }
-      );
-      const updateuser = await updateDoc(doc(db, "account", u_id), {
-        umbrella_Id: "0",
-      });
+      const u_id = put_umbrella[0].id;
+      const umbrella_id = put_umbrella[0].umbrella_Id;
+      console.log(u_id, umbrella_id);
+
+      if (umbrella_id != 0) {
+        const machine_Id = prompt("請輸入您歸還雨傘的機臺");
+        console.log(machine_Id);
+        const umbrellaconn = collection(db, "umbrella");
+        const umbrellaTemp = [];
+        const umbrellaQuery = await getDocs(
+          query(umbrellaconn, where("umbrella_Id", "==", umbrella_id))
+        );
+        console.log(umbrellaQuery);
+        umbrellaQuery.forEach((doc) => {
+          umbrellaTemp.push({
+            id: doc.id,
+          });
+        });
+        console.log(umbrellaTemp[0]);
+        const random_umbrella_id = umbrellaTemp[0].id;
+        const updateumbrella = await updateDoc(
+          doc(db, "umbrella", random_umbrella_id),
+          {
+            machine_Id: machine_Id,
+          }
+        );
+        const updateuser = await updateDoc(doc(db, "account", u_id), {
+          umbrella_Id: "0",
+        });
+        setOpen(false);
+      } else {
+        var random = Math.floor(Math.random() * 50);
+        alert("喵~".repeat(random));
+      }
     } else {
-      var random = Math.floor(Math.random() * 50);
-      alert("喵~".repeat(random));
-    }
-  
-  } else {
       var random = Math.floor(Math.random() * 50);
       alert("喵~".repeat(random));
     }
