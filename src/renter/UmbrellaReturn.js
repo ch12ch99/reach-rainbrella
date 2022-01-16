@@ -12,22 +12,22 @@ export default function UmbrellaRent(props) {
         try {
             await updateDoc(doc(db, "umbrella", umbrella.id), {
                 machine_Id: umbrella.machine_Id,
-                umbrella_Status: "false"
+                umbrella_Status: "true"
             });
             await updateDoc(doc(db, "account", account.id), {
-                umbrella_Id: account.umbrella_Id,
+                umbrella_Id: "",
             });
         }catch (e) {
             console.log(e);
         }
-        console.log("成功租借!");
+        console.log("成功還傘!");
         props.close();
     }
     return (
         <Dialog open={props.open}>
             <DialogTitle>租借</DialogTitle>
             <DialogActions>
-                <Button variant="outlined" color="primary" onClick={umbrellaupdate}>租借</Button>
+                <Button variant="outlined" color="primary" onClick={umbrellaupdate}>還傘</Button>
                 <Button variant="outlined" color="secondary" onClick={props.close}>取消</Button>
             </DialogActions>
         </Dialog>

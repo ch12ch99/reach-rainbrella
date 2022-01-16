@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppBar, Button, Toolbar } from "@mui/material";
 import SignOut from "../account/SignOut";
@@ -36,6 +36,8 @@ export default function AppMenu() {
   const meow = async function () {
     const db = getFirestore();
     const auth = getAuth();
+
+    if (auth.currentUser != null){
     const user = auth.currentUser;
     const u_email = user.email;
     console.log(u_email);
@@ -54,7 +56,7 @@ export default function AppMenu() {
     console.log(u_id, umbrella_id);
 
     if (umbrella_id != 0) {
-      alert("back umbrella!");
+      alert("return umbrella!");
       const umbrellaconn = collection(db, "umbrella");
       const umbrellaTemp = [];
       const umbrellaQuery = await getDocs(
@@ -79,7 +81,11 @@ export default function AppMenu() {
       });
     } else {
       var random = Math.floor(Math.random() * 50);
-      console.log(random);
+      alert("喵~".repeat(random));
+    }
+  
+  } else {
+      var random = Math.floor(Math.random() * 50);
       alert("喵~".repeat(random));
     }
   };
