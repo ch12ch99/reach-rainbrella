@@ -37,7 +37,6 @@ export default function AppMenu() {
   const meow = async function () {
     const db = getFirestore();
     const auth = getAuth();
-
     if (auth.currentUser != null) {
       const user = auth.currentUser;
       const u_email = user.email;
@@ -72,13 +71,10 @@ export default function AppMenu() {
         });
         console.log(umbrellaTemp[0]);
         const random_umbrella_id = umbrellaTemp[0].id;
-        const updateumbrella = await updateDoc(
-          doc(db, "umbrella", random_umbrella_id),
-          {
-            machine_Id: machine_Id,
-          }
-        );
-        const updateuser = await updateDoc(doc(db, "account", u_id), {
+        await updateDoc(doc(db, "umbrella", random_umbrella_id),{
+          machine_Id: machine_Id,
+        });
+        await updateDoc(doc(db, "account", u_id), {
           umbrella_Id: "0",
         });
         setOpen(false);
