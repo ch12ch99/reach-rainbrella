@@ -13,11 +13,25 @@ import { getFirestore } from "@firebase/firestore";
 import { collection, query, where } from "@firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
 import { doc, updateDoc, getDocs } from "@firebase/firestore";
+
+export const MEOW = {
+  meowCount: 1,
+};
+
+export const MeowContext = React.createContext({
+  meow: MEOW.meowCount,
+  setMeow: (newMeow) => {
+    this.meow = newMeow;
+  },
+});
+
 export default function AppMenu() {
   const [open, setOpen] = useState(false);
   const authContext = useContext(AuthContext); //利用useContext hook取得AuthContext裡的值
+  const meowContext = useContext(MeowContext); //利用useContext hook取得AuthContext裡的值
   const mewoif = authContext.status;
   console.log(mewoif);
+  console.log(meowContext);
   const levelContext = useContext(LevelContext);
   const fonttheme = createTheme({
     typography: {
@@ -71,16 +85,19 @@ export default function AppMenu() {
         });
         console.log(umbrellaTemp[0]);
         const random_umbrella_id = umbrellaTemp[0].id;
-        await updateDoc(doc(db, "umbrella", random_umbrella_id),{
+        await updateDoc(doc(db, "umbrella", random_umbrella_id), {
           machine_Id: machine_Id,
         });
         await updateDoc(doc(db, "account", u_id), {
           umbrella_Id: "0",
         });
+        meowContext.setMeow((MEOW.meowCount += 1));
         setOpen(false);
       } else {
         var random = Math.floor(Math.random() * 50);
         alert("喵~".repeat(random));
+        meowContext.setMeow((MEOW.meowCount += 1));
+        console.log(meowContext);
       }
     } else {
       var random = Math.floor(Math.random() * 50);

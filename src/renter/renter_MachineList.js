@@ -22,6 +22,7 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
+import { MeowContext, MEOW } from "../ui/AppMenu";
 
 export default function MachineList(props) {
   const firebaseApp = initializeApp(config);
@@ -32,6 +33,9 @@ export default function MachineList(props) {
   const [machines, setMachines] = useState([]); //useState是存firebase的資料 所以要用[]
   const [currentUmbrella, setCurrentUmbrella] = useState(false);
   const authContext = useContext(AuthContext);
+  const meowContext = useContext(MeowContext);
+  const [count, setCount] = useState(meowContext.meow);
+  console.log("看看我見阿里：" + count);
   useEffect(() => {
     async function readData() {
       //查看現在有哪些機臺
@@ -72,7 +76,7 @@ export default function MachineList(props) {
       });
     }
     readData();
-  }, [db, open]);
+  }, [db, open, count]);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -123,7 +127,7 @@ export default function MachineList(props) {
       machine_Id: "0",
       umbrella_Status: "false",
     });
-    <renter_MachineList />;
+
     setOpen(true);
   };
 
